@@ -1,0 +1,6 @@
+
+ [{
+    "name":"zlPlayer",
+    "class":"zlPlayer",
+    "methods":["init","play",""]
+ }]
