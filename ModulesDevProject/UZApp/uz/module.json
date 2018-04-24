@@ -2,5 +2,5 @@
  [{
     "name":"zlPlayer",
     "class":"zlPlayer",
-    "methods":["init","play",""]
+    "methods":["init","play","getCurrentPosition","stop"]
  }]

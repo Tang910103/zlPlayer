@@ -21,6 +21,8 @@
 @property (nonatomic,strong) UISlider *bufferSlier;
 //播放按钮
 @property (nonatomic, strong) UIButton *playButton;
+//全屏按钮
+@property (nonatomic,strong) UIButton *largeButton;
 
 @end
 static NSInteger padding = 8;
@@ -84,8 +86,8 @@ static NSInteger padding = 8;
         _bufferSlier = [[UISlider alloc]init];
         [_bufferSlier setThumbImage:[UIImage new] forState:UIControlStateNormal];
         _bufferSlier.continuous = YES;
-        _bufferSlier.minimumTrackTintColor = [UIColor lightGrayColor];
-//        _bufferSlier.maximumTrackTintColor = [UIColor clearColor];
+        _bufferSlier.minimumTrackTintColor = [UIColor clearColor];
+        _bufferSlier.maximumTrackTintColor = [UIColor lightGrayColor];
         _bufferSlier.minimumValue = 0.f;
         _bufferSlier.maximumValue = 1.f;
         _bufferSlier.userInteractionEnabled = NO;
@@ -96,8 +98,8 @@ static NSInteger padding = 8;
 {
     if (!_playButton) {
         _playButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_playButton setImage:[PlayerTool imageWithName:@"播放"] forState:UIControlStateSelected];
-        [_playButton setImage:[PlayerTool imageWithName:@"暂停"] forState:UIControlStateNormal];
+        [_playButton setImage:[PlayerTool imageWithName:@"播放"] forState:UIControlStateNormal];
+        [_playButton setImage:[PlayerTool imageWithName:@"暂停"] forState:UIControlStateSelected];
         [_playButton addTarget:self action:@selector(clickPlayButton:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _playButton;
@@ -134,7 +136,7 @@ static NSInteger padding = 8;
         make.left.mas_equalTo(self.playButton.mas_right);
         make.bottom.height.mas_equalTo(self);
         make.width.mas_equalTo(@55);
-        make.centerY.mas_equalTo(@[self.timeLabel,self.playButton,self.slider,self.totalTimeLabel,self.largeButton]);
+        make.centerY.mas_equalTo(@[self.timeLabel,self.playButton,self.slider,self.totalTimeLabel,self.largeButton,self.bufferSlier]);
     }];
     [self.largeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self).offset(-padding);
@@ -151,9 +153,8 @@ static NSInteger padding = 8;
     }];
     
     [self.bufferSlier mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.slider).offset(5);
-        make.right.mas_equalTo(self.slider).offset(-5);
-        make.center.mas_equalTo(self.slider);
+        make.left.mas_equalTo(self.timeLabel.mas_right).offset(5);
+        make.right.mas_equalTo(self.totalTimeLabel.mas_left).offset(-5);
     }];
     [self layoutIfNeeded];
 }
@@ -167,7 +168,7 @@ static NSInteger padding = 8;
 - (void)clickPlayButton:(UIButton *)button {
     button.selected = !button.selected;
     if ([self.delegate respondsToSelector:@selector(controlView:withPlayButton:)]) {
-        [self.delegate controlView:self withPlayButton:self.playButton];
+        [self.delegate controlView:self withPlayButton:button];
     }
 }
 -(void)handleSliderWillSliding:(UISlider *)slider{
@@ -196,6 +197,11 @@ static NSInteger padding = 8;
 }
 
 //setter 和 getter方法
+- (void)setIsPlaying:(BOOL)isPlaying
+{
+    _isPlaying = isPlaying;
+    self.playButton.selected = isPlaying;
+}
 -(void)setValue:(CGFloat)value{
     self.slider.value = value;
 }

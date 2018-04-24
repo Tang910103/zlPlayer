@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A502D0E0208D752000FB330D /* BrightnessView.h in Headers */ = {isa = PBXBuildFile; fileRef = A502D0DE208D752000FB330D /* BrightnessView.h */; };
+		A502D0E1208D752000FB330D /* BrightnessView.m in Sources */ = {isa = PBXBuildFile; fileRef = A502D0DF208D752000FB330D /* BrightnessView.m */; };
 		A526C7C520850184005CEF08 /* PLPlayerKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A526C7C420850184005CEF08 /* PLPlayerKit.a */; };
 		A5473D3D208AF788002563D0 /* PlayerManager.h in Headers */ = {isa = PBXBuildFile; fileRef = A5473D3B208AF788002563D0 /* PlayerManager.h */; };
 		A5473D3E208AF788002563D0 /* PlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5473D3C208AF788002563D0 /* PlayerManager.m */; };
+		A5473D57208C98F1002563D0 /* PlayerToolView.h in Headers */ = {isa = PBXBuildFile; fileRef = A5473D55208C98F1002563D0 /* PlayerToolView.h */; };
+		A5473D58208C98F1002563D0 /* PlayerToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5473D56208C98F1002563D0 /* PlayerToolView.m */; };
 		A5A805072081D5CE0038686C /* zlPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A5A805062081D5CE0038686C /* zlPlayer.m */; };
 		A5A805082081D5CE0038686C /* zlPlayer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A5A805052081D5CE0038686C /* zlPlayer.h */; };
-		A5C713DF2086120500161DE3 /* FullScreenToolView.h in Headers */ = {isa = PBXBuildFile; fileRef = A5C713DD2086120500161DE3 /* FullScreenToolView.h */; };
-		A5C713E02086120500161DE3 /* FullScreenToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C713DE2086120500161DE3 /* FullScreenToolView.m */; };
 		A5C713E8208616E500161DE3 /* PlayerTool.h in Headers */ = {isa = PBXBuildFile; fileRef = A5C713E6208616E500161DE3 /* PlayerTool.h */; };
 		A5C713E9208616E500161DE3 /* PlayerTool.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C713E7208616E500161DE3 /* PlayerTool.m */; };
 		A5C71406208623C900161DE3 /* MASCompositeConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = A5C713ED208623C900161DE3 /* MASCompositeConstraint.h */; };
@@ -59,6 +61,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A502D0DE208D752000FB330D /* BrightnessView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrightnessView.h; sourceTree = "<group>"; };
+		A502D0DF208D752000FB330D /* BrightnessView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrightnessView.m; sourceTree = "<group>"; };
 		A526C7C020850184005CEF08 /* PLPlayerError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLPlayerError.h; sourceTree = "<group>"; };
 		A526C7C120850184005CEF08 /* PLPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLPlayer.h; sourceTree = "<group>"; };
 		A526C7C220850184005CEF08 /* PLPlayerOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLPlayerOption.h; sourceTree = "<group>"; };
@@ -73,11 +77,11 @@
 		A543F41B2082499C002ECE27 /* NSDictionaryUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSDictionaryUtils.h; sourceTree = "<group>"; };
 		A5473D3B208AF788002563D0 /* PlayerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerManager.h; sourceTree = "<group>"; };
 		A5473D3C208AF788002563D0 /* PlayerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerManager.m; sourceTree = "<group>"; };
+		A5473D55208C98F1002563D0 /* PlayerToolView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerToolView.h; sourceTree = "<group>"; };
+		A5473D56208C98F1002563D0 /* PlayerToolView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerToolView.m; sourceTree = "<group>"; };
 		A5A805022081D5CE0038686C /* libzlPlayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libzlPlayer.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5A805052081D5CE0038686C /* zlPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zlPlayer.h; sourceTree = "<group>"; };
 		A5A805062081D5CE0038686C /* zlPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zlPlayer.m; sourceTree = "<group>"; };
-		A5C713DD2086120500161DE3 /* FullScreenToolView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FullScreenToolView.h; sourceTree = "<group>"; };
-		A5C713DE2086120500161DE3 /* FullScreenToolView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FullScreenToolView.m; sourceTree = "<group>"; };
 		A5C713E6208616E500161DE3 /* PlayerTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerTool.h; sourceTree = "<group>"; };
 		A5C713E7208616E500161DE3 /* PlayerTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerTool.m; sourceTree = "<group>"; };
 		A5C713ED208623C900161DE3 /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
@@ -171,12 +175,14 @@
 			children = (
 				A5A805052081D5CE0038686C /* zlPlayer.h */,
 				A5A805062081D5CE0038686C /* zlPlayer.m */,
+				A5473D55208C98F1002563D0 /* PlayerToolView.h */,
+				A5473D56208C98F1002563D0 /* PlayerToolView.m */,
 				A5473D3B208AF788002563D0 /* PlayerManager.h */,
 				A5473D3C208AF788002563D0 /* PlayerManager.m */,
 				A5C7142020862A0700161DE3 /* SBControlView.h */,
 				A5C7141F20862A0500161DE3 /* SBControlView.m */,
-				A5C713DD2086120500161DE3 /* FullScreenToolView.h */,
-				A5C713DE2086120500161DE3 /* FullScreenToolView.m */,
+				A502D0DE208D752000FB330D /* BrightnessView.h */,
+				A502D0DF208D752000FB330D /* BrightnessView.m */,
 				A5C713E6208616E500161DE3 /* PlayerTool.h */,
 				A5C713E7208616E500161DE3 /* PlayerTool.m */,
 			);
@@ -228,6 +234,7 @@
 				A5C7141C208623C900161DE3 /* ViewController+MASAdditions.h in Headers */,
 				A5C7140F208623C900161DE3 /* MASViewAttribute.h in Headers */,
 				A5C71408208623C900161DE3 /* MASConstraint+Private.h in Headers */,
+				A502D0E0208D752000FB330D /* BrightnessView.h in Headers */,
 				A5C7140B208623C900161DE3 /* MASConstraintMaker.h in Headers */,
 				A5473D3D208AF788002563D0 /* PlayerManager.h in Headers */,
 				A5C71413208623C900161DE3 /* NSLayoutConstraint+MASDebugAdditions.h in Headers */,
@@ -236,8 +243,8 @@
 				A5C7142220862A0700161DE3 /* SBControlView.h in Headers */,
 				A5C71411208623C900161DE3 /* MASViewConstraint.h in Headers */,
 				A5C71409208623C900161DE3 /* MASLayoutConstraint.h in Headers */,
-				A5C713DF2086120500161DE3 /* FullScreenToolView.h in Headers */,
 				A5C713E8208616E500161DE3 /* PlayerTool.h in Headers */,
+				A5473D57208C98F1002563D0 /* PlayerToolView.h in Headers */,
 				A5C7140C208623C900161DE3 /* View+MASAdditions.h in Headers */,
 				A5C71419208623C900161DE3 /* View+MASShorthandAdditions.h in Headers */,
 				A5C7140E208623C900161DE3 /* MASUtilities.h in Headers */,
@@ -315,6 +322,7 @@
 			files = (
 				A5C7141D208623C900161DE3 /* MASViewConstraint.m in Sources */,
 				A5C7141E208623C900161DE3 /* MASViewAttribute.m in Sources */,
+				A5473D58208C98F1002563D0 /* PlayerToolView.m in Sources */,
 				A5A805072081D5CE0038686C /* zlPlayer.m in Sources */,
 				A5C71417208623C900161DE3 /* NSArray+MASAdditions.m in Sources */,
 				A5C71410208623C900161DE3 /* ViewController+MASAdditions.m in Sources */,
@@ -327,7 +335,7 @@
 				A5C71407208623C900161DE3 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				A5C71416208623C900161DE3 /* MASLayoutConstraint.m in Sources */,
 				A5C7142120862A0700161DE3 /* SBControlView.m in Sources */,
-				A5C713E02086120500161DE3 /* FullScreenToolView.m in Sources */,
+				A502D0E1208D752000FB330D /* BrightnessView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

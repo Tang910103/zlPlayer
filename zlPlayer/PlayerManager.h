@@ -118,6 +118,12 @@ typedef NS_ENUM(NSUInteger, PlayerStatus) {
  @param time 需要
   */
 - (void)seekTo:(CMTime)time;
+/**
+ 快速定位到指定播放时间点，该方法仅在回放时起作用，直播场景下该方法直接返回
+ 
+ @param second 秒
+ */
+- (void)seekToSecond:(CGFloat)second;
 
 /**
  *  设置音量，范围是0-3.0，默认是1.0

@@ -85,15 +85,16 @@
 		52CA35771AB195EB002579CF /* libresolv.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 52CA35761AB195EB002579CF /* libresolv.9.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
 		52E586AA1AFC74F100864ACF /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52BA30A919F6367A00D81640 /* CoreAudio.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A5473D3A208AEE7A002563D0 /* res_zlPlayer in Resources */ = {isa = PBXBuildFile; fileRef = A5473D39208AEE7A002563D0 /* res_zlPlayer */; };
+		A5473D54208C9629002563D0 /* libzlPlayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A5473D53208C9607002563D0 /* libzlPlayer.a */; };
 		A5C7138E2085A30600161DE3 /* PLPlayerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C7138D2085A30600161DE3 /* PLPlayerKit.framework */; };
 		A5C7138F2085A35400161DE3 /* PLPlayerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C7138D2085A30600161DE3 /* PLPlayerKit.framework */; };
 		A5C713902085A35400161DE3 /* PLPlayerKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5C7138D2085A30600161DE3 /* PLPlayerKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A5473D4B208C9559002563D0 /* PBXContainerItemProxy */ = {
+		A5473D52208C9607002563D0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A5473D47208C9559002563D0 /* zlPlayer.xcodeproj */;
+			containerPortal = A5473D4E208C9607002563D0 /* zlPlayer.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = A5A805022081D5CE0038686C;
 			remoteInfo = zlPlayer;
@@ -225,7 +226,7 @@
 		52CA35741AB195C9002579CF /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
 		52CA35761AB195EB002579CF /* libresolv.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.9.dylib; path = usr/lib/libresolv.9.dylib; sourceTree = SDKROOT; };
 		A5473D39208AEE7A002563D0 /* res_zlPlayer */ = {isa = PBXFileReference; lastKnownFileType = folder; path = res_zlPlayer; sourceTree = "<group>"; };
-		A5473D47208C9559002563D0 /* zlPlayer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = zlPlayer.xcodeproj; path = ../../../zlPlayer/zlPlayer.xcodeproj; sourceTree = "<group>"; };
+		A5473D4E208C9607002563D0 /* zlPlayer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = zlPlayer.xcodeproj; path = ../../../zlPlayer.xcodeproj; sourceTree = "<group>"; };
 		A5C7138D2085A30600161DE3 /* PLPlayerKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PLPlayerKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -234,6 +235,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5473D54208C9629002563D0 /* libzlPlayer.a in Frameworks */,
 				A5C7138F2085A35400161DE3 /* PLPlayerKit.framework in Frameworks */,
 				5262179B1CFC3B9C00DEE766 /* WebKit.framework in Frameworks */,
 				52E586AA1AFC74F100864ACF /* CoreAudio.framework in Frameworks */,
@@ -381,7 +383,7 @@
 		527BCF9B19C4339B0077631F /* UZModules */ = {
 			isa = PBXGroup;
 			children = (
-				A5473D47208C9559002563D0 /* zlPlayer.xcodeproj */,
+				A5473D4E208C9607002563D0 /* zlPlayer.xcodeproj */,
 			);
 			path = UZModules;
 			sourceTree = "<group>";
@@ -479,10 +481,10 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		A5473D48208C9559002563D0 /* Products */ = {
+		A5473D4F208C9607002563D0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A5473D4C208C9559002563D0 /* libzlPlayer.a */,
+				A5473D53208C9607002563D0 /* libzlPlayer.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -521,7 +523,7 @@
 				TargetAttributes = {
 					527BCF6A19C431480077631F = {
 						CreatedOnToolsVersion = 6.0;
-						DevelopmentTeam = 8DYK63463V;
+						DevelopmentTeam = 99LHU7K998;
 						LastSwiftMigration = 0820;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
@@ -549,8 +551,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = A5473D48208C9559002563D0 /* Products */;
-					ProjectRef = A5473D47208C9559002563D0 /* zlPlayer.xcodeproj */;
+					ProductGroup = A5473D4F208C9607002563D0 /* Products */;
+					ProjectRef = A5473D4E208C9607002563D0 /* zlPlayer.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -561,11 +563,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		A5473D4C208C9559002563D0 /* libzlPlayer.a */ = {
+		A5473D53208C9607002563D0 /* libzlPlayer.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libzlPlayer.a;
-			remoteRef = A5473D4B208C9559002563D0 /* PBXContainerItemProxy */;
+			remoteRef = A5473D52208C9607002563D0 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -701,7 +703,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
-				DEVELOPMENT_TEAM = 8DYK63463V;
+				DEVELOPMENT_TEAM = 99LHU7K998;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/UZApp/UZModules",
@@ -742,7 +744,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
-				DEVELOPMENT_TEAM = 8DYK63463V;
+				DEVELOPMENT_TEAM = 99LHU7K998;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/UZApp/UZModules",

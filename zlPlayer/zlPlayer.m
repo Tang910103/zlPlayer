@@ -9,27 +9,40 @@
 #import <UIKit/UIKit.h>
 #import "zlPlayer.h"
 #import "NSDictionaryUtils.h"
-#import "SBControlView.h"
 #import "Masonry.h"
 #import "PlayerManager.h"
+#import "PlayerToolView.h"
+#import "SBControlView.h"
+
+typedef NS_ENUM(NSUInteger, ScreenOrientation) {
+    ScreenOrientation_portrait_up = 1,               //竖屏时，屏幕在home键的上面
+    ScreenOrientation_portrait_down,            //竖屏时，幕在home键的下面，部分手机不支持
+    ScreenOrientation_landscape_left,            //横屏时，屏幕在home键的左边
+    ScreenOrientation_landscape_right,            //横屏时，屏幕在home键的右边
+    ScreenOrientation_auto,                   //屏幕根据重力感应在横竖屏间自动切换
+    ScreenOrientation_auto_portrait,            //屏幕根据重力感应在竖屏间自动切换
+    ScreenOrientation_auto_landscape,            //屏幕根据重力感应在横屏间自动切换
+};
 
 static NSInteger count = 0;
 
-@interface zlPlayer()<SBControlViewDelegate>
+@interface zlPlayer()<PlayerManagerDelegate,PlayerToolViewDelegate>
 {
-    NSInteger _cbId;
+    NSMutableDictionary *_cbIdDictionary;
     NSString *_fixedOn;
     BOOL _fixed;
     CGRect _rect;
     NSString *_orientation;
+    NSString *_title;
 }
 
 @property (nonatomic, strong) NSURL *URL;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 
 @property (nonatomic, strong) CADisplayLink *timer;
-//底部控制视图
-@property (nonatomic,strong) SBControlView *controlView;
+
+@property (nonatomic, strong) PlayerToolView *playerToolView;
+
 
 @property (nonatomic, strong, readonly) PlayerManager *manager;
 
@@ -44,14 +57,21 @@ static NSInteger count = 0;
 {
     if (self = [super initWithUZWebView:webView]) {
 //        [self setScreenOrientation:@{@"orientation":@"auto"}];
+        _cbIdDictionary = @{}.mutableCopy;
+        _orientation = [self screenOrientation:ScreenOrientation_landscape_right];
     }
     return self;
 }
-
+- (void)dispose
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillEnterForegroundNotification object:nil];
+}
 #pragma mark - public
+
 /** 初始化视频播放器 */
 - (void)init:(NSDictionary *)paramDict   {
-    _cbId = [paramDict integerValueForKey:@"cbId" defaultValue:0];
+    [self addCbIDByParamDict:paramDict SEL:@selector(init:)];
+    
     NSDictionary *rect = [paramDict dictValueForKey:@"rect" defaultValue:nil];
     _rect = CGRectZero;
     if (rect) {
@@ -65,18 +85,26 @@ static NSInteger count = 0;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(player) name:UIApplicationWillEnterForegroundNotification object:nil];
 }
 
-/** 显示播放视图 */
+/** 开始播放url */
 - (void)play:(NSDictionary *)paramDict  {
+    [self addCbIDByParamDict:paramDict SEL:@selector(play:)];
     NSString *url = [paramDict stringValueForKey:@"url" defaultValue:nil];
-    [self.manager playWithURL:[NSURL URLWithString:url]];
+    _title = [paramDict stringValueForKey:@"title" defaultValue:url];
+    _orientation = [paramDict stringValueForKey:@"direction" defaultValue:_orientation];
+    self.playerToolView.title = _title;
+    BOOL status = [self.manager playWithURL:[NSURL URLWithString:url]];
+    [self callback:status msg:status ? @"":@"播放失败"  SEL:@selector(play:)];
 }
-
-/** 回调JS */
-- (void)callback:(BOOL)status msg:(NSString *)msg {
-    
-    if (!msg) msg = @"";
-    
-    [self sendResultEventWithCallbackId:_cbId dataDict:@{@"status":@(status)} errDict:@{@"msg":msg} doDelete:YES];
+/** 获取播放器当前播放进度 */
+- (void)getCurrentPosition:(NSDictionary *)paramDict {
+    [self addCbIDByParamDict:paramDict SEL:@selector(getCurrentPosition:)];
+    [self callbackByDic:@{@"status":@(YES),@"currentPosition":@(self.currentTime.value/self.currentTime.timescale)} msg:@"" SEL:@selector(getCurrentPosition:)];
+}
+/** 停止播放 */
+- (void)stop:(NSDictionary *)paramDict {
+    [self.manager stop];
+    [self addCbIDByParamDict:paramDict SEL:@selector(stop:)];
+    [self callback:YES msg:@"" SEL:@selector(stop:)];
 }
 
 #pragma mark - SBControlViewDelegate
@@ -101,7 +129,7 @@ static NSInteger count = 0;
 }
 - (void)controlView:(SBControlView *)controlView withPlayButton:(UIButton *)button
 {
-    if (button.selected) {
+    if (!button.selected) {
         [self.manager pause];
     } else {
          [self.manager resume];
@@ -109,43 +137,83 @@ static NSInteger count = 0;
 }
 -(void)controlView:(SBControlView *)controlView withLargeButton:(UIButton *)button{
     count = 0;
-//    if (kScreenWidth<kScreenHeight) {
-//        [self interfaceOrientation:UIInterfaceOrientationLandscapeRight];
-//    }else{
-//        [self interfaceOrientation:UIInterfaceOrientationPortrait];
-//    }
-    [[UIApplication sharedApplication] setValue:@(UIInterfaceOrientationLandscapeRight) forKey:@"statusBarOrientation"];
+    [self setOrientation:button.selected];
 }
-
-- (void)fullScreen:(BOOL)fullScreen
+#pragma mark - PlayerManagerDelegate
+- (void)playerStatusDidChange:(PlayerStatus)state
 {
+    if (state <= PlayerStatusCaching) {
+        [self.activityIndicatorView startAnimating];
+    } else {
+        [self.activityIndicatorView stopAnimating];
+    }
     
-    UIView *playerView = self.manager.playerView;
-    [playerView removeFromSuperview];
-//    if (fullScreen) {
-//        playerView.frame = CGRectMake(0, 0, CGRectGetHeight([UIScreen mainScreen].bounds), CGRectGetWidth([UIScreen mainScreen].bounds));
-//        [self addSubview:playerView fixedOn:nil fixed:YES];
-//    } else {
-//        if (_rect) {
-//            playerView.frame = CGRectFromString(_rect);
-//        }
-//        [self addSubview:playerView fixedOn:_fixedOn fixed:_fixed];
-//    }
-    [self setScreenOrientation:@{@"orientation":fullScreen ? _orientation : @"portrait_up"}];
-//    self.bottomView.frame = CGRectMake(0, CGRectGetHeight(playerView.bounds) - CGRectGetHeight(self.bottomView.bounds), CGRectGetWidth(playerView.bounds), CGRectGetHeight(self.bottomView.bounds));
+    if (state == PlayerStatusPlaying) {
+        [self.playerToolView setIsPlaying:YES];
+        [self.playerToolView updateTotalTime:self.totalDuration];
+        [self addTimer];
+    } else {
+        [self removeTimer];
+    }
+    if (state == PlayerStatusCompleted) {
+        [self.playerToolView setIsPlaying:NO];
+    }
+    
+}
+- (void)player:(nonnull PLPlayer *)player stoppedWithError:(nullable NSError *)error {
+    [self.activityIndicatorView stopAnimating];
+}
+#pragma mark - PlayerToolViewDelegate
+
+- (void)exitFullScreen
+{
+    [self setOrientation:NO];
 }
 #pragma mark - event response
 
 - (void)updatePlayTime {
-    CGFloat second = self.currentTime.value/self.currentTime.timescale;
-    self.controlView.currentTime = [PlayerTool convertTime:second];
-    self.controlView.value = second;
-    NSLog(@"8888");
+    [self.playerToolView updatePlayTime:self.currentTime];
 }
 #pragma mark - private
+/** 设置屏幕取向 */
+- (void)setOrientation:(BOOL)isFullScreen {
+    [self setScreenOrientation:@{@"orientation":isFullScreen ? _orientation : [self screenOrientation:ScreenOrientation_portrait_up]}];
+    self.playerToolView.isFullScreen = isFullScreen;
+    [self.manager.playerView removeFromSuperview];
+    BOOL fixed = _fixed;
+    if (isFullScreen) {
+        self.manager.playerView.frame = [UIScreen mainScreen].bounds;
+        fixed = YES;
+    } else {
+        self.manager.playerView.frame = _rect;
+    }
+    [[UIApplication sharedApplication] setStatusBarHidden:isFullScreen withAnimation:UIStatusBarAnimationNone];
+    [self addSubview:self.manager.playerView fixedOn:_fixedOn fixed:fixed];
+}
+
+/** 回调JS */
+- (void)callback:(BOOL)status msg:(NSString *)msg SEL:(SEL)sel {
+    
+    if (!msg) msg = @"";
+    [self callbackByDic:@{@"status":@(status)} msg:msg SEL:sel];
+}
+- (void)callbackByDic:(NSDictionary *)dic msg:(NSString *)msg SEL:(SEL)sel  {
+    NSInteger cbID = [_cbIdDictionary intValueForKey:NSStringFromSelector(sel) defaultValue:0];
+    [self sendResultEventWithCallbackId:cbID dataDict:dic errDict:@{@"msg":msg} doDelete:YES];
+    [_cbIdDictionary removeObjectForKey:NSStringFromSelector(sel)];
+}
+
+- (void)addCbIDByParamDict:(NSDictionary *)paramDict SEL:(SEL)sel {
+    NSInteger cbId = [paramDict integerValueForKey:@"cbId" defaultValue:0];
+    [_cbIdDictionary setValue:@(cbId) forKey:NSStringFromSelector(sel)];
+}
+- (void)sendResultEventWithError:(NSString *)msg {
+    [self sendResultEventWithCallbackId:0 dataDict:nil errDict:nil doDelete:YES];
+}
+
 - (void)player {
     [UIApplication sharedApplication].idleTimerDisabled = YES;
-    [self.manager play];
+    [self.manager resume];
 }
 
 - (void)addTimer {
@@ -159,11 +227,41 @@ static NSInteger count = 0;
         self.timer = nil;
     }
 }
+- (NSString *)screenOrientation:(ScreenOrientation)orientation {
+    switch (orientation) {
+        case ScreenOrientation_portrait_up:
+            return @"portrait_up";
+            break;
+        case ScreenOrientation_portrait_down:
+            return @"portrait_down";
+            break;
+        case ScreenOrientation_landscape_left:
+            return @"landscape_left";
+            break;
+        case ScreenOrientation_landscape_right:
+            return @"landscape_right";
+            break;
+        case ScreenOrientation_auto:
+            return @"auto";
+            break;
+        case ScreenOrientation_auto_portrait:
+            return @"auto_portrait";
+            break;
+        case ScreenOrientation_auto_landscape:
+            return @"auto_landscape";
+            break;
+        default:
+            return @"landscape_right";
+            break;
+    }
+}
 
 #pragma mark - getter/setter
 - (PlayerManager *)manager
 {
-    return [PlayerManager defaultManager];
+    PlayerManager *manager = [PlayerManager defaultManager];
+    manager.delegate = self;
+    return manager;
 }
 - (UIActivityIndicatorView *)activityIndicatorView
 {
@@ -171,6 +269,14 @@ static NSInteger count = 0;
         _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     }
     return _activityIndicatorView;
+}
+- (PlayerToolView *)playerToolView
+{
+    if (!_playerToolView) {
+        _playerToolView = [[PlayerToolView alloc] init];
+        _playerToolView.delegate = self;
+    }
+    return _playerToolView;
 }
 - (CMTime)currentTime
 {
@@ -180,16 +286,7 @@ static NSInteger count = 0;
 {
     return self.manager.totalDuration;
 }
-//懒加载控制视图
--(SBControlView *)controlView{
-    if (!_controlView) {
-        _controlView = [[SBControlView alloc]init];
-        _controlView.delegate = self;
-        _controlView.backgroundColor = [UIColor clearColor];
-//        [_controlView.tapGesture requireGestureRecognizerToFail:self.pauseOrPlayView.imageBtn.gestureRecognizers.firstObject];
-    }
-    return _controlView;
-}
+
 //添加视图
 -(void)setupView{
     UIView *playerView = self.manager.playerView;
@@ -203,16 +300,17 @@ static NSInteger count = 0;
     //        | UIViewAutoresizingFlexibleRightMargin
     //        | UIViewAutoresizingFlexibleWidth
     //        | UIViewAutoresizingFlexibleHeight;
-
+    [playerView addSubview:self.playerToolView];
     [playerView addSubview:self.activityIndicatorView];
     
-    [playerView addSubview:self.controlView];
-    
-    [self addSubview:playerView fixedOn:_fixedOn fixed:_fixed];
-
-    [self.controlView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.mas_equalTo(playerView);
-        make.height.mas_equalTo(@44);
+    [self.playerToolView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(playerView);
     }];
+    [self.activityIndicatorView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(playerView);
+    }];
+    
+    BOOL status = [self addSubview:playerView fixedOn:_fixedOn fixed:_fixed];
+    [self callback:status msg:status ? @"":@"播放初始化失败"  SEL:@selector(init:)];
 }
 @end

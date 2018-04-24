@@ -69,6 +69,11 @@
 {
     [self.player seekTo:time];
 }
+- (void)seekToSecond:(CGFloat)second
+{
+    CMTime pointTime = CMTimeMake(second * self.currentTime.timescale, self.currentTime.timescale);
+    [self.player seekTo:pointTime];
+}
 - (void)setVolume:(float)volume
 {
     [self.player setVolume:volume];
@@ -106,7 +111,7 @@
         _player = [PLPlayer playerWithURL:nil option:option];
         _player.delegate = self;
         _player.delegateQueue = dispatch_get_main_queue();
-        _player.backgroundPlayEnable = YES;        
+        _player.backgroundPlayEnable = YES;
     }
     return _player;
 }
