@@ -7,44 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A502D0E0208D752000FB330D /* BrightnessView.h in Headers */ = {isa = PBXBuildFile; fileRef = A502D0DE208D752000FB330D /* BrightnessView.h */; };
-		A502D0E1208D752000FB330D /* BrightnessView.m in Sources */ = {isa = PBXBuildFile; fileRef = A502D0DF208D752000FB330D /* BrightnessView.m */; };
-		A526C7C520850184005CEF08 /* PLPlayerKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A526C7C420850184005CEF08 /* PLPlayerKit.a */; };
-		A5473D3D208AF788002563D0 /* PlayerManager.h in Headers */ = {isa = PBXBuildFile; fileRef = A5473D3B208AF788002563D0 /* PlayerManager.h */; };
-		A5473D3E208AF788002563D0 /* PlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5473D3C208AF788002563D0 /* PlayerManager.m */; };
-		A5473D57208C98F1002563D0 /* PlayerToolView.h in Headers */ = {isa = PBXBuildFile; fileRef = A5473D55208C98F1002563D0 /* PlayerToolView.h */; };
-		A5473D58208C98F1002563D0 /* PlayerToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5473D56208C98F1002563D0 /* PlayerToolView.m */; };
+		A516D3A0208F7B8E003D1FFC /* AliThirdparty.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A516D38A208F7B8E003D1FFC /* AliThirdparty.a */; };
+		A516D3A1208F7B8E003D1FFC /* AliThirdparty.h in Headers */ = {isa = PBXBuildFile; fileRef = A516D38B208F7B8E003D1FFC /* AliThirdparty.h */; };
+		A516D3A2208F7B8E003D1FFC /* AliVcMediaPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = A516D38D208F7B8E003D1FFC /* AliVcMediaPlayer.h */; };
+		A516D3A3208F7B8E003D1FFC /* AliVcPlayerDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = A516D38E208F7B8E003D1FFC /* AliVcPlayerDefine.h */; };
+		A516D3A4208F7B8E003D1FFC /* AliVcPlayerErrorCode.h in Headers */ = {isa = PBXBuildFile; fileRef = A516D38F208F7B8E003D1FFC /* AliVcPlayerErrorCode.h */; };
+		A516D3A5208F7B8E003D1FFC /* AliyunPlayerSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A516D390208F7B8E003D1FFC /* AliyunPlayerSDK.a */; };
+		A516D3A6208F7B8E003D1FFC /* AliyunPlayerSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = A516D391208F7B8E003D1FFC /* AliyunPlayerSDK.h */; };
+		A516D3A7208F7B8E003D1FFC /* KernelMPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = A516D392208F7B8E003D1FFC /* KernelMPlayer.h */; };
+		A516D3A8208F7B8E003D1FFC /* MPlayingHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = A516D393208F7B8E003D1FFC /* MPlayingHandler.h */; };
+		A516D3A9208F7B8E003D1FFC /* AliyunVodDownLoadManager.h in Headers */ = {isa = PBXBuildFile; fileRef = A516D395208F7B8E003D1FFC /* AliyunVodDownLoadManager.h */; };
+		A516D3AA208F7B8E003D1FFC /* AliyunVodPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = A516D396208F7B8E003D1FFC /* AliyunVodPlayer.h */; };
+		A516D3AB208F7B8E003D1FFC /* AliyunVodPlayerDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = A516D397208F7B8E003D1FFC /* AliyunVodPlayerDefine.h */; };
+		A516D3AC208F7B8E003D1FFC /* AliyunVodPlayerSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A516D398208F7B8E003D1FFC /* AliyunVodPlayerSDK.a */; };
+		A516D3AD208F7B8E003D1FFC /* AliyunVodPlayerSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = A516D399208F7B8E003D1FFC /* AliyunVodPlayerSDK.h */; };
+		A516D3AE208F7B8E003D1FFC /* AliyunVodPlayerVideo.h in Headers */ = {isa = PBXBuildFile; fileRef = A516D39A208F7B8E003D1FFC /* AliyunVodPlayerVideo.h */; };
+		A516D3AF208F7B8E003D1FFC /* AliyunVodPlayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = A516D39C208F7B8E003D1FFC /* AliyunVodPlayerView.h */; };
+		A516D3B0208F7B8E003D1FFC /* AliyunVodPlayerViewDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = A516D39D208F7B8E003D1FFC /* AliyunVodPlayerViewDefine.h */; };
+		A516D3B1208F7B8E003D1FFC /* AliyunVodPlayerViewSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A516D39E208F7B8E003D1FFC /* AliyunVodPlayerViewSDK.a */; };
+		A516D3B2208F7B8E003D1FFC /* AliyunVodPlayerViewSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = A516D39F208F7B8E003D1FFC /* AliyunVodPlayerViewSDK.h */; };
+		A516D3CF208F7D4B003D1FFC /* AliyunPlayDataConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = A516D3CD208F7D4A003D1FFC /* AliyunPlayDataConfig.h */; };
+		A516D3D0208F7D4B003D1FFC /* AliyunPlayDataConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = A516D3CE208F7D4A003D1FFC /* AliyunPlayDataConfig.m */; };
+		A516D3D3208F7FF1003D1FFC /* AliyunPlayerMediaUIDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A516D3D1208F7FF1003D1FFC /* AliyunPlayerMediaUIDemoViewController.m */; };
+		A516D3D4208F7FF1003D1FFC /* AliyunPlayerMediaUIDemoViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A516D3D2208F7FF1003D1FFC /* AliyunPlayerMediaUIDemoViewController.h */; };
 		A5A805072081D5CE0038686C /* zlPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A5A805062081D5CE0038686C /* zlPlayer.m */; };
 		A5A805082081D5CE0038686C /* zlPlayer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A5A805052081D5CE0038686C /* zlPlayer.h */; };
-		A5C713E8208616E500161DE3 /* PlayerTool.h in Headers */ = {isa = PBXBuildFile; fileRef = A5C713E6208616E500161DE3 /* PlayerTool.h */; };
-		A5C713E9208616E500161DE3 /* PlayerTool.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C713E7208616E500161DE3 /* PlayerTool.m */; };
-		A5C71406208623C900161DE3 /* MASCompositeConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = A5C713ED208623C900161DE3 /* MASCompositeConstraint.h */; };
-		A5C71407208623C900161DE3 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C713EE208623C900161DE3 /* NSLayoutConstraint+MASDebugAdditions.m */; };
-		A5C71408208623C900161DE3 /* MASConstraint+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = A5C713EF208623C900161DE3 /* MASConstraint+Private.h */; };
-		A5C71409208623C900161DE3 /* MASLayoutConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = A5C713F0208623C900161DE3 /* MASLayoutConstraint.h */; };
-		A5C7140A208623C900161DE3 /* NSArray+MASShorthandAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = A5C713F1208623C900161DE3 /* NSArray+MASShorthandAdditions.h */; };
-		A5C7140B208623C900161DE3 /* MASConstraintMaker.h in Headers */ = {isa = PBXBuildFile; fileRef = A5C713F2208623C900161DE3 /* MASConstraintMaker.h */; };
-		A5C7140C208623C900161DE3 /* View+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = A5C713F3208623C900161DE3 /* View+MASAdditions.h */; };
-		A5C7140D208623C900161DE3 /* NSArray+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = A5C713F4208623C900161DE3 /* NSArray+MASAdditions.h */; };
-		A5C7140E208623C900161DE3 /* MASUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = A5C713F5208623C900161DE3 /* MASUtilities.h */; };
-		A5C7140F208623C900161DE3 /* MASViewAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = A5C713F6208623C900161DE3 /* MASViewAttribute.h */; };
-		A5C71410208623C900161DE3 /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C713F7208623C900161DE3 /* ViewController+MASAdditions.m */; };
-		A5C71411208623C900161DE3 /* MASViewConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = A5C713F8208623C900161DE3 /* MASViewConstraint.h */; };
-		A5C71412208623C900161DE3 /* MASConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = A5C713F9208623C900161DE3 /* MASConstraint.h */; };
-		A5C71413208623C900161DE3 /* NSLayoutConstraint+MASDebugAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = A5C713FA208623C900161DE3 /* NSLayoutConstraint+MASDebugAdditions.h */; };
-		A5C71414208623C900161DE3 /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C713FB208623C900161DE3 /* MASCompositeConstraint.m */; };
-		A5C71415208623C900161DE3 /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C713FC208623C900161DE3 /* MASConstraintMaker.m */; };
-		A5C71416208623C900161DE3 /* MASLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C713FD208623C900161DE3 /* MASLayoutConstraint.m */; };
-		A5C71417208623C900161DE3 /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C713FE208623C900161DE3 /* NSArray+MASAdditions.m */; };
-		A5C71418208623C900161DE3 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C713FF208623C900161DE3 /* View+MASAdditions.m */; };
-		A5C71419208623C900161DE3 /* View+MASShorthandAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = A5C71400208623C900161DE3 /* View+MASShorthandAdditions.h */; };
-		A5C7141A208623C900161DE3 /* Masonry.h in Headers */ = {isa = PBXBuildFile; fileRef = A5C71401208623C900161DE3 /* Masonry.h */; };
-		A5C7141B208623C900161DE3 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C71402208623C900161DE3 /* MASConstraint.m */; };
-		A5C7141C208623C900161DE3 /* ViewController+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = A5C71403208623C900161DE3 /* ViewController+MASAdditions.h */; };
-		A5C7141D208623C900161DE3 /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C71404208623C900161DE3 /* MASViewConstraint.m */; };
-		A5C7141E208623C900161DE3 /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C71405208623C900161DE3 /* MASViewAttribute.m */; };
-		A5C7142120862A0700161DE3 /* SBControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C7141F20862A0500161DE3 /* SBControlView.m */; };
-		A5C7142220862A0700161DE3 /* SBControlView.h in Headers */ = {isa = PBXBuildFile; fileRef = A5C7142020862A0700161DE3 /* SBControlView.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -61,13 +48,29 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		A502D0DE208D752000FB330D /* BrightnessView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrightnessView.h; sourceTree = "<group>"; };
-		A502D0DF208D752000FB330D /* BrightnessView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrightnessView.m; sourceTree = "<group>"; };
-		A526C7C020850184005CEF08 /* PLPlayerError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLPlayerError.h; sourceTree = "<group>"; };
-		A526C7C120850184005CEF08 /* PLPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLPlayer.h; sourceTree = "<group>"; };
-		A526C7C220850184005CEF08 /* PLPlayerOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLPlayerOption.h; sourceTree = "<group>"; };
-		A526C7C320850184005CEF08 /* PLPlayerKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLPlayerKit.h; sourceTree = "<group>"; };
-		A526C7C420850184005CEF08 /* PLPlayerKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = PLPlayerKit.a; sourceTree = "<group>"; };
+		A516D38A208F7B8E003D1FFC /* AliThirdparty.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = AliThirdparty.a; sourceTree = "<group>"; };
+		A516D38B208F7B8E003D1FFC /* AliThirdparty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliThirdparty.h; sourceTree = "<group>"; };
+		A516D38D208F7B8E003D1FFC /* AliVcMediaPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliVcMediaPlayer.h; sourceTree = "<group>"; };
+		A516D38E208F7B8E003D1FFC /* AliVcPlayerDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliVcPlayerDefine.h; sourceTree = "<group>"; };
+		A516D38F208F7B8E003D1FFC /* AliVcPlayerErrorCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliVcPlayerErrorCode.h; sourceTree = "<group>"; };
+		A516D390208F7B8E003D1FFC /* AliyunPlayerSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = AliyunPlayerSDK.a; sourceTree = "<group>"; };
+		A516D391208F7B8E003D1FFC /* AliyunPlayerSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliyunPlayerSDK.h; sourceTree = "<group>"; };
+		A516D392208F7B8E003D1FFC /* KernelMPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KernelMPlayer.h; sourceTree = "<group>"; };
+		A516D393208F7B8E003D1FFC /* MPlayingHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPlayingHandler.h; sourceTree = "<group>"; };
+		A516D395208F7B8E003D1FFC /* AliyunVodDownLoadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliyunVodDownLoadManager.h; sourceTree = "<group>"; };
+		A516D396208F7B8E003D1FFC /* AliyunVodPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliyunVodPlayer.h; sourceTree = "<group>"; };
+		A516D397208F7B8E003D1FFC /* AliyunVodPlayerDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliyunVodPlayerDefine.h; sourceTree = "<group>"; };
+		A516D398208F7B8E003D1FFC /* AliyunVodPlayerSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = AliyunVodPlayerSDK.a; sourceTree = "<group>"; };
+		A516D399208F7B8E003D1FFC /* AliyunVodPlayerSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliyunVodPlayerSDK.h; sourceTree = "<group>"; };
+		A516D39A208F7B8E003D1FFC /* AliyunVodPlayerVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliyunVodPlayerVideo.h; sourceTree = "<group>"; };
+		A516D39C208F7B8E003D1FFC /* AliyunVodPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliyunVodPlayerView.h; sourceTree = "<group>"; };
+		A516D39D208F7B8E003D1FFC /* AliyunVodPlayerViewDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliyunVodPlayerViewDefine.h; sourceTree = "<group>"; };
+		A516D39E208F7B8E003D1FFC /* AliyunVodPlayerViewSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = AliyunVodPlayerViewSDK.a; sourceTree = "<group>"; };
+		A516D39F208F7B8E003D1FFC /* AliyunVodPlayerViewSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliyunVodPlayerViewSDK.h; sourceTree = "<group>"; };
+		A516D3CD208F7D4A003D1FFC /* AliyunPlayDataConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliyunPlayDataConfig.h; sourceTree = "<group>"; };
+		A516D3CE208F7D4A003D1FFC /* AliyunPlayDataConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AliyunPlayDataConfig.m; sourceTree = "<group>"; };
+		A516D3D1208F7FF1003D1FFC /* AliyunPlayerMediaUIDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AliyunPlayerMediaUIDemoViewController.m; sourceTree = "<group>"; };
+		A516D3D2208F7FF1003D1FFC /* AliyunPlayerMediaUIDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliyunPlayerMediaUIDemoViewController.h; sourceTree = "<group>"; };
 		A543F4152082499C002ECE27 /* UIViewControllerExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIViewControllerExtension.h; sourceTree = "<group>"; };
 		A543F4162082499C002ECE27 /* UZURLTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UZURLTask.h; sourceTree = "<group>"; };
 		A543F4172082499C002ECE27 /* UZModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UZModule.h; sourceTree = "<group>"; };
@@ -75,42 +78,9 @@
 		A543F4192082499C002ECE27 /* UZAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UZAppDelegate.h; sourceTree = "<group>"; };
 		A543F41A2082499C002ECE27 /* UZAppUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UZAppUtils.h; sourceTree = "<group>"; };
 		A543F41B2082499C002ECE27 /* NSDictionaryUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSDictionaryUtils.h; sourceTree = "<group>"; };
-		A5473D3B208AF788002563D0 /* PlayerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerManager.h; sourceTree = "<group>"; };
-		A5473D3C208AF788002563D0 /* PlayerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerManager.m; sourceTree = "<group>"; };
-		A5473D55208C98F1002563D0 /* PlayerToolView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerToolView.h; sourceTree = "<group>"; };
-		A5473D56208C98F1002563D0 /* PlayerToolView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerToolView.m; sourceTree = "<group>"; };
 		A5A805022081D5CE0038686C /* libzlPlayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libzlPlayer.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5A805052081D5CE0038686C /* zlPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zlPlayer.h; sourceTree = "<group>"; };
 		A5A805062081D5CE0038686C /* zlPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zlPlayer.m; sourceTree = "<group>"; };
-		A5C713E6208616E500161DE3 /* PlayerTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerTool.h; sourceTree = "<group>"; };
-		A5C713E7208616E500161DE3 /* PlayerTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerTool.m; sourceTree = "<group>"; };
-		A5C713ED208623C900161DE3 /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
-		A5C713EE208623C900161DE3 /* NSLayoutConstraint+MASDebugAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+MASDebugAdditions.m"; sourceTree = "<group>"; };
-		A5C713EF208623C900161DE3 /* MASConstraint+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MASConstraint+Private.h"; sourceTree = "<group>"; };
-		A5C713F0208623C900161DE3 /* MASLayoutConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASLayoutConstraint.h; sourceTree = "<group>"; };
-		A5C713F1208623C900161DE3 /* NSArray+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MASShorthandAdditions.h"; sourceTree = "<group>"; };
-		A5C713F2208623C900161DE3 /* MASConstraintMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASConstraintMaker.h; sourceTree = "<group>"; };
-		A5C713F3208623C900161DE3 /* View+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASAdditions.h"; sourceTree = "<group>"; };
-		A5C713F4208623C900161DE3 /* NSArray+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MASAdditions.h"; sourceTree = "<group>"; };
-		A5C713F5208623C900161DE3 /* MASUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASUtilities.h; sourceTree = "<group>"; };
-		A5C713F6208623C900161DE3 /* MASViewAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASViewAttribute.h; sourceTree = "<group>"; };
-		A5C713F7208623C900161DE3 /* ViewController+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ViewController+MASAdditions.m"; sourceTree = "<group>"; };
-		A5C713F8208623C900161DE3 /* MASViewConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASViewConstraint.h; sourceTree = "<group>"; };
-		A5C713F9208623C900161DE3 /* MASConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASConstraint.h; sourceTree = "<group>"; };
-		A5C713FA208623C900161DE3 /* NSLayoutConstraint+MASDebugAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+MASDebugAdditions.h"; sourceTree = "<group>"; };
-		A5C713FB208623C900161DE3 /* MASCompositeConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASCompositeConstraint.m; sourceTree = "<group>"; };
-		A5C713FC208623C900161DE3 /* MASConstraintMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASConstraintMaker.m; sourceTree = "<group>"; };
-		A5C713FD208623C900161DE3 /* MASLayoutConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASLayoutConstraint.m; sourceTree = "<group>"; };
-		A5C713FE208623C900161DE3 /* NSArray+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+MASAdditions.m"; sourceTree = "<group>"; };
-		A5C713FF208623C900161DE3 /* View+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "View+MASAdditions.m"; sourceTree = "<group>"; };
-		A5C71400208623C900161DE3 /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
-		A5C71401208623C900161DE3 /* Masonry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Masonry.h; sourceTree = "<group>"; };
-		A5C71402208623C900161DE3 /* MASConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASConstraint.m; sourceTree = "<group>"; };
-		A5C71403208623C900161DE3 /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ViewController+MASAdditions.h"; sourceTree = "<group>"; };
-		A5C71404208623C900161DE3 /* MASViewConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewConstraint.m; sourceTree = "<group>"; };
-		A5C71405208623C900161DE3 /* MASViewAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewAttribute.m; sourceTree = "<group>"; };
-		A5C7141F20862A0500161DE3 /* SBControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBControlView.m; sourceTree = "<group>"; };
-		A5C7142020862A0700161DE3 /* SBControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBControlView.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,23 +88,74 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A526C7C520850184005CEF08 /* PLPlayerKit.a in Frameworks */,
+				A516D3B1208F7B8E003D1FFC /* AliyunVodPlayerViewSDK.a in Frameworks */,
+				A516D3A0208F7B8E003D1FFC /* AliThirdparty.a in Frameworks */,
+				A516D3AC208F7B8E003D1FFC /* AliyunVodPlayerSDK.a in Frameworks */,
+				A516D3A5208F7B8E003D1FFC /* AliyunPlayerSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A526C7BF20850184005CEF08 /* Headers */ = {
+		A516D388208F7B8E003D1FFC /* aliHeader */ = {
 			isa = PBXGroup;
 			children = (
-				A526C7C020850184005CEF08 /* PLPlayerError.h */,
-				A526C7C120850184005CEF08 /* PLPlayer.h */,
-				A526C7C220850184005CEF08 /* PLPlayerOption.h */,
-				A526C7C320850184005CEF08 /* PLPlayerKit.h */,
-				A526C7C420850184005CEF08 /* PLPlayerKit.a */,
+				A516D389208F7B8E003D1FFC /* AliThirdparty */,
+				A516D38C208F7B8E003D1FFC /* AliyunPlayerSDK */,
+				A516D394208F7B8E003D1FFC /* AliyunVodPlayerSDK */,
+				A516D39B208F7B8E003D1FFC /* AliyunVodPlayerViewSDK */,
 			);
-			path = Headers;
+			path = aliHeader;
+			sourceTree = "<group>";
+		};
+		A516D389208F7B8E003D1FFC /* AliThirdparty */ = {
+			isa = PBXGroup;
+			children = (
+				A516D3CD208F7D4A003D1FFC /* AliyunPlayDataConfig.h */,
+				A516D3CE208F7D4A003D1FFC /* AliyunPlayDataConfig.m */,
+				A516D38A208F7B8E003D1FFC /* AliThirdparty.a */,
+				A516D38B208F7B8E003D1FFC /* AliThirdparty.h */,
+			);
+			path = AliThirdparty;
+			sourceTree = "<group>";
+		};
+		A516D38C208F7B8E003D1FFC /* AliyunPlayerSDK */ = {
+			isa = PBXGroup;
+			children = (
+				A516D38D208F7B8E003D1FFC /* AliVcMediaPlayer.h */,
+				A516D38E208F7B8E003D1FFC /* AliVcPlayerDefine.h */,
+				A516D38F208F7B8E003D1FFC /* AliVcPlayerErrorCode.h */,
+				A516D390208F7B8E003D1FFC /* AliyunPlayerSDK.a */,
+				A516D391208F7B8E003D1FFC /* AliyunPlayerSDK.h */,
+				A516D392208F7B8E003D1FFC /* KernelMPlayer.h */,
+				A516D393208F7B8E003D1FFC /* MPlayingHandler.h */,
+			);
+			path = AliyunPlayerSDK;
+			sourceTree = "<group>";
+		};
+		A516D394208F7B8E003D1FFC /* AliyunVodPlayerSDK */ = {
+			isa = PBXGroup;
+			children = (
+				A516D395208F7B8E003D1FFC /* AliyunVodDownLoadManager.h */,
+				A516D396208F7B8E003D1FFC /* AliyunVodPlayer.h */,
+				A516D397208F7B8E003D1FFC /* AliyunVodPlayerDefine.h */,
+				A516D398208F7B8E003D1FFC /* AliyunVodPlayerSDK.a */,
+				A516D399208F7B8E003D1FFC /* AliyunVodPlayerSDK.h */,
+				A516D39A208F7B8E003D1FFC /* AliyunVodPlayerVideo.h */,
+			);
+			path = AliyunVodPlayerSDK;
+			sourceTree = "<group>";
+		};
+		A516D39B208F7B8E003D1FFC /* AliyunVodPlayerViewSDK */ = {
+			isa = PBXGroup;
+			children = (
+				A516D39C208F7B8E003D1FFC /* AliyunVodPlayerView.h */,
+				A516D39D208F7B8E003D1FFC /* AliyunVodPlayerViewDefine.h */,
+				A516D39E208F7B8E003D1FFC /* AliyunVodPlayerViewSDK.a */,
+				A516D39F208F7B8E003D1FFC /* AliyunVodPlayerViewSDK.h */,
+			);
+			path = AliyunVodPlayerViewSDK;
 			sourceTree = "<group>";
 		};
 		A543F4142082499C002ECE27 /* UZEngine */ = {
@@ -154,8 +175,7 @@
 		A5A804F92081D5CE0038686C = {
 			isa = PBXGroup;
 			children = (
-				A5C713EC208623C900161DE3 /* Masonry */,
-				A526C7BF20850184005CEF08 /* Headers */,
+				A516D388208F7B8E003D1FFC /* aliHeader */,
 				A543F4142082499C002ECE27 /* UZEngine */,
 				A5A805042081D5CE0038686C /* zlPlayer */,
 				A5A805032081D5CE0038686C /* Products */,
@@ -173,52 +193,12 @@
 		A5A805042081D5CE0038686C /* zlPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				A516D3D2208F7FF1003D1FFC /* AliyunPlayerMediaUIDemoViewController.h */,
+				A516D3D1208F7FF1003D1FFC /* AliyunPlayerMediaUIDemoViewController.m */,
 				A5A805052081D5CE0038686C /* zlPlayer.h */,
 				A5A805062081D5CE0038686C /* zlPlayer.m */,
-				A5473D55208C98F1002563D0 /* PlayerToolView.h */,
-				A5473D56208C98F1002563D0 /* PlayerToolView.m */,
-				A5473D3B208AF788002563D0 /* PlayerManager.h */,
-				A5473D3C208AF788002563D0 /* PlayerManager.m */,
-				A5C7142020862A0700161DE3 /* SBControlView.h */,
-				A5C7141F20862A0500161DE3 /* SBControlView.m */,
-				A502D0DE208D752000FB330D /* BrightnessView.h */,
-				A502D0DF208D752000FB330D /* BrightnessView.m */,
-				A5C713E6208616E500161DE3 /* PlayerTool.h */,
-				A5C713E7208616E500161DE3 /* PlayerTool.m */,
 			);
 			path = zlPlayer;
-			sourceTree = "<group>";
-		};
-		A5C713EC208623C900161DE3 /* Masonry */ = {
-			isa = PBXGroup;
-			children = (
-				A5C713ED208623C900161DE3 /* MASCompositeConstraint.h */,
-				A5C713EE208623C900161DE3 /* NSLayoutConstraint+MASDebugAdditions.m */,
-				A5C713EF208623C900161DE3 /* MASConstraint+Private.h */,
-				A5C713F0208623C900161DE3 /* MASLayoutConstraint.h */,
-				A5C713F1208623C900161DE3 /* NSArray+MASShorthandAdditions.h */,
-				A5C713F2208623C900161DE3 /* MASConstraintMaker.h */,
-				A5C713F3208623C900161DE3 /* View+MASAdditions.h */,
-				A5C713F4208623C900161DE3 /* NSArray+MASAdditions.h */,
-				A5C713F5208623C900161DE3 /* MASUtilities.h */,
-				A5C713F6208623C900161DE3 /* MASViewAttribute.h */,
-				A5C713F7208623C900161DE3 /* ViewController+MASAdditions.m */,
-				A5C713F8208623C900161DE3 /* MASViewConstraint.h */,
-				A5C713F9208623C900161DE3 /* MASConstraint.h */,
-				A5C713FA208623C900161DE3 /* NSLayoutConstraint+MASDebugAdditions.h */,
-				A5C713FB208623C900161DE3 /* MASCompositeConstraint.m */,
-				A5C713FC208623C900161DE3 /* MASConstraintMaker.m */,
-				A5C713FD208623C900161DE3 /* MASLayoutConstraint.m */,
-				A5C713FE208623C900161DE3 /* NSArray+MASAdditions.m */,
-				A5C713FF208623C900161DE3 /* View+MASAdditions.m */,
-				A5C71400208623C900161DE3 /* View+MASShorthandAdditions.h */,
-				A5C71401208623C900161DE3 /* Masonry.h */,
-				A5C71402208623C900161DE3 /* MASConstraint.m */,
-				A5C71403208623C900161DE3 /* ViewController+MASAdditions.h */,
-				A5C71404208623C900161DE3 /* MASViewConstraint.m */,
-				A5C71405208623C900161DE3 /* MASViewAttribute.m */,
-			);
-			path = Masonry;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,26 +208,23 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5C71406208623C900161DE3 /* MASCompositeConstraint.h in Headers */,
-				A5C7140D208623C900161DE3 /* NSArray+MASAdditions.h in Headers */,
-				A5C7140A208623C900161DE3 /* NSArray+MASShorthandAdditions.h in Headers */,
-				A5C7141C208623C900161DE3 /* ViewController+MASAdditions.h in Headers */,
-				A5C7140F208623C900161DE3 /* MASViewAttribute.h in Headers */,
-				A5C71408208623C900161DE3 /* MASConstraint+Private.h in Headers */,
-				A502D0E0208D752000FB330D /* BrightnessView.h in Headers */,
-				A5C7140B208623C900161DE3 /* MASConstraintMaker.h in Headers */,
-				A5473D3D208AF788002563D0 /* PlayerManager.h in Headers */,
-				A5C71413208623C900161DE3 /* NSLayoutConstraint+MASDebugAdditions.h in Headers */,
-				A5C71412208623C900161DE3 /* MASConstraint.h in Headers */,
-				A5C7141A208623C900161DE3 /* Masonry.h in Headers */,
-				A5C7142220862A0700161DE3 /* SBControlView.h in Headers */,
-				A5C71411208623C900161DE3 /* MASViewConstraint.h in Headers */,
-				A5C71409208623C900161DE3 /* MASLayoutConstraint.h in Headers */,
-				A5C713E8208616E500161DE3 /* PlayerTool.h in Headers */,
-				A5473D57208C98F1002563D0 /* PlayerToolView.h in Headers */,
-				A5C7140C208623C900161DE3 /* View+MASAdditions.h in Headers */,
-				A5C71419208623C900161DE3 /* View+MASShorthandAdditions.h in Headers */,
-				A5C7140E208623C900161DE3 /* MASUtilities.h in Headers */,
+				A516D3AF208F7B8E003D1FFC /* AliyunVodPlayerView.h in Headers */,
+				A516D3B0208F7B8E003D1FFC /* AliyunVodPlayerViewDefine.h in Headers */,
+				A516D3A8208F7B8E003D1FFC /* MPlayingHandler.h in Headers */,
+				A516D3A7208F7B8E003D1FFC /* KernelMPlayer.h in Headers */,
+				A516D3CF208F7D4B003D1FFC /* AliyunPlayDataConfig.h in Headers */,
+				A516D3A2208F7B8E003D1FFC /* AliVcMediaPlayer.h in Headers */,
+				A516D3AD208F7B8E003D1FFC /* AliyunVodPlayerSDK.h in Headers */,
+				A516D3A4208F7B8E003D1FFC /* AliVcPlayerErrorCode.h in Headers */,
+				A516D3AB208F7B8E003D1FFC /* AliyunVodPlayerDefine.h in Headers */,
+				A516D3A6208F7B8E003D1FFC /* AliyunPlayerSDK.h in Headers */,
+				A516D3AA208F7B8E003D1FFC /* AliyunVodPlayer.h in Headers */,
+				A516D3D4208F7FF1003D1FFC /* AliyunPlayerMediaUIDemoViewController.h in Headers */,
+				A516D3A1208F7B8E003D1FFC /* AliThirdparty.h in Headers */,
+				A516D3B2208F7B8E003D1FFC /* AliyunVodPlayerViewSDK.h in Headers */,
+				A516D3A9208F7B8E003D1FFC /* AliyunVodDownLoadManager.h in Headers */,
+				A516D3A3208F7B8E003D1FFC /* AliVcPlayerDefine.h in Headers */,
+				A516D3AE208F7B8E003D1FFC /* AliyunVodPlayerVideo.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,22 +297,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5C7141D208623C900161DE3 /* MASViewConstraint.m in Sources */,
-				A5C7141E208623C900161DE3 /* MASViewAttribute.m in Sources */,
-				A5473D58208C98F1002563D0 /* PlayerToolView.m in Sources */,
 				A5A805072081D5CE0038686C /* zlPlayer.m in Sources */,
-				A5C71417208623C900161DE3 /* NSArray+MASAdditions.m in Sources */,
-				A5C71410208623C900161DE3 /* ViewController+MASAdditions.m in Sources */,
-				A5473D3E208AF788002563D0 /* PlayerManager.m in Sources */,
-				A5C71414208623C900161DE3 /* MASCompositeConstraint.m in Sources */,
-				A5C713E9208616E500161DE3 /* PlayerTool.m in Sources */,
-				A5C71418208623C900161DE3 /* View+MASAdditions.m in Sources */,
-				A5C71415208623C900161DE3 /* MASConstraintMaker.m in Sources */,
-				A5C7141B208623C900161DE3 /* MASConstraint.m in Sources */,
-				A5C71407208623C900161DE3 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
-				A5C71416208623C900161DE3 /* MASLayoutConstraint.m in Sources */,
-				A5C7142120862A0700161DE3 /* SBControlView.m in Sources */,
-				A502D0E1208D752000FB330D /* BrightnessView.m in Sources */,
+				A516D3D0208F7D4B003D1FFC /* AliyunPlayDataConfig.m in Sources */,
+				A516D3D3208F7FF1003D1FFC /* AliyunPlayerMediaUIDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,6 +423,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Headers",
+					"$(PROJECT_DIR)/aliHeader/AliThirdparty",
+					"$(PROJECT_DIR)/aliHeader/AliyunPlayerSDK",
+					"$(PROJECT_DIR)/aliHeader/AliyunVodPlayerSDK",
+					"$(PROJECT_DIR)/aliHeader/AliyunVodPlayerViewSDK",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
@@ -480,6 +448,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Headers",
+					"$(PROJECT_DIR)/aliHeader/AliThirdparty",
+					"$(PROJECT_DIR)/aliHeader/AliyunPlayerSDK",
+					"$(PROJECT_DIR)/aliHeader/AliyunVodPlayerSDK",
+					"$(PROJECT_DIR)/aliHeader/AliyunVodPlayerViewSDK",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";

@@ -84,15 +84,26 @@
 		52CA35751AB195C9002579CF /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 52CA35741AB195C9002579CF /* libresolv.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
 		52CA35771AB195EB002579CF /* libresolv.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 52CA35761AB195EB002579CF /* libresolv.9.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
 		52E586AA1AFC74F100864ACF /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52BA30A919F6367A00D81640 /* CoreAudio.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		A5473D3A208AEE7A002563D0 /* res_zlPlayer in Resources */ = {isa = PBXBuildFile; fileRef = A5473D39208AEE7A002563D0 /* res_zlPlayer */; };
-		A5473D54208C9629002563D0 /* libzlPlayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A5473D53208C9607002563D0 /* libzlPlayer.a */; };
-		A5C7138E2085A30600161DE3 /* PLPlayerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C7138D2085A30600161DE3 /* PLPlayerKit.framework */; };
-		A5C7138F2085A35400161DE3 /* PLPlayerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C7138D2085A30600161DE3 /* PLPlayerKit.framework */; };
-		A5C713902085A35400161DE3 /* PLPlayerKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5C7138D2085A30600161DE3 /* PLPlayerKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A516D3CC208F7BBD003D1FFC /* libzlPlayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A516D3B6208F7BA0003D1FFC /* libzlPlayer.a */; };
+		A516D3D6208F8E7B003D1FFC /* AliyunVodPlayerViewSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A516D3D5208F8E7A003D1FFC /* AliyunVodPlayerViewSDK.framework */; };
+		A516D3D8208F8EA0003D1FFC /* AliyunVodPlayerViewSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A516D3D5208F8E7A003D1FFC /* AliyunVodPlayerViewSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A516D3DB208F8ECB003D1FFC /* AliyunVodPlayerSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A516D3DA208F8ECB003D1FFC /* AliyunVodPlayerSDK.framework */; };
+		A516D3DC208F8ECF003D1FFC /* AliyunVodPlayerSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A516D3DA208F8ECB003D1FFC /* AliyunVodPlayerSDK.framework */; };
+		A516D3DD208F8ECF003D1FFC /* AliyunVodPlayerSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A516D3DA208F8ECB003D1FFC /* AliyunVodPlayerSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A516D3E0208F8EE6003D1FFC /* AliyunImageSource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A516D3DE208F8EE5003D1FFC /* AliyunImageSource.bundle */; };
+		A516D3E1208F8EE6003D1FFC /* AliyunLanguageSource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A516D3DF208F8EE6003D1FFC /* AliyunLanguageSource.bundle */; };
+		A516D3E2208F8EE8003D1FFC /* AliyunImageSource.bundle in Embed PlugIns */ = {isa = PBXBuildFile; fileRef = A516D3DE208F8EE5003D1FFC /* AliyunImageSource.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A516D3E3208F8EE8003D1FFC /* AliyunLanguageSource.bundle in Embed PlugIns */ = {isa = PBXBuildFile; fileRef = A516D3DF208F8EE6003D1FFC /* AliyunLanguageSource.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A516D3E7208F8F13003D1FFC /* AliyunPlayerSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A516D3E5208F8F12003D1FFC /* AliyunPlayerSDK.framework */; };
+		A516D3E8208F8F13003D1FFC /* AliThirdparty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A516D3E6208F8F12003D1FFC /* AliThirdparty.framework */; };
+		A516D3E9208F8F16003D1FFC /* AliThirdparty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A516D3E6208F8F12003D1FFC /* AliThirdparty.framework */; };
+		A516D3EA208F8F16003D1FFC /* AliThirdparty.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A516D3E6208F8F12003D1FFC /* AliThirdparty.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A516D3EB208F8F16003D1FFC /* AliyunPlayerSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A516D3E5208F8F12003D1FFC /* AliyunPlayerSDK.framework */; };
+		A516D3EC208F8F16003D1FFC /* AliyunPlayerSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A516D3E5208F8F12003D1FFC /* AliyunPlayerSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A5473D52208C9607002563D0 /* PBXContainerItemProxy */ = {
+		A516D3B5208F7BA0003D1FFC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A5473D4E208C9607002563D0 /* zlPlayer.xcodeproj */;
 			proxyType = 2;
@@ -102,25 +113,30 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		52BCBF0A1ADB6C5E00561043 /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-			);
-			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A5C713912085A35400161DE3 /* Embed Frameworks */ = {
+		A516D3D9208F8EA0003D1FFC /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A5C713902085A35400161DE3 /* PLPlayerKit.framework in Embed Frameworks */,
+				A516D3EA208F8F16003D1FFC /* AliThirdparty.framework in Embed Frameworks */,
+				A516D3DD208F8ECF003D1FFC /* AliyunVodPlayerSDK.framework in Embed Frameworks */,
+				A516D3EC208F8F16003D1FFC /* AliyunPlayerSDK.framework in Embed Frameworks */,
+				A516D3D8208F8EA0003D1FFC /* AliyunVodPlayerViewSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A516D3E4208F8EE8003D1FFC /* Embed PlugIns */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A516D3E3208F8EE8003D1FFC /* AliyunLanguageSource.bundle in Embed PlugIns */,
+				A516D3E2208F8EE8003D1FFC /* AliyunImageSource.bundle in Embed PlugIns */,
+			);
+			name = "Embed PlugIns";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -225,9 +241,13 @@
 		52BA311019F63B0300D81640 /* libbsm.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbsm.dylib; path = usr/lib/libbsm.dylib; sourceTree = SDKROOT; };
 		52CA35741AB195C9002579CF /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
 		52CA35761AB195EB002579CF /* libresolv.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.9.dylib; path = usr/lib/libresolv.9.dylib; sourceTree = SDKROOT; };
-		A5473D39208AEE7A002563D0 /* res_zlPlayer */ = {isa = PBXFileReference; lastKnownFileType = folder; path = res_zlPlayer; sourceTree = "<group>"; };
+		A516D3D5208F8E7A003D1FFC /* AliyunVodPlayerViewSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AliyunVodPlayerViewSDK.framework; sourceTree = "<group>"; };
+		A516D3DA208F8ECB003D1FFC /* AliyunVodPlayerSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AliyunVodPlayerSDK.framework; sourceTree = "<group>"; };
+		A516D3DE208F8EE5003D1FFC /* AliyunImageSource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AliyunImageSource.bundle; sourceTree = "<group>"; };
+		A516D3DF208F8EE6003D1FFC /* AliyunLanguageSource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AliyunLanguageSource.bundle; sourceTree = "<group>"; };
+		A516D3E5208F8F12003D1FFC /* AliyunPlayerSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AliyunPlayerSDK.framework; sourceTree = "<group>"; };
+		A516D3E6208F8F12003D1FFC /* AliThirdparty.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AliThirdparty.framework; sourceTree = "<group>"; };
 		A5473D4E208C9607002563D0 /* zlPlayer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = zlPlayer.xcodeproj; path = ../../../zlPlayer.xcodeproj; sourceTree = "<group>"; };
-		A5C7138D2085A30600161DE3 /* PLPlayerKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PLPlayerKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,14 +255,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5473D54208C9629002563D0 /* libzlPlayer.a in Frameworks */,
-				A5C7138F2085A35400161DE3 /* PLPlayerKit.framework in Frameworks */,
+				A516D3CC208F7BBD003D1FFC /* libzlPlayer.a in Frameworks */,
+				A516D3D6208F8E7B003D1FFC /* AliyunVodPlayerViewSDK.framework in Frameworks */,
 				5262179B1CFC3B9C00DEE766 /* WebKit.framework in Frameworks */,
 				52E586AA1AFC74F100864ACF /* CoreAudio.framework in Frameworks */,
+				A516D3E8208F8F13003D1FFC /* AliThirdparty.framework in Frameworks */,
 				52BA30F419F6368400D81640 /* MapKit.framework in Frameworks */,
 				52BA30F519F6368400D81640 /* MediaAccessibility.framework in Frameworks */,
 				52BA30F619F6368400D81640 /* MediaToolbox.framework in Frameworks */,
 				52BA30F719F6368400D81640 /* Metal.framework in Frameworks */,
+				A516D3DC208F8ECF003D1FFC /* AliyunVodPlayerSDK.framework in Frameworks */,
 				52BA30F819F6368400D81640 /* MultipeerConnectivity.framework in Frameworks */,
 				52BA30FA19F6368400D81640 /* NewsstandKit.framework in Frameworks */,
 				52BA30FB19F6368400D81640 /* NotificationCenter.framework in Frameworks */,
@@ -266,15 +288,18 @@
 				52BA30D919F6368400D81640 /* SystemConfiguration.framework in Frameworks */,
 				52BA30DA19F6368400D81640 /* UIKit.framework in Frameworks */,
 				52BA30BC19F6367A00D81640 /* Accelerate.framework in Frameworks */,
+				A516D3E9208F8F16003D1FFC /* AliThirdparty.framework in Frameworks */,
 				52BA30BD19F6367A00D81640 /* Accounts.framework in Frameworks */,
 				52BA30BF19F6367A00D81640 /* AVKit.framework in Frameworks */,
 				52BA30C319F6367A00D81640 /* CoreBluetooth.framework in Frameworks */,
+				A516D3DB208F8ECB003D1FFC /* AliyunVodPlayerSDK.framework in Frameworks */,
 				52BA30C419F6367A00D81640 /* CoreFoundation.framework in Frameworks */,
 				52BA30C519F6367A00D81640 /* CoreImage.framework in Frameworks */,
 				52BA30C619F6367A00D81640 /* CoreMIDI.framework in Frameworks */,
 				52BA30C719F6367A00D81640 /* CoreMotion.framework in Frameworks */,
 				52BA30C819F6367A00D81640 /* CoreText.framework in Frameworks */,
 				52BA30C919F6367A00D81640 /* EventKit.framework in Frameworks */,
+				A516D3D6208F8E7B003D1FFC /* AliyunVodPlayerViewSDK.framework in Frameworks */,
 				52BA30CA19F6367A00D81640 /* EventKitUI.framework in Frameworks */,
 				52BA30CC19F6367A00D81640 /* GameController.framework in Frameworks */,
 				52BA30CE19F6367A00D81640 /* GLKit.framework in Frameworks */,
@@ -293,17 +318,18 @@
 				52BA30A019F6367A00D81640 /* CoreTelephony.framework in Frameworks */,
 				52BA30A119F6367A00D81640 /* CoreVideo.framework in Frameworks */,
 				52BA30A219F6367A00D81640 /* Foundation.framework in Frameworks */,
-				A5C7138E2085A30600161DE3 /* PLPlayerKit.framework in Frameworks */,
 				52BA30A319F6367A00D81640 /* ImageIO.framework in Frameworks */,
 				52CA35771AB195EB002579CF /* libresolv.9.dylib in Frameworks */,
 				52CA35751AB195C9002579CF /* libresolv.dylib in Frameworks */,
 				52BA311119F63B0300D81640 /* libbsm.dylib in Frameworks */,
 				52BA310E19F63AB200D81640 /* libarchive.2.dylib in Frameworks */,
+				A516D3EB208F8F16003D1FFC /* AliyunPlayerSDK.framework in Frameworks */,
 				52BA310F19F63AB200D81640 /* libarchive.dylib in Frameworks */,
 				522E970019EF922000A2E9C5 /* libxml2.2.dylib in Frameworks */,
 				522E970119EF922000A2E9C5 /* libxml2.dylib in Frameworks */,
 				522E96FC19EF920C00A2E9C5 /* libbz2.1.0.dylib in Frameworks */,
 				522E96FD19EF920C00A2E9C5 /* libbz2.dylib in Frameworks */,
+				A516D3E7208F8F13003D1FFC /* AliyunPlayerSDK.framework in Frameworks */,
 				527BCFBA19C434100077631F /* libicucore.dylib in Frameworks */,
 				527BCFBB19C434100077631F /* libstdc++.6.dylib in Frameworks */,
 				527BCFBC19C434100077631F /* libc++.dylib in Frameworks */,
@@ -327,8 +353,12 @@
 		527BCF6219C431480077631F = {
 			isa = PBXGroup;
 			children = (
-				A5473D39208AEE7A002563D0 /* res_zlPlayer */,
-				A5C7138D2085A30600161DE3 /* PLPlayerKit.framework */,
+				A516D3E6208F8F12003D1FFC /* AliThirdparty.framework */,
+				A516D3E5208F8F12003D1FFC /* AliyunPlayerSDK.framework */,
+				A516D3DE208F8EE5003D1FFC /* AliyunImageSource.bundle */,
+				A516D3DF208F8EE6003D1FFC /* AliyunLanguageSource.bundle */,
+				A516D3DA208F8ECB003D1FFC /* AliyunVodPlayerSDK.framework */,
+				A516D3D5208F8E7A003D1FFC /* AliyunVodPlayerViewSDK.framework */,
 				527BCF6D19C431480077631F /* UZApp */,
 				527BCFD619C434200077631F /* Frameworks */,
 				527BCF6C19C431480077631F /* Products */,
@@ -484,7 +514,7 @@
 		A5473D4F208C9607002563D0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A5473D53208C9607002563D0 /* libzlPlayer.a */,
+				A516D3B6208F7BA0003D1FFC /* libzlPlayer.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -499,8 +529,8 @@
 				527BCF6719C431480077631F /* Sources */,
 				527BCF6819C431480077631F /* Frameworks */,
 				527BCF6919C431480077631F /* Resources */,
-				52BCBF0A1ADB6C5E00561043 /* Embed App Extensions */,
-				A5C713912085A35400161DE3 /* Embed Frameworks */,
+				A516D3D9208F8EA0003D1FFC /* Embed Frameworks */,
+				A516D3E4208F8EE8003D1FFC /* Embed PlugIns */,
 			);
 			buildRules = (
 			);
@@ -563,11 +593,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		A5473D53208C9607002563D0 /* libzlPlayer.a */ = {
+		A516D3B6208F7BA0003D1FFC /* libzlPlayer.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libzlPlayer.a;
-			remoteRef = A5473D52208C9607002563D0 /* PBXContainerItemProxy */;
+			remoteRef = A516D3B5208F7BA0003D1FFC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -578,8 +608,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				527BCFF519C4346B0077631F /* uz in Resources */,
+				A516D3E1208F8EE6003D1FFC /* AliyunLanguageSource.bundle in Resources */,
 				527BCFF619C4346B0077631F /* widget in Resources */,
-				A5473D3A208AEE7A002563D0 /* res_zlPlayer in Resources */,
+				A516D3E0208F8EE6003D1FFC /* AliyunImageSource.bundle in Resources */,
 				527BCF7C19C431480077631F /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
