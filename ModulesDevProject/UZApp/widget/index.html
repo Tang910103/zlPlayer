@@ -73,9 +73,68 @@ a.button3{
     display: -webkit-box;
     -webkit-box-pack: center;
     -webkit-box-align: center;
+    height: 36px;
+    margin: 8px;
+    margin-top: 10px;
+    background-color: rgba(240,240,240,1.0);
+    border-color: rgba(220,220,220,1.0);
+    border-width: 2px;
+    border-style: solid;
+}
+a.button4{
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+    height: 36px;
+    margin: 8px;
+    margin-top: 10px;
+    background-color: rgba(240,240,240,1.0);
+    border-color: rgba(220,220,220,1.0);
+    border-width: 2px;
+    border-style: solid;
+}
+a.button5{
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+    height: 36px;
+    margin: 8px;
+    margin-top: 10px;
+    background-color: rgba(240,240,240,1.0);
+    border-color: rgba(220,220,220,1.0);
+    border-width: 2px;
+    border-style: solid;
+}
+a.button6{
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+    height: 36px;
+    margin: 8px;
+    margin-top: 10px;
+    background-color: rgba(240,240,240,1.0);
+    border-color: rgba(220,220,220,1.0);
+    border-width: 2px;
+    border-style: solid;
+}
+a.button7{
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+    height: 36px;
+    margin: 8px;
+    margin-top: 10px;
+    background-color: rgba(240,240,240,1.0);
+    border-color: rgba(220,220,220,1.0);
+    border-width: 2px;
+    border-style: solid;
+}
+a.button70{
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
     height: 360px;
-    left: 0px;
-    right: 0px;
+    margin: 8px;
     margin-top: 10px;
     background-color: rgba(240,240,240,1.0);
     border-color: rgba(220,220,220,1.0);
@@ -93,10 +152,16 @@ a.button3{
 	    	<h1 id="title">模块开发</h1>
 	    </header>
 	    <div id="main">
-            <a class="button" tapmode="active" onclick="init()">init</a>
-            <a class="button1" tapmode="active" onclick="play()">显示view</a>
+            <a class="button" tapmode="active" onclick="init()">初始化播放器</a>
+            <a class="button1" tapmode="active" onclick="play()">开始播放</a>
             <a class="button2" tapmode="active" onclick="getCurrentPosition()">获取播放器当前播放进度</a>
+            <a class="button4" tapmode="active" onclick="isFullScreen()">是否为全屏</a>
+            <a class="button5" tapmode="active" onclick="seekTo()">跳转到10秒位置</a>
+            <a class="button6" tapmode="active" onclick="pause()">暂停播放</a>
+            <a class="button7" tapmode="active" onclick="resume()">继续播放</a>
             <a class="button3" tapmode="active" onclick="stop()">停止播放</a>
+            
+            <a class="button70" onclick=""></a>
         </div>
     </div>
 </body>
@@ -107,7 +172,7 @@ a.button3{
         demo.init({
                   fixedOn:"",
                   fixed:false,
-                  rect:{x: 0,y:300,w:375,h:200},
+                  rect:{x: 0,y:500,w:375,h:200},
                 });
     }
 
@@ -129,6 +194,49 @@ function getCurrentPosition() {
                                       });
                             });
 }
+
+function isFullScreen() {
+    var demo = api.require('zlPlayer');
+    demo.isFullScreen({
+                
+                },function(ret, err){
+                api.toast({
+                          msg: ret.status ? "是全屏" : "不是全屏"
+                          });
+                });
+}
+function seekTo() {
+    var demo = api.require('zlPlayer');
+    var pro = 10 * 1000;
+    demo.seekTo({
+                process:pro
+                },function(ret, err){
+                api.toast({
+                          msg: "跳转到" + pro + "秒"
+                          });
+                });
+}
+function resume() {
+    var demo = api.require('zlPlayer');
+    demo.resume({
+               
+               },function(ret, err){
+               api.toast({
+                         msg: "继续播放"
+                         });
+               });
+}
+function pause() {
+    var demo = api.require('zlPlayer');
+    demo.pause({
+              
+              },function(ret, err){
+              api.toast({
+                        msg: "暂停播放"
+                        });
+              });
+}
+
 function stop() {
     var demo = api.require('zlPlayer');
     demo.stop({

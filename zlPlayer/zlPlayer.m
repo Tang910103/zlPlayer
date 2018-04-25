@@ -28,8 +28,6 @@ typedef NS_ENUM(NSUInteger, ScreenOrientation) {
     ScreenOrientation_auto_landscape,
 };
 
-static NSInteger count = 0;
-
 @interface zlPlayer()<AliyunVodPlayerViewDelegate>
 {
     NSMutableDictionary *_cbIdDictionary;
@@ -39,9 +37,10 @@ static NSInteger count = 0;
     CGRect _rect;
     NSString *_orientation;
     NSString *_title;
+    BOOL _isFullScreen;
 }
 @property (nonatomic, strong) AliyunVodPlayerView *playerView;
-@property (nonatomic, strong) NSURL *URL;
+@property (nonatomic, strong) AliyunVodPlayer *aliyunVodPlayer;
 @end
 
 @implementation zlPlayer
@@ -104,15 +103,43 @@ static NSInteger count = 0;
 /** 获取播放器当前播放进度 */
 - (void)getCurrentPosition:(NSDictionary *)paramDict {
     [self addCbIDByParamDict:paramDict SEL:@selector(getCurrentPosition:)];
-    [self callbackByDic:@{@"status":@(YES),@"currentPosition":@(self.playerView.currentTime)} msg:@"" SEL:@selector(getCurrentPosition:)];
+    [self callbackByDic:@{@"status":@(YES),@"currentPosition":@(self.playerView.currentTime*1000)} msg:@"" SEL:@selector(getCurrentPosition:)];
 }
 /** 停止播放 */
 - (void)stop:(NSDictionary *)paramDict {
-    [self.playerView stop];
+    if (self.playerView != nil) {
+        [self.playerView stop];
+        [self.playerView releasePlayer];
+        [self.playerView removeFromSuperview];
+        self.playerView = nil;
+    }
     [self addCbIDByParamDict:paramDict SEL:@selector(stop:)];
     [self callback:YES msg:@"" SEL:@selector(stop:)];
 }
-
+/** 获取是否全屏播放状态 */
+- (void)isFullScreen:(NSDictionary *)paramDict {
+    [self addCbIDByParamDict:paramDict SEL:@selector(isFullScreen:)];
+    [self callback:_isFullScreen msg:@"" SEL:@selector(isFullScreen:)];
+}
+/** 设置播放进度位置 */
+- (void)seekTo:(NSDictionary *)paramDict {
+    NSInteger process = [paramDict integerValueForKey:@"process" defaultValue:0];
+    [self.aliyunVodPlayer seekToTime:process/1000];
+    [self addCbIDByParamDict:paramDict SEL:@selector(seekTo:)];
+    [self callback:YES msg:@"" SEL:@selector(seekTo:)];
+}
+/** 暂停播放 */
+- (void)pause:(NSDictionary *)paramDict {
+    [self.playerView pause];
+    [self addCbIDByParamDict:paramDict SEL:@selector(pause:)];
+    [self callback:YES msg:@"" SEL:@selector(pause:)];
+}
+/** 继续播放 */
+- (void)resume:(NSDictionary *)paramDict {
+    [self.playerView resume];
+    [self addCbIDByParamDict:paramDict SEL:@selector(resume:)];
+    [self callback:YES msg:@"" SEL:@selector(resume:)];
+}
 #pragma mark - private
 /** 设置屏幕取向 */
 - (void)setOrientation:(BOOL)isFullScreen {
@@ -220,8 +247,19 @@ static NSInteger count = 0;
 
 - (void)aliyunVodPlayerView:(AliyunVodPlayerView *)playerView fullScreen:(BOOL)isFullScreen{
     NSLog(@"isfullScreen --%d",isFullScreen);
+    _isFullScreen = isFullScreen;
     [self setOrientation:isFullScreen];
 }
+
+- (void)aliyunVodPlayerView:(AliyunVodPlayerView *)playerView onVideoDefinitionChanged:(NSString *)videoDefinition {
+    
+}
+
+
+- (void)onCircleStartWithVodPlayerView:(AliyunVodPlayerView *)playerView {
+    
+}
+
 #pragma mark - getter/setter
 
 //添加视图
@@ -246,6 +284,7 @@ static NSInteger count = 0;
     //播放器播放方式
     AliyunVodPlayer *aliPlayer = [self.playerView valueForKey:@"_aliPlayer"];
     aliPlayer.referer = _referer;
+    self.aliyunVodPlayer = aliPlayer;
     BOOL status = [self addSubview:self.playerView fixedOn:_fixedOn fixed:_fixed];
     [self callback:status msg:status ? @"":@"播放初始化失败"  SEL:@selector(init:)];
 }
