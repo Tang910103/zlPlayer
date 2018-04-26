@@ -85,19 +85,15 @@
 		52CA35771AB195EB002579CF /* libresolv.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 52CA35761AB195EB002579CF /* libresolv.9.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
 		52E586AA1AFC74F100864ACF /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52BA30A919F6367A00D81640 /* CoreAudio.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A516D3CC208F7BBD003D1FFC /* libzlPlayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A516D3B6208F7BA0003D1FFC /* libzlPlayer.a */; };
-		A516D3F4208F8FFA003D1FFC /* AliThirdparty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A516D3EE208F8FFA003D1FFC /* AliThirdparty.framework */; };
 		A516D3F5208F8FFA003D1FFC /* AliyunImageSource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A516D3EF208F8FFA003D1FFC /* AliyunImageSource.bundle */; };
 		A516D3F6208F8FFA003D1FFC /* AliyunLanguageSource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A516D3F0208F8FFA003D1FFC /* AliyunLanguageSource.bundle */; };
-		A516D3F7208F8FFA003D1FFC /* AliyunPlayerSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A516D3F1208F8FFA003D1FFC /* AliyunPlayerSDK.framework */; };
 		A516D3F8208F8FFA003D1FFC /* AliyunVodPlayerSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A516D3F2208F8FFA003D1FFC /* AliyunVodPlayerSDK.framework */; };
-		A516D3F9208F8FFA003D1FFC /* AliyunVodPlayerViewSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A516D3F3208F8FFA003D1FFC /* AliyunVodPlayerViewSDK.framework */; };
 		A516D3FA208F9005003D1FFC /* AliThirdparty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A516D3EE208F8FFA003D1FFC /* AliThirdparty.framework */; };
 		A516D3FB208F9005003D1FFC /* AliThirdparty.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A516D3EE208F8FFA003D1FFC /* AliThirdparty.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A516D3FC208F9005003D1FFC /* AliyunImageSource.bundle in Embed PlugIns */ = {isa = PBXBuildFile; fileRef = A516D3EF208F8FFA003D1FFC /* AliyunImageSource.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A516D3FD208F9005003D1FFC /* AliyunLanguageSource.bundle in Embed PlugIns */ = {isa = PBXBuildFile; fileRef = A516D3F0208F8FFA003D1FFC /* AliyunLanguageSource.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A516D3FE208F9005003D1FFC /* AliyunPlayerSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A516D3F1208F8FFA003D1FFC /* AliyunPlayerSDK.framework */; };
 		A516D3FF208F9005003D1FFC /* AliyunPlayerSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A516D3F1208F8FFA003D1FFC /* AliyunPlayerSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A516D400208F9005003D1FFC /* AliyunVodPlayerSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A516D3F2208F8FFA003D1FFC /* AliyunVodPlayerSDK.framework */; };
 		A516D401208F9005003D1FFC /* AliyunVodPlayerSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A516D3F2208F8FFA003D1FFC /* AliyunVodPlayerSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A516D402208F9005003D1FFC /* AliyunVodPlayerViewSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A516D3F3208F8FFA003D1FFC /* AliyunVodPlayerViewSDK.framework */; };
 		A516D403208F9005003D1FFC /* AliyunVodPlayerViewSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A516D3F3208F8FFA003D1FFC /* AliyunVodPlayerViewSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -294,13 +290,11 @@
 				52BA30C319F6367A00D81640 /* CoreBluetooth.framework in Frameworks */,
 				52BA30C419F6367A00D81640 /* CoreFoundation.framework in Frameworks */,
 				A516D3F8208F8FFA003D1FFC /* AliyunVodPlayerSDK.framework in Frameworks */,
-				A516D3F7208F8FFA003D1FFC /* AliyunPlayerSDK.framework in Frameworks */,
 				52BA30C519F6367A00D81640 /* CoreImage.framework in Frameworks */,
 				52BA30C619F6367A00D81640 /* CoreMIDI.framework in Frameworks */,
 				52BA30C719F6367A00D81640 /* CoreMotion.framework in Frameworks */,
 				52BA30C819F6367A00D81640 /* CoreText.framework in Frameworks */,
 				52BA30C919F6367A00D81640 /* EventKit.framework in Frameworks */,
-				A516D3F4208F8FFA003D1FFC /* AliThirdparty.framework in Frameworks */,
 				52BA30CA19F6367A00D81640 /* EventKitUI.framework in Frameworks */,
 				52BA30CC19F6367A00D81640 /* GameController.framework in Frameworks */,
 				52BA30CE19F6367A00D81640 /* GLKit.framework in Frameworks */,
@@ -316,7 +310,6 @@
 				52BA309D19F6367A00D81640 /* CoreGraphics.framework in Frameworks */,
 				52BA309E19F6367A00D81640 /* CoreLocation.framework in Frameworks */,
 				52BA309F19F6367A00D81640 /* CoreMedia.framework in Frameworks */,
-				A516D400208F9005003D1FFC /* AliyunVodPlayerSDK.framework in Frameworks */,
 				52BA30A019F6367A00D81640 /* CoreTelephony.framework in Frameworks */,
 				52BA30A119F6367A00D81640 /* CoreVideo.framework in Frameworks */,
 				52BA30A219F6367A00D81640 /* Foundation.framework in Frameworks */,
@@ -332,7 +325,6 @@
 				522E96FD19EF920C00A2E9C5 /* libbz2.dylib in Frameworks */,
 				527BCFBA19C434100077631F /* libicucore.dylib in Frameworks */,
 				527BCFBB19C434100077631F /* libstdc++.6.dylib in Frameworks */,
-				A516D3F9208F8FFA003D1FFC /* AliyunVodPlayerViewSDK.framework in Frameworks */,
 				527BCFBC19C434100077631F /* libc++.dylib in Frameworks */,
 				527BCFBD19C434100077631F /* libiconv.dylib in Frameworks */,
 				527BCFBE19C434100077631F /* libz.dylib in Frameworks */,
@@ -557,7 +549,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0710;
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = APICloud;
 				TargetAttributes = {
 					527BCF6A19C431480077631F = {
@@ -642,21 +634,27 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					armv7s,
-				);
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -664,8 +662,10 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -678,9 +678,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -692,21 +692,27 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					armv7s,
-				);
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -716,13 +722,14 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
 				PROVISIONING_PROFILE = "";
@@ -736,7 +743,6 @@
 		527BCF8F19C431480077631F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -765,6 +771,7 @@
 					"-force_load",
 					"$(PROJECT_DIR)/UZApp/UZEngine/libUZEngine.a",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.apicloud.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "UZApp/UZModules/UZApp-Bridging-Header.h";
@@ -778,7 +785,6 @@
 		527BCF9019C431480077631F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -806,6 +812,7 @@
 					"-force_load",
 					"$(PROJECT_DIR)/UZApp/UZEngine/libUZEngine.a",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.apicloud.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "UZApp/UZModules/UZApp-Bridging-Header.h";

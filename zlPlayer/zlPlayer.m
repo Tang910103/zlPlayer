@@ -37,6 +37,7 @@ typedef NS_ENUM(NSUInteger, ScreenOrientation) {
     CGRect _rect;
     NSString *_orientation;
     NSString *_title;
+    NSString *_coverUrl;
     BOOL _isFullScreen;
 }
 @property (nonatomic, strong) AliyunVodPlayerView *playerView;
@@ -48,7 +49,7 @@ typedef NS_ENUM(NSUInteger, ScreenOrientation) {
 - (id)initWithUZWebView:(id)webView
 {
     if (self = [super initWithUZWebView:webView]) {
-//        [self setScreenOrientation:@{@"orientation":@"auto"}];
+        [self setScreenOrientation:@{@"orientation":@"auto"}];
         _cbIdDictionary = @{}.mutableCopy;
         _orientation = [self screenOrientation:ScreenOrientation_landscape_right];
     }
@@ -56,8 +57,8 @@ typedef NS_ENUM(NSUInteger, ScreenOrientation) {
 }
 - (void)dispose
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
 }
 #pragma mark - public
 
@@ -73,18 +74,19 @@ typedef NS_ENUM(NSUInteger, ScreenOrientation) {
     _fixedOn = [paramDict stringValueForKey:@"fixedOn" defaultValue:@""];
     _referer = [paramDict stringValueForKey:@"referer" defaultValue:@""];
     _fixed = [paramDict boolValueForKey:@"fixed" defaultValue:NO];
+    _coverUrl = [paramDict stringValueForKey:@"coverUrl" defaultValue:@""];
     
     [self initPlayerView];
     
     /**************************************/
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(becomeActive)
-                                                 name:UIApplicationDidBecomeActiveNotification
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(resignActive)
-                                                 name:UIApplicationWillResignActiveNotification
-                                               object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(becomeActive)
+//                                                 name:UIApplicationDidBecomeActiveNotification
+//                                               object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(resignActive)
+//                                                 name:UIApplicationWillResignActiveNotification
+//                                               object:nil];
 }
 
 /** 开始播放url */
@@ -93,12 +95,21 @@ typedef NS_ENUM(NSUInteger, ScreenOrientation) {
     NSString *url = [paramDict stringValueForKey:@"url" defaultValue:nil];
     _title = [paramDict stringValueForKey:@"title" defaultValue:url];
     _orientation = [paramDict stringValueForKey:@"direction" defaultValue:_orientation];
+    _coverUrl = [paramDict stringValueForKey:@"coverUrl" defaultValue:@""];
+    if ([url containsString:@"fs://"]) {
+        url = [self getPathWithUZSchemeURL:url];
+    }
+    if (self.playerView) {
+        [self.playerView stop];
+    }
     
     [self.playerView setTitle:_title];
+    [self.playerView setCoverUrl:[NSURL URLWithString:_coverUrl]];
     [self.playerView playViewPrepareWithURL:[NSURL URLWithString:url]];
-    
-    BOOL status = self.playerView.playerViewState == AliyunVodPlayerStateError;
-    [self callback:status msg:status ? @"":@"播放失败"  SEL:@selector(play:)];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        BOOL status = self.playerView.playerViewState == AliyunVodPlayerStateError;
+        [self callback:status msg:status ? @"":@"播放失败"  SEL:@selector(play:)];
+    });
 }
 /** 获取播放器当前播放进度 */
 - (void)getCurrentPosition:(NSDictionary *)paramDict {
@@ -143,11 +154,11 @@ typedef NS_ENUM(NSUInteger, ScreenOrientation) {
 #pragma mark - private
 /** 设置屏幕取向 */
 - (void)setOrientation:(BOOL)isFullScreen {
-    [self setScreenOrientation:@{@"orientation":isFullScreen ? _orientation : [self screenOrientation:ScreenOrientation_portrait_up]}];
+//    [self setScreenOrientation:@{@"orientation":isFullScreen ? _orientation : [self screenOrientation:ScreenOrientation_portrait_up]}];
 //    [self.playerView removeFromSuperview];
     BOOL fixed = _fixed;
     if (isFullScreen) {
-//        self.playerView.frame = [UIScreen mainScreen].bounds;
+        self.playerView.frame = [UIScreen mainScreen].bounds;
         fixed = YES;
     } else {
         self.playerView.frame = _rect;
@@ -271,6 +282,7 @@ typedef NS_ENUM(NSUInteger, ScreenOrientation) {
     [self.playerView setAutoPlay:YES];
     self.playerView.isScreenLocked = NO;
     self.playerView.fixedPortrait = NO;
+    self.playerView.coverUrl = [NSURL URLWithString:_coverUrl];
     
     //边下边播缓存沙箱位置
     NSArray *pathArray = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
