@@ -11,7 +11,7 @@
 #import "NSDictionaryUtils.h"
 #import "AliyunVodPlayerViewSDK.h"
 
-#define version @"0.0.4"
+#define version @"0.0.5"
 
 
 typedef NS_ENUM(NSUInteger, ScreenOrientation) {
@@ -368,9 +368,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
     if (isFullScreen) {
         CGRect frame = [UIScreen mainScreen].bounds;
         frame.origin.y = self.scrollView.contentOffset.y;
-        if ([UIApplication sharedApplication].statusBarFrame.size.height) {
-            frame.size.height -= [UIApplication sharedApplication].statusBarFrame.size.height;
-        }
+        frame.size.height -= [UIApplication sharedApplication].statusBarFrame.size.height;
         self.playerView.frame = frame;
         fixed = YES;
     } else {
@@ -430,7 +428,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
 
     _isFullScreen = !_isFullScreen;
     [self setScreenOrientation:@{@"orientation":[self screenOrientation:_isFullScreen ? ScreenOrientation_landscape_right : ScreenOrientation_portrait_up]}];
-    [[UIApplication sharedApplication] setStatusBarHidden:_isFullScreen];
+//    [[UIApplication sharedApplication] setStatusBarHidden:_isFullScreen];
     [self setOrientation:_isFullScreen];
     
 //    if (sender.selected) {
