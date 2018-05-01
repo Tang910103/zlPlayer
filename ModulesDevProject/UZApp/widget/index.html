@@ -170,7 +170,7 @@ a.button70{
     function init() {
         var demo = api.require('zlPlayer');
         demo.init({
-                  fixedOn:"",
+<!--                  fixedOn:"",-->
                   fixed:false,
                   rect:{x: 0,y:500,w:375,h:200},
                 });
@@ -207,9 +207,9 @@ function isFullScreen() {
 }
 function seekTo() {
     var demo = api.require('zlPlayer');
-    var pro = 10 * 1000;
+    var pro = 10;
     demo.seekTo({
-                process:pro
+                process:(pro * 1000)
                 },function(ret, err){
                 api.toast({
                           msg: "跳转到" + pro + "秒"

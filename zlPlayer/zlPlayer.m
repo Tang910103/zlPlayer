@@ -11,6 +11,9 @@
 #import "NSDictionaryUtils.h"
 #import "AliyunVodPlayerViewSDK.h"
 
+#define version @"0.0.4"
+
+
 typedef NS_ENUM(NSUInteger, ScreenOrientation) {
     /** 竖屏时，屏幕在home键的上面 */
     ScreenOrientation_portrait_up = 1,
@@ -28,6 +31,17 @@ typedef NS_ENUM(NSUInteger, ScreenOrientation) {
     ScreenOrientation_auto_landscape,
 };
 
+typedef NS_ENUM(NSUInteger, EventType) {
+    EventType_Play,
+    EventType_Pause,
+    EventType_Resume,
+    EventType_Stop,
+    EventType_Seek,
+    EventType_Finish,
+    EventType_LockScreen,
+    EventType_FullScreen,
+};
+
 @interface zlPlayer()<AliyunVodPlayerViewDelegate>
 {
     NSMutableDictionary *_cbIdDictionary;
@@ -39,17 +53,21 @@ typedef NS_ENUM(NSUInteger, ScreenOrientation) {
     NSString *_title;
     NSString *_coverUrl;
     BOOL _isFullScreen;
+    UIButton *_backBtn;
+    UIView *_controlLayer;
+    UIButton *_fullScreenBtn;
+    UIInterfaceOrientation _statusBarOrientation;
 }
 @property (nonatomic, strong) AliyunVodPlayerView *playerView;
 @property (nonatomic, strong) AliyunVodPlayer *aliyunVodPlayer;
+@property (nonatomic, strong) AliVcMediaPlayer *aliVcMediaPlayer;
 @end
 
 @implementation zlPlayer
-
 - (id)initWithUZWebView:(id)webView
 {
     if (self = [super initWithUZWebView:webView]) {
-        [self setScreenOrientation:@{@"orientation":@"auto"}];
+//        [self setScreenOrientation:@{@"orientation":@"auto"}];
         _cbIdDictionary = @{}.mutableCopy;
         _orientation = [self screenOrientation:ScreenOrientation_landscape_right];
     }
@@ -59,7 +77,73 @@ typedef NS_ENUM(NSUInteger, ScreenOrientation) {
 {
 //    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
 //    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
+    [self callback:YES msg:@"页面关闭" SEL:@selector(setLogger:)];
+    [self stop];
 }
+
+//- (void)receiveNotification:(NSNotification *)notifi {
+//    if ([[notifi object] isKindOfClass:[AliVcMediaPlayer class]]) {
+//        AliVcMediaPlayer *aliVcMediaPlayer = notifi.object;
+////        NSLog(@"%@",aliVcMediaPlayer.getAllDebugInfo);
+//        [self callbackByDic:aliVcMediaPlayer.getAllDebugInfo msg:notifi.name SEL:@selector(setLogger:) doDelete:NO];
+//    }
+//}
+
+//- (void)removeNotification {
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//}
+
+//- (void)registerNotification {
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotification:) name:AliVcMediaPlayerLoadDidPreparedNotification object:nil];
+//
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotification:) name:AliVcMediaPlayerPlaybackErrorNotification object:nil];
+//
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotification:) name:AliVcMediaPlayerPlaybackStopNotification object:nil];
+//
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotification:) name:AliVcMediaPlayerSeekingDidFinishNotification object:nil];
+//
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotification:) name:AliVcMediaPlayerPlaybackDidFinishNotification object:nil];
+//
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotification:) name:AliVcMediaPlayerStartCachingNotification object:nil];
+//
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotification:) name:AliVcMediaPlayerEndCachingNotification object:nil];
+//
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotification:) name:AliVcMediaPlayerFirstFrameNotification object:nil];
+//
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotification:) name:AliVcMediaPlayerCircleStartNotification object:nil];
+//
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotification:) name:AliVcMediaPlayerSeiDataNotification object:nil];
+//}
+
+
+/** 清除收据 */
+- (void)clean {
+    _cbIdDictionary = nil;
+    _fixedOn = nil;
+    _referer = nil;
+    _fixed = NO;
+    _rect = CGRectZero;
+    _orientation = nil;
+    _title = nil;
+    _coverUrl = nil;
+    _isFullScreen = NO;
+    _backBtn = nil;
+    _aliyunVodPlayer = nil;
+    _aliVcMediaPlayer = nil;
+    _controlLayer = nil;
+}
+- (void)stop {
+    if (self.playerView != nil) {
+        [self.playerView stop];
+        [self.playerView releasePlayer];
+        [self.playerView removeFromSuperview];
+        self.playerView = nil;
+    }
+//    [self removeNotification];
+    [self clean];
+//    [self callbackByDic:aliVcMediaPlayer.getAllDebugInfo msg:notifi.name SEL:@selector(setLogger:) doDelete:NO];
+}
+
 #pragma mark - public
 
 /** 初始化视频播放器 */
@@ -76,8 +160,10 @@ typedef NS_ENUM(NSUInteger, ScreenOrientation) {
     _fixed = [paramDict boolValueForKey:@"fixed" defaultValue:NO];
     _coverUrl = [paramDict stringValueForKey:@"coverUrl" defaultValue:@""];
     
-    [self initPlayerView];
-    
+    if (!self.playerView) {
+        [self initPlayerView];
+//        [self registerNotification];
+    }
     /**************************************/
 //    [[NSNotificationCenter defaultCenter] addObserver:self
 //                                             selector:@selector(becomeActive)
@@ -96,9 +182,8 @@ typedef NS_ENUM(NSUInteger, ScreenOrientation) {
     _title = [paramDict stringValueForKey:@"title" defaultValue:url];
     _orientation = [paramDict stringValueForKey:@"direction" defaultValue:_orientation];
     _coverUrl = [paramDict stringValueForKey:@"coverUrl" defaultValue:@""];
-    if ([url containsString:@"fs://"]) {
-        url = [self getPathWithUZSchemeURL:url];
-    }
+    url = [self getPathWithUZSchemeURL:url];
+
     if (self.playerView) {
         [self.playerView stop];
     }
@@ -114,19 +199,17 @@ typedef NS_ENUM(NSUInteger, ScreenOrientation) {
 /** 获取播放器当前播放进度 */
 - (void)getCurrentPosition:(NSDictionary *)paramDict {
     [self addCbIDByParamDict:paramDict SEL:@selector(getCurrentPosition:)];
-    [self callbackByDic:@{@"status":@(YES),@"currentPosition":@(self.playerView.currentTime*1000)} msg:@"" SEL:@selector(getCurrentPosition:)];
+    [self callbackByDic:@{@"status":@(YES),@"currentPosition":@(self.playerView.currentTime*1000)} msg:@"" SEL:@selector(getCurrentPosition:) doDelete:YES];
 }
 /** 停止播放 */
 - (void)stop:(NSDictionary *)paramDict {
-    if (self.playerView != nil) {
-        [self.playerView stop];
-        [self.playerView releasePlayer];
-        [self.playerView removeFromSuperview];
-        self.playerView = nil;
-    }
+    
+    [self stop];
+    
     [self addCbIDByParamDict:paramDict SEL:@selector(stop:)];
     [self callback:YES msg:@"" SEL:@selector(stop:)];
 }
+
 /** 获取是否全屏播放状态 */
 - (void)isFullScreen:(NSDictionary *)paramDict {
     [self addCbIDByParamDict:paramDict SEL:@selector(isFullScreen:)];
@@ -151,33 +234,36 @@ typedef NS_ENUM(NSUInteger, ScreenOrientation) {
     [self addCbIDByParamDict:paramDict SEL:@selector(resume:)];
     [self callback:YES msg:@"" SEL:@selector(resume:)];
 }
-#pragma mark - private
-/** 设置屏幕取向 */
-- (void)setOrientation:(BOOL)isFullScreen {
-//    [self setScreenOrientation:@{@"orientation":isFullScreen ? _orientation : [self screenOrientation:ScreenOrientation_portrait_up]}];
-//    [self.playerView removeFromSuperview];
-    BOOL fixed = _fixed;
-    if (isFullScreen) {
-        self.playerView.frame = [UIScreen mainScreen].bounds;
-        fixed = YES;
-    } else {
-        self.playerView.frame = _rect;
-    }
-    [[UIApplication sharedApplication] setStatusBarHidden:isFullScreen withAnimation:UIStatusBarAnimationNone];
-    [self addSubview:self.playerView fixedOn:_fixedOn fixed:fixed];
+/** 打印日志 */
+- (void)setLogger:(NSDictionary *)paramDict {
+    [self addCbIDByParamDict:paramDict SEL:@selector(setLogger:)];
 }
+/** 事件监听 */
+- (void)addEventListener:(NSDictionary *)paramDict {
+    [self addCbIDByParamDict:paramDict SEL:@selector(addEventListener:)];
+}
+#pragma mark - private
 
 /** 回调JS */
 - (void)callback:(BOOL)status msg:(NSString *)msg SEL:(SEL)sel {
     
+    if (!self.playerView) {
+        status = false;
+        msg = @"还未初始化播放器";
+    }
     if (!msg) msg = @"";
-    [self callbackByDic:@{@"status":@(status)} msg:msg SEL:sel];
+    [self callbackByDic:@{@"status":@(status)} msg:msg SEL:sel doDelete:YES];
 }
-- (void)callbackByDic:(NSDictionary *)dic msg:(NSString *)msg SEL:(SEL)sel  {
+
+- (void)callbackByDic:(NSDictionary *)dic msg:(NSString *)msg SEL:(SEL)sel doDelete:(BOOL)doDelete  {
+    NSMutableDictionary *mutDic = dic.mutableCopy;
+    [mutDic setObject:version forKey:@"version"];
     if ([_cbIdDictionary.allKeys containsObject:NSStringFromSelector(sel)]) {
         NSInteger cbID = [_cbIdDictionary intValueForKey:NSStringFromSelector(sel) defaultValue:0];
-        [self sendResultEventWithCallbackId:cbID dataDict:dic errDict:@{@"msg":msg} doDelete:YES];
-        [_cbIdDictionary removeObjectForKey:NSStringFromSelector(sel)];
+        [self sendResultEventWithCallbackId:cbID dataDict:mutDic errDict:@{@"msg":msg} doDelete:doDelete];
+        if (doDelete) {
+            [_cbIdDictionary removeObjectForKey:NSStringFromSelector(sel)];
+        }
     }
 }
 
@@ -228,27 +314,30 @@ typedef NS_ENUM(NSUInteger, ScreenOrientation) {
     
 //    [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-
 - (void)aliyunVodPlayerView:(AliyunVodPlayerView*)playerView onPause:(NSTimeInterval)currentPlayTime{
-    
-    NSLog(@"onPause");
+    NSDictionary *dic = @{@"status":@(YES),@"eventType":@(EventType_Pause)};
+    [self callbackByDic:dic msg:@"onPause" SEL:@selector(addEventListener:) doDelete:NO];
 }
 - (void)aliyunVodPlayerView:(AliyunVodPlayerView*)playerView onResume:(NSTimeInterval)currentPlayTime{
-    NSLog(@"onResume");
+    NSDictionary *dic = @{@"status":@(YES),@"eventType":@(EventType_Resume)};
+    [self callbackByDic:dic msg:@"onResume" SEL:@selector(addEventListener:) doDelete:NO];
 }
 - (void)aliyunVodPlayerView:(AliyunVodPlayerView*)playerView onStop:(NSTimeInterval)currentPlayTime{
-    NSLog(@"onStop");
+    NSDictionary *dic = @{@"status":@(YES),@"eventType":@(EventType_Stop)};
+    [self callbackByDic:dic msg:@"onStop" SEL:@selector(addEventListener:) doDelete:NO];
 }
 - (void)aliyunVodPlayerView:(AliyunVodPlayerView*)playerView onSeekDone:(NSTimeInterval)seekDoneTime{
-    NSLog(@"onSeekDone");
+    NSDictionary *dic = @{@"status":@(YES),@"eventType":@(EventType_Seek)};
+    [self callbackByDic:dic msg:@"onSeekDone" SEL:@selector(addEventListener:) doDelete:NO];
 }
 -(void)onFinishWithAliyunVodPlayerView:(AliyunVodPlayerView *)playerView{
-    NSLog(@"onFinish");
+    NSDictionary *dic = @{@"status":@(YES),@"eventType":@(EventType_Finish)};
+    [self callbackByDic:dic msg:@"onFinish" SEL:@selector(addEventListener:) doDelete:NO];
 }
 
 - (void)aliyunVodPlayerView:(AliyunVodPlayerView *)playerView lockScreen:(BOOL)isLockScreen{
-
+    NSDictionary *dic = @{@"status":@(YES),@"eventType":@(EventType_LockScreen)};
+    [self callbackByDic:dic msg:@"LockScreen" SEL:@selector(addEventListener:) doDelete:NO];
 }
 
 
@@ -257,9 +346,10 @@ typedef NS_ENUM(NSUInteger, ScreenOrientation) {
 }
 
 - (void)aliyunVodPlayerView:(AliyunVodPlayerView *)playerView fullScreen:(BOOL)isFullScreen{
-    NSLog(@"isfullScreen --%d",isFullScreen);
-    _isFullScreen = isFullScreen;
-    [self setOrientation:isFullScreen];
+
+    if (!_isFullScreen) {
+        [self setOrientation:NO];
+    }
 }
 
 - (void)aliyunVodPlayerView:(AliyunVodPlayerView *)playerView onVideoDefinitionChanged:(NSString *)videoDefinition {
@@ -270,6 +360,29 @@ typedef NS_ENUM(NSUInteger, ScreenOrientation) {
 - (void)onCircleStartWithVodPlayerView:(AliyunVodPlayerView *)playerView {
     
 }
+#pragma mark ------------ event response
+/** 设置屏幕取向 */
+- (void)setOrientation:(BOOL)isFullScreen {
+
+    BOOL fixed = _fixed;
+    if (isFullScreen) {
+        CGRect frame = [UIScreen mainScreen].bounds;
+        frame.origin.y = self.scrollView.contentOffset.y;
+        if ([UIApplication sharedApplication].statusBarFrame.size.height) {
+            frame.size.height -= [UIApplication sharedApplication].statusBarFrame.size.height;
+        }
+        self.playerView.frame = frame;
+        fixed = YES;
+    } else {
+        self.playerView.frame = _rect;
+    }
+
+    [self callbackByDic:@{@"playerViewFrame":NSStringFromCGRect(self.playerView.frame),@"controlLayerFrame":NSStringFromCGRect(_controlLayer.frame),@"isFullScreen":@(isFullScreen),@"superView":self.playerView.superview,@"contentOffset":NSStringFromCGPoint(self.scrollView.contentOffset)} msg:@"" SEL:@selector(setLogger:) doDelete:NO];
+    
+    _backBtn.hidden = !isFullScreen;
+//    [self addSubview:self.playerView fixedOn:_fixedOn fixed:fixed];
+}
+
 
 #pragma mark - getter/setter
 
@@ -295,20 +408,68 @@ typedef NS_ENUM(NSUInteger, ScreenOrientation) {
     //    [self.playerView playViewPrepareWithURL:[NSURL URLWithString:@"http://shenji.zlketang.com/public/test.mp4"]];
     //播放器播放方式
     AliyunVodPlayer *aliPlayer = [self.playerView valueForKey:@"_aliPlayer"];
+    _controlLayer = [self.playerView valueForKey:@"_controlLayer"];
+    _fullScreenBtn = [_controlLayer valueForKey:@"_fullScreenBtn"];
+    
+    _backBtn = [_controlLayer valueForKey:@"_backBtn"];
+    _backBtn.hidden = YES;
+
+    [_fullScreenBtn addTarget:self action:@selector(clickFullSreenButton:) forControlEvents:UIControlEventTouchUpInside];
+    [_backBtn addTarget:self action:@selector(clickFullSreenButton:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.playerView.fixedPortrait = NO;
+    [self.playerView setPrintLog:YES];
+    
     aliPlayer.referer = _referer;
     self.aliyunVodPlayer = aliPlayer;
     BOOL status = [self addSubview:self.playerView fixedOn:_fixedOn fixed:_fixed];
     [self callback:status msg:status ? @"":@"播放初始化失败"  SEL:@selector(init:)];
 }
 
-- (void)becomeActive{
-    [self.playerView resume];
+- (void)clickFullSreenButton:(UIButton *)sender {
+
+    _isFullScreen = !_isFullScreen;
+    [self setScreenOrientation:@{@"orientation":[self screenOrientation:_isFullScreen ? ScreenOrientation_landscape_right : ScreenOrientation_portrait_up]}];
+    [[UIApplication sharedApplication] setStatusBarHidden:_isFullScreen];
+    [self setOrientation:_isFullScreen];
+    
+//    if (sender.selected) {
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceOrientationDidChangeNotification:) name:UIDeviceOrientationDidChangeNotification object:nil];
+//    } else {
+//        [[UIApplication sharedApplication] setStatusBarHidden:NO];
+//        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+//    }
 }
 
-- (void)resignActive{
-    if (self.playerView && self.playerView.playerViewState == AliyunVodPlayerStatePlay){
-        [self.playerView pause];
-    }
-}
+//- (void)deviceOrientationDidChangeNotification:(NSNotification *)notifi {
+//    @try {
+//        if (_isFullScreen) {
+//            if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
+//                [self setScreenOrientation:@{@"orientation":[self screenOrientation:ScreenOrientation_landscape_left]}];
+//                [self setOrientation:YES];
+//            }
+//            if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft) {
+//                [self setScreenOrientation:@{@"orientation":[self screenOrientation:ScreenOrientation_landscape_right]}];
+//                [self setOrientation:YES];
+//            }
+//            if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortrait) {
+//                [self setOrientation:YES];
+//            }
+//        }
+//    } @catch (NSException *exception) {
+//        [self callbackByDic:@{@"exception":exception.reason} msg:@"" SEL:@selector(setLogger:) doDelete:NO];
+//    }
+//}
 
+
+//
+//- (void)becomeActive{
+//    [self.playerView resume];
+//}
+//
+//- (void)resignActive{
+//    if (self.playerView && self.playerView.playerViewState == AliyunVodPlayerStatePlay){
+//        [self.playerView pause];
+//    }
+//}
 @end
