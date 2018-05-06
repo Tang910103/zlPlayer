@@ -2,5 +2,5 @@
  [{
     "name":"zlPlayer",
     "class":"zlPlayer",
-    "methods":["init","play","getCurrentPosition","stop","pause","resume","seekTo","isFullScreen"]
+    "methods":["init","play","getCurrentPosition","stop","pause","resume","seekTo","isFullScreen","setPlaySpeed"]
  }]
