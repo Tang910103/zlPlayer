@@ -11,24 +11,24 @@
 #import "AliyunVodPlayerViewSDK.h"
 #import "UZAppDelegate.h"
 
-#define version @"0.0.10"
+#define version @"0.0.11"
 
 
 typedef NS_ENUM(NSUInteger, ScreenOrientation) {
     /** 竖屏时，屏幕在home键的上面 */
     ScreenOrientation_portrait_up = 1,
     /** 竖屏时，幕在home键的下面，部分手机不支持 */
-    ScreenOrientation_portrait_down,
+    ScreenOrientation_portrait_down = 2,
     /** //横屏时，屏幕在home键的左边 */
-    ScreenOrientation_landscape_left,
+    ScreenOrientation_landscape_left = 3,
     /** //横屏时，屏幕在home键的右边 */
-    ScreenOrientation_landscape_right,
+    ScreenOrientation_landscape_right = 4,
     /**  //屏幕根据重力感应在横竖屏间自动切换 */
-    ScreenOrientation_auto,
+    ScreenOrientation_auto = 5,
     /** //屏幕根据重力感应在竖屏间自动切换 */
-    ScreenOrientation_auto_portrait,
+    ScreenOrientation_auto_portrait = 6,
     /** //屏幕根据重力感应在横屏间自动切换 */
-    ScreenOrientation_auto_landscape,
+    ScreenOrientation_auto_landscape = 7,
 };
 
 typedef NS_ENUM(NSUInteger, EventType) {
@@ -284,32 +284,22 @@ typedef NS_ENUM(NSUInteger, EventType) {
 }
 
 - (NSString *)screenOrientation:(ScreenOrientation)orientation {
-    switch (orientation) {
-        case ScreenOrientation_portrait_up:
-            return @"portrait_up";
-            break;
-        case ScreenOrientation_portrait_down:
-            return @"portrait_down";
-            break;
-        case ScreenOrientation_landscape_left:
-            return @"landscape_left";
-            break;
-        case ScreenOrientation_landscape_right:
-            return @"landscape_right";
-            break;
-        case ScreenOrientation_auto:
-            return @"auto";
-            break;
-        case ScreenOrientation_auto_portrait:
-            return @"auto_portrait";
-            break;
-        case ScreenOrientation_auto_landscape:
-            return @"auto_landscape";
-            break;
-        default:
-            return @"landscape_right";
-            break;
+    if (orientation == ScreenOrientation_portrait_up) {
+        return @"portrait_up";
+    } else if (orientation == ScreenOrientation_portrait_down) {
+        return @"portrait_down";
+    } else if (orientation == ScreenOrientation_landscape_left) {
+        return @"landscape_left";
+    } else if (orientation == ScreenOrientation_landscape_right) {
+        return @"landscape_right";
+    } else if (orientation == ScreenOrientation_auto) {
+        return @"auto";
+    } else if (orientation == ScreenOrientation_auto_portrait) {
+        return @"auto_portrait";
+    } else if (orientation == ScreenOrientation_auto_landscape) {
+        return @"auto_landscape";
     }
+    return @"landscape_right";
 }
 #pragma mark - AliyunVodPlayerViewDelegate
 - (void)onBackViewClickWithAliyunVodPlayerView:(AliyunVodPlayerView *)playerView{
@@ -372,6 +362,8 @@ typedef NS_ENUM(NSUInteger, EventType) {
         dispatch_semaphore_wait(signal, overTime); //signal 值 -1
         dispatch_async(dispatch_get_main_queue(), ^{
             NSString *orientationStr = [self screenOrientation:orientation];
+        NSLog(@"%@",orientationStr);
+            
             [self setScreenOrientation:@{@"orientation":[self screenOrientation:orientation]}];
             
             [self callbackByDic:@{@"playerViewFrame":NSStringFromCGRect(self.playerView.frame),@"controlLayerFrame":NSStringFromCGRect(self->_controlLayer.frame),@"isFullScreen":@(self->_isFullScreen),@"contentOffset":NSStringFromCGPoint(self.scrollView.contentOffset),@"orientation":orientationStr} msg:@"" SEL:@selector(setLogger:) doDelete:NO];
@@ -392,6 +384,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
         self.playerView.frame = _rect;
     }
     [self addSubview:self.playerView fixedOn:_fixedOn fixed:fixed];
+    NSLog(@"self.playerView.frame->%@",NSStringFromCGRect(self.playerView.frame));
 }
 
 #pragma mark - getter/setter
@@ -463,13 +456,14 @@ typedef NS_ENUM(NSUInteger, EventType) {
 }
 
 - (void)deviceOrientationDidChangeNotification:(NSNotification *)notifi {
+    if (self.playerView.isScreenLocked) return;
     [self callbackByDic:@{@"屏幕旋转":@([UIDevice currentDevice].orientation),@"orientation":[self screenOrientation:self.orientation]} msg:@"" SEL:@selector(setLogger:) doDelete:NO];
     if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
-        [self setOrientation:ScreenOrientation_landscape_right];
+        [self setOrientation:ScreenOrientation_landscape_left];
         [self updatePlayerViewFrame:YES];
     }
     if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft) {
-        [self setOrientation:ScreenOrientation_landscape_left];
+        [self setOrientation:ScreenOrientation_landscape_right];
         [self updatePlayerViewFrame:YES];
     }
 }
