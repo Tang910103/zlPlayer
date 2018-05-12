@@ -11,8 +11,6 @@
 #import "AliyunVodPlayerViewSDK.h"
 #import "UZAppDelegate.h"
 
-#define version @"0.0.11"
-
 
 typedef NS_ENUM(NSUInteger, ScreenOrientation) {
     /** 竖屏时，屏幕在home键的上面 */
@@ -185,15 +183,22 @@ typedef NS_ENUM(NSUInteger, EventType) {
     _title = [paramDict stringValueForKey:@"title" defaultValue:url];
     _orientationStr = [paramDict stringValueForKey:@"direction" defaultValue:_orientationStr];
     _coverUrl = [paramDict stringValueForKey:@"coverUrl" defaultValue:@""];
+    NSString *vid = [paramDict stringValueForKey:@"vid" defaultValue:nil];
+    NSString *accessKeySecret = [paramDict stringValueForKey:@"accessKeySecret" defaultValue:nil];
+    NSString *accessKeyId = [paramDict stringValueForKey:@"accessKeyId" defaultValue:nil];
+    NSString *securityToken = [paramDict stringValueForKey:@"securityToken" defaultValue:nil];
     url = [self getPathWithUZSchemeURL:url];
-
     if (self.playerView) {
         [self.playerView stop];
     }
+    if (url) {
+        [self.playerView setTitle:_title];
+        [self.playerView setCoverUrl:[NSURL URLWithString:_coverUrl]];
+        [self.playerView playViewPrepareWithURL:[NSURL URLWithString:url]];
+    } else {
+        [self.playerView playViewPrepareWithVid:vid accessKeyId:accessKeyId accessKeySecret:accessKeySecret securityToken:securityToken];
+    }
     
-    [self.playerView setTitle:_title];
-    [self.playerView setCoverUrl:[NSURL URLWithString:_coverUrl]];
-    [self.playerView playViewPrepareWithURL:[NSURL URLWithString:url]];
     [self callback:YES msg:@""  SEL:@selector(play:)];
 }
 /** 获取播放器当前播放进度 */
@@ -459,11 +464,11 @@ typedef NS_ENUM(NSUInteger, EventType) {
     if (self.playerView.isScreenLocked) return;
     [self callbackByDic:@{@"屏幕旋转":@([UIDevice currentDevice].orientation),@"orientation":[self screenOrientation:self.orientation]} msg:@"" SEL:@selector(setLogger:) doDelete:NO];
     if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
-        [self setOrientation:ScreenOrientation_landscape_left];
+        [self setOrientation:ScreenOrientation_landscape_right];
         [self updatePlayerViewFrame:YES];
     }
     if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft) {
-        [self setOrientation:ScreenOrientation_landscape_right];
+        [self setOrientation:ScreenOrientation_landscape_left];
         [self updatePlayerViewFrame:YES];
     }
 }

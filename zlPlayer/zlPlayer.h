@@ -9,6 +9,8 @@
 
 #import "UZModule.h"
 
+#define version @"0.0.12"
+
 @interface zlPlayer : UZModule
 
 @end

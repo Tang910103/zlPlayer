@@ -30,6 +30,7 @@
 		A5A805082081D5CE0038686C /* zlPlayer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A5A805052081D5CE0038686C /* zlPlayer.h */; };
 		A5E093D2209F0E6D00BEEC02 /* AliyunPlayerMediaUIDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E093D0209F0E6D00BEEC02 /* AliyunPlayerMediaUIDemoViewController.m */; };
 		A5E093D3209F0E6D00BEEC02 /* AliyunPlayerMediaUIDemoViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A5E093D1209F0E6D00BEEC02 /* AliyunPlayerMediaUIDemoViewController.h */; };
+		A5EB47AA20A2937B0002C1F0 /* zlPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = A5A805052081D5CE0038686C /* zlPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A5EE3A6B209B808C00835E5C /* NSArrary+safe.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EE3A67209B808A00835E5C /* NSArrary+safe.m */; };
 		A5EE3A6C209B808C00835E5C /* NSArrary+safe.h in Headers */ = {isa = PBXBuildFile; fileRef = A5EE3A68209B808B00835E5C /* NSArrary+safe.h */; };
 		A5EE3A6D209B808C00835E5C /* NSDictionary+safe.h in Headers */ = {isa = PBXBuildFile; fileRef = A5EE3A69209B808B00835E5C /* NSDictionary+safe.h */; };
@@ -220,6 +221,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5EB47AA20A2937B0002C1F0 /* zlPlayer.h in Headers */,
 				A516D3AF208F7B8E003D1FFC /* AliyunVodPlayerView.h in Headers */,
 				A5EE3A6D209B808C00835E5C /* NSDictionary+safe.h in Headers */,
 				A5EE3A72209B80AA00835E5C /* NSObject+exchangeMethod.h in Headers */,
