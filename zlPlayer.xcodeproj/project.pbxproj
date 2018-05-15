@@ -28,8 +28,6 @@
 		A516D3B2208F7B8E003D1FFC /* AliyunVodPlayerViewSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = A516D39F208F7B8E003D1FFC /* AliyunVodPlayerViewSDK.h */; };
 		A5A805072081D5CE0038686C /* zlPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A5A805062081D5CE0038686C /* zlPlayer.m */; };
 		A5A805082081D5CE0038686C /* zlPlayer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A5A805052081D5CE0038686C /* zlPlayer.h */; };
-		A5E093D2209F0E6D00BEEC02 /* AliyunPlayerMediaUIDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E093D0209F0E6D00BEEC02 /* AliyunPlayerMediaUIDemoViewController.m */; };
-		A5E093D3209F0E6D00BEEC02 /* AliyunPlayerMediaUIDemoViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A5E093D1209F0E6D00BEEC02 /* AliyunPlayerMediaUIDemoViewController.h */; };
 		A5EB47AA20A2937B0002C1F0 /* zlPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = A5A805052081D5CE0038686C /* zlPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A5EE3A6B209B808C00835E5C /* NSArrary+safe.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EE3A67209B808A00835E5C /* NSArrary+safe.m */; };
 		A5EE3A6C209B808C00835E5C /* NSArrary+safe.h in Headers */ = {isa = PBXBuildFile; fileRef = A5EE3A68209B808B00835E5C /* NSArrary+safe.h */; };
@@ -82,8 +80,6 @@
 		A5A805022081D5CE0038686C /* libzlPlayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libzlPlayer.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5A805052081D5CE0038686C /* zlPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zlPlayer.h; sourceTree = "<group>"; };
 		A5A805062081D5CE0038686C /* zlPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zlPlayer.m; sourceTree = "<group>"; };
-		A5E093D0209F0E6D00BEEC02 /* AliyunPlayerMediaUIDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AliyunPlayerMediaUIDemoViewController.m; sourceTree = "<group>"; };
-		A5E093D1209F0E6D00BEEC02 /* AliyunPlayerMediaUIDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliyunPlayerMediaUIDemoViewController.h; sourceTree = "<group>"; };
 		A5EE3A67209B808A00835E5C /* NSArrary+safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArrary+safe.m"; sourceTree = "<group>"; };
 		A5EE3A68209B808B00835E5C /* NSArrary+safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArrary+safe.h"; sourceTree = "<group>"; };
 		A5EE3A69209B808B00835E5C /* NSDictionary+safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+safe.h"; sourceTree = "<group>"; };
@@ -206,8 +202,6 @@
 		A5A805042081D5CE0038686C /* zlPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				A5E093D1209F0E6D00BEEC02 /* AliyunPlayerMediaUIDemoViewController.h */,
-				A5E093D0209F0E6D00BEEC02 /* AliyunPlayerMediaUIDemoViewController.m */,
 				A5A805052081D5CE0038686C /* zlPlayer.h */,
 				A5A805062081D5CE0038686C /* zlPlayer.m */,
 			);
@@ -230,7 +224,6 @@
 				A516D3A8208F7B8E003D1FFC /* MPlayingHandler.h in Headers */,
 				A516D3A7208F7B8E003D1FFC /* KernelMPlayer.h in Headers */,
 				A516D3A2208F7B8E003D1FFC /* AliVcMediaPlayer.h in Headers */,
-				A5E093D3209F0E6D00BEEC02 /* AliyunPlayerMediaUIDemoViewController.h in Headers */,
 				A516D3AD208F7B8E003D1FFC /* AliyunVodPlayerSDK.h in Headers */,
 				A516D3A4208F7B8E003D1FFC /* AliVcPlayerErrorCode.h in Headers */,
 				A516D3AB208F7B8E003D1FFC /* AliyunVodPlayerDefine.h in Headers */,
@@ -313,7 +306,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5E093D2209F0E6D00BEEC02 /* AliyunPlayerMediaUIDemoViewController.m in Sources */,
 				A5EE3A6B209B808C00835E5C /* NSArrary+safe.m in Sources */,
 				A5EE3A6E209B808C00835E5C /* NSDictionary+safe.m in Sources */,
 				A5A805072081D5CE0038686C /* zlPlayer.m in Sources */,

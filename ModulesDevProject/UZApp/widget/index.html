@@ -1,14 +1,48 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-<title>Module Develop</title>
-<meta charset="utf-8">
-<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
-<style type="text/css">
-	html,body{
-		height: 100%
-	}
-	body{
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>Hello APP</title>
+    <link rel="stylesheet" type="text/css" href="./css/api.css" />
+    <style type="text/css">
+    html,body{
+        height: 100%;
+    }
+    #wrap{
+        height: 100%;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-flex-flow: column;
+               flex-flow: column;
+    }
+    #header{
+        text-align: center; background-color: #81a9c3; color: #fff;
+        width: 100%;
+    }
+    #header h1{
+        font-size: 20px; height: 44px; line-height: 44px; margin: 0em; color: #fff;
+    }
+    #main{
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        flex: 1;
+    }
+    #footer{
+        height: 30px; line-height: 30px;
+        background-color: #81a9c3;
+        width: 100%;
+        text-align: center;
+    }
+    #footer h5{
+        color: white;
+    }
+    .con{font-size: 28px; text-align: center;}
+
+    	body{
 		background-color: #fff;
 	    margin: 0;
 	}
@@ -22,10 +56,10 @@
 	    position: relative;
 	}
 	#header h1{
-	    font-size: 20px; 
-	    height: 44px; 
-	    line-height: 44px; 
-	    margin: 0em; 
+	    font-size: 20px;
+	    height: 44px;
+	    line-height: 44px;
+	    margin: 0em;
 	    color: #fff;
 		margin-left: 100px;
 		margin-right: 100px;
@@ -129,172 +163,134 @@ a.button7{
     border-width: 2px;
     border-style: solid;
 }
-a.button8{
-    display: -webkit-box;
-    -webkit-box-pack: center;
-    -webkit-box-align: center;
-    height: 36px;
-    margin: 8px;
-    margin-top: 10px;
-    background-color: rgba(240,240,240,1.0);
-    border-color: rgba(220,220,220,1.0);
-    border-width: 2px;
-    border-style: solid;
-}
-a.button8{
-    display: -webkit-box;
-    -webkit-box-pack: center;
-    -webkit-box-align: center;
-    height: 36px;
-    margin: 8px;
-    margin-top: 10px;
-    background-color: rgba(240,240,240,1.0);
-    border-color: rgba(220,220,220,1.0);
-    border-width: 2px;
-    border-style: solid;
-}
-a.button70{
-    display: -webkit-box;
-    -webkit-box-pack: center;
-    -webkit-box-align: center;
-    height: 360px;
-    margin: 8px;
-    margin-top: 10px;
-    background-color: rgba(240,240,240,1.0);
-    border-color: rgba(220,220,220,1.0);
-    border-width: 2px;
-    border-style: solid;
-}
     a.active{
         background-color: rgba(240,240,240,0.6);
 	}
-</style>
+    </style>
 </head>
 <body>
-	<div id="wrap">
-	    <header id="header">
-	    	<h1 id="title">模块开发</h1>
-	    </header>
-	    <div id="main">
-            <a class="button" tapmode="active" onclick="init()">初始化播放器</a>
+    <div id="wrap">
+        <div id="header">
+            <h1>APICloud</h1>
+        </div>
+        <div id="main">
+        	<div class='vadio-play-content' style="background-color: #000000;"></div>
+
+   			<a class="button" tapmode="active" onclick="init()">初始化播放器</a>
             <a class="button1" tapmode="active" onclick="play()">开始播放</a>
             <a class="button2" tapmode="active" onclick="getCurrentPosition()">获取播放器当前播放进度</a>
-            <a class="button3" tapmode="active" onclick="stop()">停止播放</a>
             <a class="button4" tapmode="active" onclick="isFullScreen()">是否为全屏</a>
             <a class="button5" tapmode="active" onclick="seekTo()">跳转到10秒位置</a>
             <a class="button6" tapmode="active" onclick="pause()">暂停播放</a>
             <a class="button7" tapmode="active" onclick="resume()">继续播放</a>
-            <a class="button8" tapmode="active" onclick="setPlaySpeed_15()">设置播放速度1.5</a>
-            <a class="button9" tapmode="active" onclick="setPlaySpeed_10()">设置播放速度1.0</a>
-            <a class="button70" tapmode="active"</a>
+            <a class="button3" tapmode="active" onclick="stop()">停止播放</a>
+		</div>
+
+        <div id="footer">
+            <h5>Copyright &copy;<span id="year"></span> </h5>
         </div>
     </div>
 </body>
-<script>
-    
+<script type="text/javascript" src="./script/zepto.min.js"></script>
+<script type="text/javascript" src="./script/sm.min.js"></script>
+<script type="text/javascript" src="./script/api.js"></script>
+<script type="text/javascript" src="./script/alidownload.js"></script>
+<script type="text/javascript">
+	var zlPlayer = false;
     function init() {
-        var demo = api.require('zlPlayer');
-        demo.init({
-<!--                  fixedOn:"",-->
-                  fixed:false,
-                  rect:{x: 0,y:600,w:375,h:200},
-                });
+    	var width = api.winWidth;
+		var height = parseInt(width / 1.8);
+        zlPlayer.init({
+          fixed:false,
+          rect:{x: 0,y:44,w:width,h:height},
+                      referer:"http://www.zlketang.com/ios",
+        });
+        zlPlayer.setLogger(function(ret) {
+        	console.log(JSON.stringify(ret));
+        });
     }
 
     function play() {
-        var demo = api.require('zlPlayer');
-        demo.play({
-                  title:"title",
-                  url: "http://shenji.zlketang.com/public/test.mp4",
-                  direction:"landscape_left",
-                  });
+        zlPlayer.play({
+          title:"title",
+          //url: "http://shenji.zlketang.com/public/test.mp4",
+          sts:refreshSts(),
+          direction:"landscape_right",
+          });
     }
-function getCurrentPosition() {
-    var demo = api.require('zlPlayer');
-    demo.getCurrentPosition({
-                            
-                            },function(ret, err){
-                            api.toast({
-                                      msg: ret.currentPosition
-                                      });
-                            });
-}
+	function getCurrentPosition() {
+	    zlPlayer.getCurrentPosition({
+	    },function(ret, err){
+	    	api.toast({
+          		msg: ret.currentPosition
+          	});
+	    });
+	}
 
-function isFullScreen() {
-    var demo = api.require('zlPlayer');
-    demo.isFullScreen({
-                
-                },function(ret, err){
-                api.toast({
-                          msg: ret.status ? "是全屏" : "不是全屏"
-                          });
-                });
-}
-function seekTo() {
-    var demo = api.require('zlPlayer');
-    var pro = 10;
-    demo.seekTo({
-                process:(pro * 1000)
-                },function(ret, err){
-                api.toast({
-                          msg: "跳转到" + pro + "秒"
-                          });
-                });
-}
+	function isFullScreen() {
+	    zlPlayer.isFullScreen({
+	    
+	    },function(ret, err){
+			api.toast({msg: ret.status ? "是全屏" : "不是全屏"});
+	    });
+	}
+	function seekTo() {
+	    var pro = 10;
+	    zlPlayer.seekTo({
+	    	process:(pro * 1000)
+	    },function(ret, err){
+	    	api.toast({msg: "跳转到" + pro + "秒"});
+	    });
+	}
+	function resume() {
+		zlPlayer.resume({
 
-function setPlaySpeed_15() {
-    var demo = api.require('zlPlayer');
-    var speed = 1.5;
-    demo.setPlaySpeed({
-                speed:speed
-                },function(ret, err){
-                api.toast({
-                          msg: "播放速度" + speed + "倍"
-                          });
-                });
-}
-function setPlaySpeed_10() {
-    var demo = api.require('zlPlayer');
-    var speed = 1.0;
-    demo.setPlaySpeed({
-                      speed:speed
-                      },function(ret, err){
-                      api.toast({
-                                msg: "播放速度" + speed + "倍"
-                                });
-                      });
-}
-function resume() {
-    var demo = api.require('zlPlayer');
-    demo.resume({
-               
-               },function(ret, err){
-               api.toast({
-                         msg: "继续播放"
-                         });
-               });
-}
-function pause() {
-    var demo = api.require('zlPlayer');
-    demo.pause({
-              
-              },function(ret, err){
-              api.toast({
-                        msg: "暂停播放"
-                        });
-              });
-}
+	   },function(ret, err){
+	   	api.toast({msg: "继续播放"});
+	   });
+	}
+	function pause() {
+	    zlPlayer.pause({
 
-function stop() {
-    var demo = api.require('zlPlayer');
-    demo.stop({
-                            
-                            },function(ret, err){
-                            api.toast({
-                                      msg: "停止播放"
-                                      });
-                            });
-}
+		},function(ret, err){
+			api.toast({msg: "暂停播放"});
+		});
+	}
+
+	function stop() {
+	    zlPlayer.stop({
+
+	    },function(ret, err){
+	    	api.toast({msg: "停止播放"});
+	    });
+	}
+    apiready = function(){
+    	var w = api.winWidth;
+
+		$('.vadio-play-content').css({
+			width: w + 'px',
+			height: (w / 1.8) + 'px'
+		});
+
+		zlPlayer = api.require('abcPlayer');
+		if (!zlPlayer) {
+			zlPlayer = api.require('xyzPlayer');
+		}
+        var year = $api.byId('year');
+        year.innerHTML = new Date().getFullYear();
+
+		initdonwloader(zlPlayer);
+    };
+
+
+
+
+
+
+
+
+
+
 
 </script>
 </html>
