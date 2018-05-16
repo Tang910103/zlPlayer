@@ -91,6 +91,18 @@ a.button1{
     border-width: 2px;
     border-style: solid;
 }
+    a.button10{
+        display: -webkit-box;
+        -webkit-box-pack: center;
+        -webkit-box-align: center;
+        height: 36px;
+        margin: 8px;
+        margin-top: 10px;
+        background-color: rgba(240,240,240,1.0);
+        border-color: rgba(220,220,220,1.0);
+        border-width: 2px;
+        border-style: solid;
+    }
 a.button2{
     display: -webkit-box;
     -webkit-box-pack: center;
@@ -178,6 +190,7 @@ a.button7{
 
    			<a class="button" tapmode="active" onclick="init()">初始化播放器</a>
             <a class="button1" tapmode="active" onclick="play()">开始播放</a>
+            <a class="button10" tapmode="active" onclick="play_new()">切换播放</a>
             <a class="button2" tapmode="active" onclick="getCurrentPosition()">获取播放器当前播放进度</a>
             <a class="button4" tapmode="active" onclick="isFullScreen()">是否为全屏</a>
             <a class="button5" tapmode="active" onclick="seekTo()">跳转到10秒位置</a>
@@ -209,11 +222,18 @@ a.button7{
         	console.log(JSON.stringify(ret));
         });
     }
-
+function play_new() {
+    zlPlayer.play({
+                  title: new Date().toLocaleTimeString(),
+                  <!--          url: "http://shenji.zlketang.com/public/test.mp4",-->
+                  sts:refreshSts_new(),
+                  direction:"landscape_right",
+                  });
+}
     function play() {
         zlPlayer.play({
-          title:"title",
-          //url: "http://shenji.zlketang.com/public/test.mp4",
+          title: new Date().toLocaleTimeString(),
+<!--          url: "http://shenji.zlketang.com/public/test.mp4",-->
           sts:refreshSts(),
           direction:"landscape_right",
           });

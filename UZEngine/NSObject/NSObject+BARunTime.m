@@ -518,6 +518,27 @@ const char *ba_protocolListKey = "ba_protocolListKey";
     return resultDict;
 }
 
++ (NSMutableArray *)modelArrayByArray:(NSArray *)array {
+    NSMutableArray *ar = @[].mutableCopy;
+    for (NSDictionary *dic in array) {
+        [ar addObject:[self toModel:dic]];
+    }
+    return ar;
+}
+
+
++ (id)toModel:(NSDictionary *)dic {
+    NSObject *obj = [[[self class] alloc] init];
+    NSArray *objKey = [[obj tj_JSONObject] allKeys];
+    for (NSString *key in dic) {
+        if ([objKey containsObject:key]) {
+            [obj setValue:dic[key] forKey:key];
+        }
+    }
+    return obj;
+}
+
+
 #pragma mark - 转为Data
 
 - (NSData *)tj_JSONData

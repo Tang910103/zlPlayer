@@ -13,6 +13,60 @@
 #import "AliyunVodDownLoadManager.h"
 #import "NSObject+Header.h"
 
+@interface MediaInfo : NSObject
+/** 字符串类型；视频id */
+@property(nonatomic,copy)NSString *vid;
+/** 字符串类型；视频标题 */
+@property(nonatomic,copy)NSString *title;
+/** 字符串；遮罩Url */
+@property(nonatomic,copy)NSString *coverUrl;
+/** 字符串类型；视频质量 */
+@property(nonatomic,assign)AliyunVodPlayerVideoQuality  quality;
+/** 数字类型；下载进度， */
+@property(nonatomic,assign)int progress;
+/** 字符串类型；下载地址 */
+@property(nonatomic,copy)NSString *savePath;
+/** 数字类型；视频长度 */
+@property(nonatomic,assign)int64_t duration;
+/** 数字类型；视频大小 */
+@property(nonatomic,assign)int64_t size;
+/**  字符串；视频格式 */
+@property(nonatomic,copy)NSString* format;
+@end
+
+@implementation MediaInfo
+- (AliyunDownloadMediaInfo *)toAliyunDownloadMediaInfo {
+    AliyunDownloadMediaInfo *mediaInfo = [[AliyunDownloadMediaInfo alloc] init];
+    mediaInfo.vid = self.vid;
+    mediaInfo.title = self.title;
+    mediaInfo.coverURL = self.coverUrl;
+    mediaInfo.quality = self.quality;
+    mediaInfo.downloadProgress = self.progress;
+    mediaInfo.downloadFilePath = self.savePath;
+    mediaInfo.duration = self.duration;
+    mediaInfo.size = self.size;
+    mediaInfo.format = self.format;
+    
+    return mediaInfo;
+}
++ (MediaInfo *)mediaInfoByAliyunDownloadMediaInfo:(AliyunDownloadMediaInfo *)aliMediaInfo {
+    
+    MediaInfo *mediaInfo = [[MediaInfo alloc] init];
+    mediaInfo.vid = aliMediaInfo.vid;
+    mediaInfo.title = aliMediaInfo.title;
+    mediaInfo.coverUrl = aliMediaInfo.coverURL;
+    mediaInfo.quality = aliMediaInfo.quality;
+    mediaInfo.progress = aliMediaInfo.downloadProgress;
+    mediaInfo.savePath = aliMediaInfo.downloadFilePath;
+    mediaInfo.duration = aliMediaInfo.duration;
+    mediaInfo.size = aliMediaInfo.size;
+    mediaInfo.format = aliMediaInfo.format;
+    
+    return mediaInfo;
+}
+
+@end
+
 typedef NS_ENUM(NSUInteger, ScreenOrientation) {
     /** 竖屏时，屏幕在home键的上面 */
     ScreenOrientation_portrait_up = 1,
@@ -137,6 +191,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
 }
 - (void)stop {
     if (self.playerView != nil) {
+        [self.aliyunVodPlayer removeObserver:self forKeyPath:@"currentPlayerVideo"];
         [self.playerView stop];
         [self.playerView releasePlayer];
         [self.playerView removeFromSuperview];
@@ -204,7 +259,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
 //        [self.aliyunVodPlayer prepareWithVid:vid accessKeyId:accessKeyId accessKeySecret:accessKeySecret securityToken:securityToken];
         [self callbackByDic:@{@"vid":vid,@"accessKeySecret":accessKeySecret,@"accessKeyId":accessKeyId,@"securityToken":securityToken} msg:@"" SEL:@selector(setLogger:) doDelete:NO];
     }
-    
+     [self.playerView getAliyunMediaInfo];
     [self callback:YES msg:@""  SEL:@selector(play:)];
 }
 /** 获取播放器当前播放进度 */
@@ -287,22 +342,13 @@ typedef NS_ENUM(NSUInteger, EventType) {
 /** 设置sts刷新回调函数 */
 - (void)setSts:(NSDictionary *)paramDict {
     [self callbackByDic:@{@"setSts":paramDict} msg:nil SEL:@selector(setLogger:) doDelete:NO];
-    NSString *accessKeySecret = [paramDict stringValueForKey:@"accessKeySecret" defaultValue:nil];
-    NSString *accessKeyId = [paramDict stringValueForKey:@"accessKeyId" defaultValue:nil];
-    NSString *securityToken = [paramDict stringValueForKey:@"securityToken" defaultValue:nil];
-    self.stsData.accessKeyId = accessKeyId;
-    self.stsData.accessKeySecret = accessKeySecret;
-    self.stsData.securityToken = securityToken;
+    self.stsData = [AliyunStsData toModel:paramDict];
 }
 /** 设准备下载 */
 - (void)prepareDownload:(NSDictionary *)paramDict {
     NSString *vid = [paramDict stringValueForKey:@"vid" defaultValue:nil];
-    NSString *accessKeySecret = [paramDict stringValueForKey:@"accessKeySecret" defaultValue:nil];
-    NSString *accessKeyId = [paramDict stringValueForKey:@"accessKeyId" defaultValue:nil];
-    NSString *securityToken = [paramDict stringValueForKey:@"securityToken" defaultValue:nil];
-    self.stsData.accessKeyId = accessKeyId;
-    self.stsData.accessKeySecret = accessKeySecret;
-    self.stsData.securityToken = securityToken;
+    AliyunStsData *stsData = [AliyunStsData toModel:paramDict];
+    self.stsData = stsData;
     self.aliyunDataSource.requestMethod = AliyunVodRequestMethodStsToken;
     self.aliyunDataSource.vid = vid;
     self.aliyunDataSource.stsData = self.stsData;
@@ -312,52 +358,32 @@ typedef NS_ENUM(NSUInteger, EventType) {
 /** 开始下载 */
 - (void)startDownload:(NSDictionary *)paramDict {
     [self callbackByDic:@{@"startDownload":paramDict} msg:nil SEL:@selector(setLogger:) doDelete:NO];
-    NSDictionary *mediaInfo = [paramDict dictValueForKey:@"mediaInfo " defaultValue:nil];
+    NSDictionary *mediaInfo = [paramDict dictValueForKey:@"mediaInfo" defaultValue:paramDict];
     if (mediaInfo) {
-        self.aliyunDataSource.vid = [mediaInfo stringValueForKey:@"vid" defaultValue:nil];
-        self.aliyunDataSource.quality = [mediaInfo integerValueForKey:@"quality" defaultValue:0];
-        self.aliyunDataSource.videoDefinition = [mediaInfo stringValueForKey:@"videoDefinition" defaultValue:nil];
-        self.aliyunDataSource.format = [mediaInfo stringValueForKey:@"format" defaultValue:nil];
+        MediaInfo *info = [MediaInfo toModel:mediaInfo];
+        self.aliyunDataSource.vid = info.vid;
+        self.aliyunDataSource.quality = info.quality;
+        self.aliyunDataSource.format = info.format;
         [[AliyunVodDownLoadManager shareManager] startDownloadMedia:self.aliyunDataSource];
     }
 }
 /** 停止下载 */
 - (void)stopDownload:(NSDictionary *)paramDict {
     [self callbackByDic:@{@"stopDownload":paramDict} msg:nil SEL:@selector(setLogger:) doDelete:NO];
-    NSDictionary *mediaInfoDic = [paramDict dictValueForKey:@"mediaInfo " defaultValue:nil];
+    NSDictionary *mediaInfoDic = [paramDict dictValueForKey:@"mediaInfo " defaultValue:paramDict];
     if (mediaInfoDic) {
-        AliyunDownloadMediaInfo *mediaInfo = [[AliyunDownloadMediaInfo alloc] init];
-        mediaInfo.vid = [mediaInfoDic stringValueForKey:@"vid" defaultValue:nil];
-        mediaInfo.title = [mediaInfoDic stringValueForKey:@"title" defaultValue:nil];
-        mediaInfo.coverURL = [mediaInfoDic stringValueForKey:@"coverURL" defaultValue:nil];
-        mediaInfo.quality = [mediaInfoDic integerValueForKey:@"quality" defaultValue:0];
-        mediaInfo.downloadProgress = [mediaInfoDic intValueForKey:@"downloadProgress" defaultValue:0];
-        mediaInfo.videoDefinition = [mediaInfoDic stringValueForKey:@"videoDefinition" defaultValue:nil];
-        mediaInfo.downloadFileName = [mediaInfoDic stringValueForKey:@"downloadFileName" defaultValue:nil];
-        mediaInfo.downloadFilePath = [mediaInfoDic stringValueForKey:@"downloadFilePath" defaultValue:nil];
-        mediaInfo.size = [mediaInfoDic longlongValueForKey:@"size" defaultValue:0];
-        mediaInfo.duration = [mediaInfoDic longlongValueForKey:@"duration" defaultValue:0];
-        mediaInfo.format = [mediaInfoDic stringValueForKey:@"format" defaultValue:nil];
+        MediaInfo *info = [MediaInfo toModel:mediaInfoDic];
+        AliyunDownloadMediaInfo *mediaInfo = [info toAliyunDownloadMediaInfo];
         [[AliyunVodDownLoadManager shareManager] stopDownloadMedia:mediaInfo];
     }
 }
 /** 删除下载 */
 - (void)removeDownload:(NSDictionary *)paramDict {
     [self callbackByDic:@{@"removeDownload":paramDict} msg:nil SEL:@selector(setLogger:) doDelete:NO];
-    NSDictionary *mediaInfoDic = [paramDict dictValueForKey:@"mediaInfo " defaultValue:nil];
+    NSDictionary *mediaInfoDic = [paramDict dictValueForKey:@"mediaInfo " defaultValue:paramDict];
     if (mediaInfoDic) {
-        AliyunDownloadMediaInfo *mediaInfo = [[AliyunDownloadMediaInfo alloc] init];
-        mediaInfo.vid = [mediaInfoDic stringValueForKey:@"vid" defaultValue:nil];
-        mediaInfo.title = [mediaInfoDic stringValueForKey:@"title" defaultValue:nil];
-        mediaInfo.coverURL = [mediaInfoDic stringValueForKey:@"coverURL" defaultValue:nil];
-        mediaInfo.quality = [mediaInfoDic integerValueForKey:@"quality" defaultValue:0];
-        mediaInfo.downloadProgress = [mediaInfoDic intValueForKey:@"downloadProgress" defaultValue:0];
-        mediaInfo.videoDefinition = [mediaInfoDic stringValueForKey:@"videoDefinition" defaultValue:nil];
-        mediaInfo.downloadFileName = [mediaInfoDic stringValueForKey:@"downloadFileName" defaultValue:nil];
-        mediaInfo.downloadFilePath = [mediaInfoDic stringValueForKey:@"downloadFilePath" defaultValue:nil];
-        mediaInfo.size = [mediaInfoDic longlongValueForKey:@"size" defaultValue:0];
-        mediaInfo.duration = [mediaInfoDic longlongValueForKey:@"duration" defaultValue:0];
-        mediaInfo.format = [mediaInfoDic stringValueForKey:@"format" defaultValue:nil];
+        MediaInfo *info = [MediaInfo toModel:mediaInfoDic];
+        AliyunDownloadMediaInfo *mediaInfo = [info toAliyunDownloadMediaInfo];
         [[AliyunVodDownLoadManager shareManager] stopDownloadMedia:mediaInfo];
     }
 }
@@ -368,7 +394,11 @@ typedef NS_ENUM(NSUInteger, EventType) {
  */
 -(void) onPrepare:(NSArray<AliyunDownloadMediaInfo*>*)mediaInfos
 {
-    [self callbackByDic:@{@"status":@(YES),@"event":@"prepare",@"mediaInfos":mediaInfos.tj_JSONObject} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
+    NSMutableArray *ar = @[].mutableCopy;
+    for (AliyunDownloadMediaInfo *mediaInfo in mediaInfos) {
+        [ar addObject:[MediaInfo mediaInfoByAliyunDownloadMediaInfo:mediaInfo].tj_JSONObject];
+    }
+    [self callbackByDic:@{@"status":@(YES),@"event":@"prepare",@"mediaInfos":ar} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
 }
 
 /*
@@ -377,7 +407,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
  */
 -(void) onStart:(AliyunDownloadMediaInfo*)mediaInfo
 {
-    [self callbackByDic:@{@"status":@(YES),@"event":@"start",@"mediaInfos":@[mediaInfo.tj_JSONObject]} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
+    [self callbackByDic:@{@"status":@(YES),@"event":@"start",@"mediaInfos":@[[MediaInfo mediaInfoByAliyunDownloadMediaInfo:mediaInfo].tj_JSONObject]} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
 }
 
 /*
@@ -386,7 +416,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
   */
 -(void) onStop:(AliyunDownloadMediaInfo*)mediaInfo
 {
-    [self callbackByDic:@{@"status":@(YES),@"event":@"stop",@"mediaInfos":@[mediaInfo.tj_JSONObject]} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
+    [self callbackByDic:@{@"status":@(YES),@"event":@"stop",@"mediaInfos":@[[MediaInfo mediaInfoByAliyunDownloadMediaInfo:mediaInfo].tj_JSONObject]} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
 }
 
 /*
@@ -395,7 +425,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
   */
 -(void) onCompletion:(AliyunDownloadMediaInfo*)mediaInfo
 {
-    [self callbackByDic:@{@"status":@(YES),@"event":@"completion",@"mediaInfos":@[mediaInfo.tj_JSONObject]} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
+    [self callbackByDic:@{@"status":@(YES),@"event":@"completion",@"mediaInfos":@[[MediaInfo mediaInfoByAliyunDownloadMediaInfo:mediaInfo].tj_JSONObject]} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
 }
 
 /*
@@ -404,7 +434,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
   */
 -(void) onProgress:(AliyunDownloadMediaInfo*)mediaInfo
 {
-    [self callbackByDic:@{@"status":@(YES),@"event":@"progress",@"mediaInfos":@[mediaInfo.tj_JSONObject]} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
+    [self callbackByDic:@{@"status":@(YES),@"event":@"progress",@"mediaInfos":@[[MediaInfo mediaInfoByAliyunDownloadMediaInfo:mediaInfo].tj_JSONObject]} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
 }
 
 /*
@@ -413,7 +443,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
   */
 -(void)onError:(AliyunDownloadMediaInfo*)mediaInfo code:(int)code msg:(NSString *)msg
 {
-    [self callbackByDic:@{@"status":@(YES),@"event":@"error",@"mediaInfos":@[mediaInfo.tj_JSONObject],@"code":@(code)} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
+    [self callbackByDic:@{@"status":@(YES),@"event":@"error",@"mediaInfos":@[[MediaInfo mediaInfoByAliyunDownloadMediaInfo:mediaInfo].tj_JSONObject],@"code":@(code)} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
 }
 /*
  功能：未完成回调，异常中断导致下载未完成，下次启动后会接收到此回调。
@@ -421,7 +451,11 @@ typedef NS_ENUM(NSUInteger, EventType) {
  */
 -(void) onUnFinished:(NSArray<AliyunDataSource*>*)mediaInfos
 {
-    [self callbackByDic:@{@"status":@(YES),@"event":@"unFinished",@"mediaInfos":mediaInfos.tj_JSONObject} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
+    NSMutableArray *ar = @[].mutableCopy;
+    for (AliyunDownloadMediaInfo *mediaInfo in mediaInfos) {
+        [ar addObject:[MediaInfo mediaInfoByAliyunDownloadMediaInfo:mediaInfo].tj_JSONObject];
+    }
+    [self callbackByDic:@{@"status":@(YES),@"event":@"unFinished",@"mediaInfos":ar} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
 }
 
 #pragma mark - private
@@ -609,8 +643,18 @@ typedef NS_ENUM(NSUInteger, EventType) {
     self.aliyunVodPlayer = aliPlayer;
     [self addSubview:self.playerView fixedOn:_fixedOn fixed:_fixed];
     [self callback:YES msg:@"" SEL:@selector(init:)];
+    
+    [self.aliyunVodPlayer addObserver:self forKeyPath:@"currentPlayerVideo" options:NSKeyValueObservingOptionNew context:nil];
 }
-
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"currentPlayerVideo"]) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            AliyunVodPlayerVideo *video = [self.playerView getAliyunMediaInfo];
+            [self.playerView setTitle:video.title];
+        });
+    }
+}
 - (void)clickFullSreenButton {
 
     _isFullScreen = !_isFullScreen;

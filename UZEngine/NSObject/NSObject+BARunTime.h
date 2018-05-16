@@ -163,6 +163,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (NSString *)tj_JSONString;
 
+/** 字典数组转模型数组（字典key需要与模型的属性名一致） */
++ (NSMutableArray *)modelArrayByArray:(NSArray *)array;
+/** 字典转模型 （字典key需要与模型的属性名一致）*/
++ (id)toModel:(NSDictionary *)dic;
+
 + (NSString *)getIPAddress:(BOOL)preferIPv4;
 + (NSDictionary *)getIPAddresses;
 
