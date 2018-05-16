@@ -11,6 +11,7 @@
 #import "AliyunVodPlayerViewSDK.h"
 #import "UZAppDelegate.h"
 #import "AliyunVodDownLoadManager.h"
+#import "NSObject+Header.h"
 
 typedef NS_ENUM(NSUInteger, ScreenOrientation) {
     /** 竖屏时，屏幕在home键的上面 */
@@ -275,6 +276,8 @@ typedef NS_ENUM(NSUInteger, EventType) {
     [[AliyunVodDownLoadManager shareManager] setDownLoadPath:downloadDir];
     [[AliyunVodDownLoadManager shareManager] setMaxDownloadOperationCount:maxNums];
     [[AliyunVodDownLoadManager shareManager] setEncrptyFile:secretImagePath];
+    
+    [self callbackByDic:@{@"initDownloader":paramDict} msg:nil SEL:@selector(setLogger:) doDelete:NO];
 }
 /** 设置sts刷新回调函数 */
 - (void)setRefreshStsCallback:(NSDictionary *)paramDict {
@@ -283,6 +286,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
 }
 /** 设置sts刷新回调函数 */
 - (void)setSts:(NSDictionary *)paramDict {
+    [self callbackByDic:@{@"setSts":paramDict} msg:nil SEL:@selector(setLogger:) doDelete:NO];
     NSString *accessKeySecret = [paramDict stringValueForKey:@"accessKeySecret" defaultValue:nil];
     NSString *accessKeyId = [paramDict stringValueForKey:@"accessKeyId" defaultValue:nil];
     NSString *securityToken = [paramDict stringValueForKey:@"securityToken" defaultValue:nil];
@@ -299,15 +303,15 @@ typedef NS_ENUM(NSUInteger, EventType) {
     self.stsData.accessKeyId = accessKeyId;
     self.stsData.accessKeySecret = accessKeySecret;
     self.stsData.securityToken = securityToken;
-    AliyunDataSource *dataSource = [[AliyunDataSource alloc] init];
-    dataSource.requestMethod = AliyunVodRequestMethodStsToken;
-    dataSource.vid = vid;
-    dataSource.stsData = self.stsData;
-    self.aliyunDataSource = dataSource;
+    self.aliyunDataSource.requestMethod = AliyunVodRequestMethodStsToken;
+    self.aliyunDataSource.vid = vid;
+    self.aliyunDataSource.stsData = self.stsData;
     [[AliyunVodDownLoadManager shareManager] prepareDownloadMedia:self.aliyunDataSource];
+    [self callbackByDic:@{@"prepareDownload":paramDict} msg:nil SEL:@selector(setLogger:) doDelete:NO];
 }
 /** 开始下载 */
-- (void)startDownload:(NSDictionary *)paramDict {   
+- (void)startDownload:(NSDictionary *)paramDict {
+    [self callbackByDic:@{@"startDownload":paramDict} msg:nil SEL:@selector(setLogger:) doDelete:NO];
     NSDictionary *mediaInfo = [paramDict dictValueForKey:@"mediaInfo " defaultValue:nil];
     if (mediaInfo) {
         self.aliyunDataSource.vid = [mediaInfo stringValueForKey:@"vid" defaultValue:nil];
@@ -319,6 +323,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
 }
 /** 停止下载 */
 - (void)stopDownload:(NSDictionary *)paramDict {
+    [self callbackByDic:@{@"stopDownload":paramDict} msg:nil SEL:@selector(setLogger:) doDelete:NO];
     NSDictionary *mediaInfoDic = [paramDict dictValueForKey:@"mediaInfo " defaultValue:nil];
     if (mediaInfoDic) {
         AliyunDownloadMediaInfo *mediaInfo = [[AliyunDownloadMediaInfo alloc] init];
@@ -338,6 +343,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
 }
 /** 删除下载 */
 - (void)removeDownload:(NSDictionary *)paramDict {
+    [self callbackByDic:@{@"removeDownload":paramDict} msg:nil SEL:@selector(setLogger:) doDelete:NO];
     NSDictionary *mediaInfoDic = [paramDict dictValueForKey:@"mediaInfo " defaultValue:nil];
     if (mediaInfoDic) {
         AliyunDownloadMediaInfo *mediaInfo = [[AliyunDownloadMediaInfo alloc] init];
@@ -362,7 +368,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
  */
 -(void) onPrepare:(NSArray<AliyunDownloadMediaInfo*>*)mediaInfos
 {
-    [self callbackByDic:@{@"status":@(YES),@"event":@"onPrepare",@"mediaInfos":mediaInfos} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
+    [self callbackByDic:@{@"status":@(YES),@"event":@"prepare",@"mediaInfos":mediaInfos.tj_JSONObject} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
 }
 
 /*
@@ -371,7 +377,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
  */
 -(void) onStart:(AliyunDownloadMediaInfo*)mediaInfo
 {
-    [self callbackByDic:@{@"status":@(YES),@"event":@"onStart",@"mediaInfos":@[mediaInfo]} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
+    [self callbackByDic:@{@"status":@(YES),@"event":@"start",@"mediaInfos":@[mediaInfo.tj_JSONObject]} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
 }
 
 /*
@@ -380,7 +386,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
   */
 -(void) onStop:(AliyunDownloadMediaInfo*)mediaInfo
 {
-    [self callbackByDic:@{@"status":@(YES),@"event":@"onStop",@"mediaInfos":@[mediaInfo]} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
+    [self callbackByDic:@{@"status":@(YES),@"event":@"stop",@"mediaInfos":@[mediaInfo.tj_JSONObject]} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
 }
 
 /*
@@ -389,7 +395,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
   */
 -(void) onCompletion:(AliyunDownloadMediaInfo*)mediaInfo
 {
-    [self callbackByDic:@{@"status":@(YES),@"event":@"onCompletion",@"mediaInfos":@[mediaInfo]} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
+    [self callbackByDic:@{@"status":@(YES),@"event":@"completion",@"mediaInfos":@[mediaInfo.tj_JSONObject]} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
 }
 
 /*
@@ -398,7 +404,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
   */
 -(void) onProgress:(AliyunDownloadMediaInfo*)mediaInfo
 {
-    [self callbackByDic:@{@"status":@(YES),@"event":@"onProgress",@"mediaInfos":@[mediaInfo]} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
+    [self callbackByDic:@{@"status":@(YES),@"event":@"progress",@"mediaInfos":@[mediaInfo.tj_JSONObject]} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
 }
 
 /*
@@ -407,7 +413,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
   */
 -(void)onError:(AliyunDownloadMediaInfo*)mediaInfo code:(int)code msg:(NSString *)msg
 {
-    [self callbackByDic:@{@"status":@(YES),@"event":@"onError",@"mediaInfos":@[mediaInfo],@"code":@(code)} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
+    [self callbackByDic:@{@"status":@(YES),@"event":@"error",@"mediaInfos":@[mediaInfo.tj_JSONObject],@"code":@(code)} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
 }
 /*
  功能：未完成回调，异常中断导致下载未完成，下次启动后会接收到此回调。
@@ -415,7 +421,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
  */
 -(void) onUnFinished:(NSArray<AliyunDataSource*>*)mediaInfos
 {
-    
+    [self callbackByDic:@{@"status":@(YES),@"event":@"unFinished",@"mediaInfos":mediaInfos.tj_JSONObject} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
 }
 
 #pragma mark - private
@@ -644,6 +650,13 @@ typedef NS_ENUM(NSUInteger, EventType) {
         _stsData = [[AliyunStsData alloc] init];
     }
     return _stsData;
+}
+- (AliyunDataSource *)aliyunDataSource
+{
+    if (!_aliyunDataSource) {
+        _aliyunDataSource = [[AliyunDataSource alloc] init];
+    }
+    return _aliyunDataSource;
 }
 //
 //- (void)becomeActive{

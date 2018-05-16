@@ -26,6 +26,9 @@
 		A516D3B0208F7B8E003D1FFC /* AliyunVodPlayerViewDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = A516D39D208F7B8E003D1FFC /* AliyunVodPlayerViewDefine.h */; };
 		A516D3B1208F7B8E003D1FFC /* AliyunVodPlayerViewSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A516D39E208F7B8E003D1FFC /* AliyunVodPlayerViewSDK.a */; };
 		A516D3B2208F7B8E003D1FFC /* AliyunVodPlayerViewSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = A516D39F208F7B8E003D1FFC /* AliyunVodPlayerViewSDK.h */; };
+		A518551720AC6B6500699690 /* NSObject+BARunTime.h in Headers */ = {isa = PBXBuildFile; fileRef = A518551420AC6B6400699690 /* NSObject+BARunTime.h */; };
+		A518551820AC6B6500699690 /* NSObject+BARunTime.m in Sources */ = {isa = PBXBuildFile; fileRef = A518551520AC6B6400699690 /* NSObject+BARunTime.m */; };
+		A518551920AC6B6500699690 /* NSObject+Header.h in Headers */ = {isa = PBXBuildFile; fileRef = A518551620AC6B6400699690 /* NSObject+Header.h */; };
 		A5A805072081D5CE0038686C /* zlPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A5A805062081D5CE0038686C /* zlPlayer.m */; };
 		A5A805082081D5CE0038686C /* zlPlayer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A5A805052081D5CE0038686C /* zlPlayer.h */; };
 		A5EB47AA20A2937B0002C1F0 /* zlPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = A5A805052081D5CE0038686C /* zlPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -70,6 +73,9 @@
 		A516D39D208F7B8E003D1FFC /* AliyunVodPlayerViewDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliyunVodPlayerViewDefine.h; sourceTree = "<group>"; };
 		A516D39E208F7B8E003D1FFC /* AliyunVodPlayerViewSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = AliyunVodPlayerViewSDK.a; sourceTree = "<group>"; };
 		A516D39F208F7B8E003D1FFC /* AliyunVodPlayerViewSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliyunVodPlayerViewSDK.h; sourceTree = "<group>"; };
+		A518551420AC6B6400699690 /* NSObject+BARunTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+BARunTime.h"; sourceTree = "<group>"; };
+		A518551520AC6B6400699690 /* NSObject+BARunTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+BARunTime.m"; sourceTree = "<group>"; };
+		A518551620AC6B6400699690 /* NSObject+Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Header.h"; sourceTree = "<group>"; };
 		A543F4152082499C002ECE27 /* UIViewControllerExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIViewControllerExtension.h; sourceTree = "<group>"; };
 		A543F4162082499C002ECE27 /* UZURLTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UZURLTask.h; sourceTree = "<group>"; };
 		A543F4172082499C002ECE27 /* UZModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UZModule.h; sourceTree = "<group>"; };
@@ -161,6 +167,16 @@
 			path = AliyunVodPlayerViewSDK;
 			sourceTree = "<group>";
 		};
+		A518551320AC6B6400699690 /* NSObject */ = {
+			isa = PBXGroup;
+			children = (
+				A518551420AC6B6400699690 /* NSObject+BARunTime.h */,
+				A518551520AC6B6400699690 /* NSObject+BARunTime.m */,
+				A518551620AC6B6400699690 /* NSObject+Header.h */,
+			);
+			path = NSObject;
+			sourceTree = "<group>";
+		};
 		A543F4142082499C002ECE27 /* UZEngine */ = {
 			isa = PBXGroup;
 			children = (
@@ -171,6 +187,7 @@
 				A543F4192082499C002ECE27 /* UZAppDelegate.h */,
 				A543F41A2082499C002ECE27 /* UZAppUtils.h */,
 				A543F41B2082499C002ECE27 /* NSDictionaryUtils.h */,
+				A518551320AC6B6400699690 /* NSObject */,
 				A5EE3A70209B80AA00835E5C /* NSObject+exchangeMethod.h */,
 				A5EE3A6F209B80AA00835E5C /* NSObject+exchangeMethod.m */,
 				A5EE3A68209B808B00835E5C /* NSArrary+safe.h */,
@@ -219,7 +236,9 @@
 				A516D3AF208F7B8E003D1FFC /* AliyunVodPlayerView.h in Headers */,
 				A5EE3A6D209B808C00835E5C /* NSDictionary+safe.h in Headers */,
 				A5EE3A72209B80AA00835E5C /* NSObject+exchangeMethod.h in Headers */,
+				A518551720AC6B6500699690 /* NSObject+BARunTime.h in Headers */,
 				A5EE3A6C209B808C00835E5C /* NSArrary+safe.h in Headers */,
+				A518551920AC6B6500699690 /* NSObject+Header.h in Headers */,
 				A516D3B0208F7B8E003D1FFC /* AliyunVodPlayerViewDefine.h in Headers */,
 				A516D3A8208F7B8E003D1FFC /* MPlayingHandler.h in Headers */,
 				A516D3A7208F7B8E003D1FFC /* KernelMPlayer.h in Headers */,
@@ -310,6 +329,7 @@
 				A5EE3A6E209B808C00835E5C /* NSDictionary+safe.m in Sources */,
 				A5A805072081D5CE0038686C /* zlPlayer.m in Sources */,
 				A5EE3A71209B80AA00835E5C /* NSObject+exchangeMethod.m in Sources */,
+				A518551820AC6B6500699690 /* NSObject+BARunTime.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
