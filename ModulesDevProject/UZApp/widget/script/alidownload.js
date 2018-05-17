@@ -1,49 +1,160 @@
-var downloader = false;
-var downloadSts = false;
-var downloadSts_new = false;
-function initdonwloader (player) {
-	downloader = player;
-	if (!downloader) {
-		return;
-	}
-	var secretImagePath = $api.isAndroid?'widget://android.dat':'widget://ios.dat';
-	var downloadDir = 'fs://';
-	console.log(api.fsDir);
-	downloader.initDownloader({
-		 downloadDir:downloadDir,
-		 maxNums:1,
-		 secretImagePath:secretImagePath
-	},function(ret){
-		console.log(JSON.stringify(ret));
-	});
-	
-	refreshSts();
-    refreshSts_new();
-	downloader.prepareDownload(downloadSts);
-    downloader.prepareDownload(downloadSts_new);
-	
-	downloader.setRefreshStsCallback(function() {
-		downloader.setSts(downloadSts);
-	});
+var alivod = {
+downloader:false,
+init: function (downloader) {
+    alivod.downloader = downloader;
+    if (!alivod.downloader) {
+        return;
+    }
+    var secretImagePath = $api.isAndroid?'widget://android.dat':'widget://ios.dat';
+    var downloadDir = api.fsDir;
+    alivod.downloader.initDownloader({
+                                     downloadDir:downloadDir,
+                                     maxNums:1,
+                                     secretImagePath:secretImagePath
+                                     },function(ret){
+                                     console.log('Raw:'+JSON.stringify(ret));
+                                     if (!ret || !ret.event || !ret.mediaInfos || ret.mediaInfos.length == 0) {
+                                     console.log('some wrong=======================');
+                                     return;
+                                     }
+                                     var mediaInfos = ret.mediaInfos;
+                                     for (var i = 0; i < mediaInfos.length;i++) {
+                                     var mediaInfo = mediaInfos[i];
+                                     if (!mediaInfo) {
+                                     continue;
+                                     }
+                                     console.log('mediaInfo Raw:'+JSON.stringify(mediaInfo));
+                                     var vid = mediaInfo.vid;
+                                     if (!vid || vid == '') {
+                                     continue;
+                                     }
+                                     console.log('event:'+ret.event+';media:'+JSON.stringify(mediaInfo));
+                                     switch(ret.event) {
+                                     case 'error':
+                                     if (ret.code && ret.code == 4002) {//sts过期，重新获取下载信息
+                                     setTimeout(function() {
+                                                alivod.prepareDownload(vid);
+                                                },(i+1)*2*1000);
+                                     }
+                                     break;
+                                     case 'prepare':
+                                     case 'prepared':
+                                     alert('准备成功，VID:'+vid);
+                                     $api.setStorage(vid,mediaInfo);
+                                     break;
+                                     case 'stop':
+                                     alert('停止成功，VID:'+vid);
+                                     break;
+                                     case 'progress':
+                                     break;
+                                     case 'completion':
+                                     alert('下载完成，VID:'+vid);
+                                     break;
+                                     case 'start':
+                                     break;
+                                     }
+                                     }
+                                     });
+    //alivod.removeDownload({vid:'1347d8e2fad74413983227f16133b501','quality':6,
+    //"duration":2524,"size":45532284,"format":"m3u8",
+    //savePath:api.fsDir+'/'+'1347d8e2fad74413983227f16133b501_m3u8_6.mp4'});
+    alivod.timer.start();
+},
+prepareDownload:function(vid) {
+    if (!alivod.downloader) {
+        return;
+    }
+    alivod.timer.checkRefreshSts(function(sts) {
+                                 var params = {
+                                 vid : vid,
+                                 accessKeySecret: sts.accessKeySecret,
+                                 accessKeyId: sts.accessKeyId,
+                                 securityToken: sts.securityToken
+                                 };
+                                 console.log('====================prepareDownload================');
+                                 alivod.downloader.prepareDownload(params);
+                                 });
+},
+stopDownload:function(media) {
+    if (!alivod.downloader) {
+        return;
+    }
+    var mediaInfo = media;
+    alivod.downloader.stopDownload(mediaInfo);
+},
+startDownload:function(media) {
+    if (!alivod.downloader) {
+        return;
+    }
+    var mediaInfo = media;
+    alivod.downloader.startDownload(mediaInfo);
+},
+removeDownload:function(media) {
+    if (!alivod.downloader) {
+        return;
+    }
+    var mediaInfo = media;
+    alivod.downloader.removeDownload(mediaInfo);
 }
-//浏览器输入地址：http://shenji.zlketang.com/app/video/sts可以获取最新的sts参数
-//vid是固定测试视频id，只需要更换其他参数即可
-function refreshSts() {
-    downloadSts = {
-        vid : '1347d8e2fad74413983227f16133b501',//视频播放id
-    accessKeySecret: "64VJTuhNNPde4TbZBtMBxiZR1LDKgGpsSCSBKvUtmfnB",
-    accessKeyId: "STS.Mp6jCvNsVmeoUQjRjXHHGPSfu",
-    securityToken: "CAIS8wF1q6Ft5B2yfSjIrLODIfnCo6x32qeEV3fbtmoNRMdrv5bNlzz2IHBOdXRvAesavv8+mGpQ6PsflqNhS55BREXDc8x8tknOH7t/J9ivgde8yJBZor/HcDHhJnyW9cvWZPqDP7G5U/yxalfCuzZuyL/hD1uLVECkNpv74vwOLK5gPG+CYCFBGc1dKyZ7tcYeLgGxD/u2NQPwiWeiZygB+CgE0D8kt/7gmJTMs0aP3QankdV4/dqhfsKWCOB3J4p6XtuP2+h7S7HMyiY46WIRpP0n0fMcomuX5YDBWQEPvkicUfDd98NoIBV0b6Qqqm2bLRJdO5cagAFt7tDyLgViauURUXi0zhc0aJU533J+UhSrI7fNL+Z7FOaITqiQZtz0wxKuCoceCp3Xf8pyhyN1ccSZvvkfpWbhiqJPXnubzUIPCuHj67ZvF1R5R3I1kqtSCdJDlEayU+I9podKDJ8Dgiko6MxEXUW3kElEnqzsf3efgaw45Y7I3w=="
-    };
-	return downloadSts;
-}
+};
 
-function refreshSts_new() {
-    downloadSts_new = {
-        vid : 'dcddb2bbb6e9475f8ec50ca2094e9364',//视频播放id
-    accessKeySecret: "64VJTuhNNPde4TbZBtMBxiZR1LDKgGpsSCSBKvUtmfnB",
-    accessKeyId: "STS.Mp6jCvNsVmeoUQjRjXHHGPSfu",
-    securityToken: "CAIS8wF1q6Ft5B2yfSjIrLODIfnCo6x32qeEV3fbtmoNRMdrv5bNlzz2IHBOdXRvAesavv8+mGpQ6PsflqNhS55BREXDc8x8tknOH7t/J9ivgde8yJBZor/HcDHhJnyW9cvWZPqDP7G5U/yxalfCuzZuyL/hD1uLVECkNpv74vwOLK5gPG+CYCFBGc1dKyZ7tcYeLgGxD/u2NQPwiWeiZygB+CgE0D8kt/7gmJTMs0aP3QankdV4/dqhfsKWCOB3J4p6XtuP2+h7S7HMyiY46WIRpP0n0fMcomuX5YDBWQEPvkicUfDd98NoIBV0b6Qqqm2bLRJdO5cagAFt7tDyLgViauURUXi0zhc0aJU533J+UhSrI7fNL+Z7FOaITqiQZtz0wxKuCoceCp3Xf8pyhyN1ccSZvvkfpWbhiqJPXnubzUIPCuHj67ZvF1R5R3I1kqtSCdJDlEayU+I9podKDJ8Dgiko6MxEXUW3kElEnqzsf3efgaw45Y7I3w=="
-    };
-    return downloadSts_new;
+alivod.timer = {//只有课程才有
+timerId:false,
+sts:false,
+lastStsTimestamp:false,
+start:function() {
+    if (alivod.timer.timerId) {
+        return;
+    }
+    alivod.timer.timerId = setInterval(function() {//定时存储播放进去
+                                       alivod.timer.checkRefreshSts();//启动sts检查
+                                       },10*1000);
+},
+getTimestamp:function() {
+    var timestamp =Date.parse(new Date());
+    return parseInt(timestamp/1000);
+},
+setSts:function(sts) {
+    console.log('setsts:'+JSON.stringify(sts));
+    if (sts && typeof(sts) == 'object') {
+        alivod.timer.sts = sts;
+        //alivod.timer.sts.expire = 70;
+        alivod.timer.lastStsTimestamp = alivod.timer.getTimestamp();
+    }
+},
+checkRefreshSts:function(callback) {
+    if (!alivod.timer.sts) {
+        //当sts没有初始值，无需更新
+        //当的确发送callback，通常play，强制启动获取刷新sts防止误判
+        callback && alivod.timer.refreshStsModel(callback);
+        return;
+    }
+    var diffTime = alivod.timer.getTimestamp() - alivod.timer.lastStsTimestamp;
+    //console.log('diffTime:'+diffTime+';expire:'+(alivod.timer.sts.expire - 60));
+    //预留60s,已经过期
+    if (diffTime > (alivod.timer.sts.expire - 60)) {
+        alivod.timer.refreshStsModel(callback);
+        return;
+    }
+    callback && callback(alivod.timer.sts);
+},
+refreshStsModel: function (callback) {
+    console.log('=================refreshStsModel===================');
+    $api.get(
+             'http://shenji.zlketang.com/app/video/sts?timestamp='+alivod.timer.getTimestamp(),
+             function (json) {
+             json = JSON.parse(json);
+             if (json && json.data) {
+             alivod.timer.setSts(json.data);
+             callback && callback(json.data);
+             console.log('STS Token:'+JSON.stringify(json.data));
+             console.log('=================setSts===================');
+             } else {//重新去获取sts
+             console.log('=================setTimeout===================');
+             setTimeout(function() {//重新检查更新sts
+                        alivod.timer.checkRefreshSts(callback);
+                        },2*1000);
+             }
+             });
+}
 }

@@ -596,7 +596,7 @@
             }
         );
     };
-
+	u.isAndroid = isAndroid;
 /*end*/
     
 

@@ -95,7 +95,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
     EventType_FullScreen,
 };
 
-@interface zlPlayer()<AliyunVodPlayerViewDelegate,AliyunVodDownLoadDelegate>
+@interface zlPlayer()<AliyunVodPlayerViewDelegate,AliyunVodDownLoadDelegate,UIApplicationDelegate>
 {
     NSMutableDictionary *_cbIdDictionary;
     NSString *_fixedOn;
@@ -127,13 +127,14 @@ typedef NS_ENUM(NSUInteger, EventType) {
     if (self = [super initWithUZWebView:webView]) {
         _cbIdDictionary = @{}.mutableCopy;
         _orientationStr = [self screenOrientation:ScreenOrientation_landscape_right];
+        [[UZAppDelegate appDelegate] addAppHandle:self];
     }
     return self;
 }
 - (void)dispose
 {
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
+    //    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+    //    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
     [self callback:YES msg:@"页面关闭" SEL:@selector(setLogger:)];
     [self stop];
 }
@@ -188,6 +189,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
     _aliVcMediaPlayer = nil;
     _controlLayer = nil;
     _statusBarHeight = 0;
+    [[UZAppDelegate appDelegate] removeAppHandle:self];
 }
 - (void)stop {
     if (self.playerView != nil) {
@@ -197,10 +199,14 @@ typedef NS_ENUM(NSUInteger, EventType) {
         [self.playerView removeFromSuperview];
         self.playerView = nil;
     }
-//    [self removeNotification];
+    //    [self removeNotification];
     [self clean];
 }
 
+- (void)applicationWillTerminate:(UIApplication *)application
+{
+    [[AliyunVodDownLoadManager shareManager] stopDownloadMedias:[[AliyunVodDownLoadManager shareManager] currentDownloadingdMedias]];
+}
 #pragma mark - public
 
 /** 初始化视频播放器 */
@@ -396,9 +402,15 @@ typedef NS_ENUM(NSUInteger, EventType) {
 {
     NSMutableArray *ar = @[].mutableCopy;
     for (AliyunDownloadMediaInfo *mediaInfo in mediaInfos) {
+        for (AliyunDownloadMediaInfo *mediaInfo_1 in [[AliyunVodDownLoadManager shareManager] allMedias]) {
+            if ([mediaInfo.vid isEqualToString:mediaInfo_1.vid]) {
+                [[AliyunVodDownLoadManager shareManager] clearMedia:mediaInfo];
+                continue;
+            }
+        }
         [ar addObject:[MediaInfo mediaInfoByAliyunDownloadMediaInfo:mediaInfo].tj_JSONObject];
     }
-    [self callbackByDic:@{@"status":@(YES),@"event":@"prepare",@"mediaInfos":ar} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
+    [self callbackByDic:@{@"status":@(YES),@"event":@"prepared",@"mediaInfos":ar} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
 }
 
 /*
@@ -452,10 +464,12 @@ typedef NS_ENUM(NSUInteger, EventType) {
 -(void) onUnFinished:(NSArray<AliyunDataSource*>*)mediaInfos
 {
     NSMutableArray *ar = @[].mutableCopy;
-    for (AliyunDownloadMediaInfo *mediaInfo in mediaInfos) {
-        [ar addObject:[MediaInfo mediaInfoByAliyunDownloadMediaInfo:mediaInfo].tj_JSONObject];
+    for (AliyunDataSource *dataSource in mediaInfos) {
+        MediaInfo *mediaInfo = [MediaInfo toModel:dataSource.tj_JSONObject];
+        [ar addObject:mediaInfo.tj_JSONObject];
     }
-    [self callbackByDic:@{@"status":@(YES),@"event":@"unFinished",@"mediaInfos":ar} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
+    
+    [self callbackByDic:@{@"status":@(YES),@"event":@"unfinished",@"mediaInfos":ar} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
 }
 
 #pragma mark - private
