@@ -35,6 +35,7 @@
 @end
 
 @implementation MediaInfo
+
 - (AliyunDownloadMediaInfo *)toAliyunDownloadMediaInfo {
     AliyunDownloadMediaInfo *mediaInfo = [[AliyunDownloadMediaInfo alloc] init];
     mediaInfo.vid = self.vid;
@@ -411,13 +412,22 @@ typedef NS_ENUM(NSUInteger, EventType) {
 }
 /**  功能：获取正在下载视频资源列表。 */
 - (void)getDownloadList:(NSDictionary *)paramDict {
-    NSArray *mediaInfos = [[AliyunVodDownLoadManager shareManager] currentDownloadingdMedias];
+    [self addCbIDByParamDict:paramDict SEL:@selector(getDownloadList:)];
+    NSArray *currentDownloadingdMedias = [[AliyunVodDownLoadManager shareManager] currentDownloadingdMedias];
+    NSArray *downloadingdMedias = [[AliyunVodDownLoadManager shareManager] downloadingdMedias];
+
+    NSArray *mediaInfos = [[AliyunVodDownLoadManager shareManager] allMedias];
     NSMutableArray *ar = @[].mutableCopy;
     for (AliyunDownloadMediaInfo *mediaInfo in mediaInfos) {
-        [ar addObject:[MediaInfo mediaInfoByAliyunDownloadMediaInfo:mediaInfo].tj_JSONObject];
+        NSMutableDictionary *info = [MediaInfo mediaInfoByAliyunDownloadMediaInfo:mediaInfo].tj_JSONObject;
+        if ([currentDownloadingdMedias containsObject:mediaInfo]) {
+            [info setObject:@"Start" forKey:@"status"];
+        } else if ([downloadingdMedias containsObject:mediaInfo]) {
+            [info setObject:@"Wait" forKey:@"status"];
+        }
+        [ar addObject:info];
     }
-    [self callbackByDic:@{@"getDownloadList":paramDict,@"mediaInfos":ar} msg:nil SEL:@selector(setLogger:) doDelete:NO];
-    
+    [self callbackByDic:@{@"getDownloadList":paramDict,@"mediaInfos":ar} msg:nil SEL:@selector(getDownloadList:) doDelete:YES];
 }
 #pragma mark ------------ AliyunVodDownLoadDelegate
 /*
@@ -432,34 +442,30 @@ typedef NS_ENUM(NSUInteger, EventType) {
     }
     [self callbackByDic:@{@"status":@(YES),@"event":@"prepared",@"mediaInfos":ar} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
 }
-
 /*
  功能：下载开始回调。
  回调数据：AliyunDownloadMediaInfo
- */
+*/
 -(void) onStart:(AliyunDownloadMediaInfo*)mediaInfo
 {
     [self callbackByDic:@{@"status":@(YES),@"event":@"start",@"mediaInfos":@[[MediaInfo mediaInfoByAliyunDownloadMediaInfo:mediaInfo].tj_JSONObject]} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
 }
-
 /*
   功能：调用stop结束下载时回调。
   回调数据：AliyunDownloadMediaInfo
-  */
+ */
 -(void) onStop:(AliyunDownloadMediaInfo*)mediaInfo
 {
     [self callbackByDic:@{@"status":@(YES),@"event":@"stop",@"mediaInfos":@[[MediaInfo mediaInfoByAliyunDownloadMediaInfo:mediaInfo].tj_JSONObject]} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
 }
-
 /*
   功能：下载完成回调。
   回调数据：AliyunDownloadMediaInfo
-  */
+*/
 -(void) onCompletion:(AliyunDownloadMediaInfo*)mediaInfo
 {
     [self callbackByDic:@{@"status":@(YES),@"event":@"completion",@"mediaInfos":@[[MediaInfo mediaInfoByAliyunDownloadMediaInfo:mediaInfo].tj_JSONObject]} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
 }
-
 /*
   功能：下载进度回调。可通过mediaInfo.downloadProgress获取进度。
   回调数据：AliyunDownloadMediaInfo
@@ -468,11 +474,10 @@ typedef NS_ENUM(NSUInteger, EventType) {
 {
     [self callbackByDic:@{@"status":@(YES),@"event":@"progress",@"mediaInfos":@[[MediaInfo mediaInfoByAliyunDownloadMediaInfo:mediaInfo].tj_JSONObject]} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
 }
-
 /*
   功能：错误回调。错误码与错误信息详见文档。
   回调数据：AliyunDownloadMediaInfo， code：错误码 msg：错误信息
-  */
+ */
 -(void)onError:(AliyunDownloadMediaInfo*)mediaInfo code:(int)code msg:(NSString *)msg
 {
     [self callbackByDic:@{@"status":@(YES),@"event":@"error",@"mediaInfos":@[[MediaInfo mediaInfoByAliyunDownloadMediaInfo:mediaInfo].tj_JSONObject],@"code":@(code)} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];

@@ -2,5 +2,5 @@
  [{
     "name":"abcPlayer",
     "class":"zlPlayer",
-    "methods":["init","play","getCurrentPosition","stop","pause","resume","seekTo","isFullScreen","addEventListener","setLogger","setPlaySpeed","initDownloader","setRefreshStsCallback","setSts","prepareDownload","startDownload","stopDownload","removeDownload"]
+    "methods":["init","play","getCurrentPosition","stop","pause","resume","seekTo","isFullScreen","addEventListener","setLogger","setPlaySpeed","initDownloader","setRefreshStsCallback","setSts","prepareDownload","startDownload","stopDownload","removeDownload","getDownloadList"]
  }]

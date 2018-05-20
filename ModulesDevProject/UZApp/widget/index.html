@@ -181,7 +181,7 @@ a.button7{
             <a class="button4" tapmode="active" onclick="removeDownload()">删除下载</a>
             <a class="button4" tapmode="active" onclick="playDownload()">播放下载</a>
             <a class="button4" tapmode="active" onclick="deleteDownload()">删除下载文件</a>
-            <a class="button" tapmode="active" onclick="initDownload(2)">准备下载2</a>
+            <a class="button" tapmode="active" onclick="getDownloadList(2)">准备下载2</a>
             <a class="button1" tapmode="active" onclick="startDownload(2)">开始下载2</a>
             <a class="button2" tapmode="active" onclick="stopDownload(2)">停止下载2</a>
    			<!--<a class="button" tapmode="active" onclick="init()">初始化播放器</a>
@@ -213,6 +213,12 @@ a.button7{
 			alivod.prepareDownload(alivid2);
 <!--        }-->
 	}
+function getDownloadList(val) {
+    zlPlayer.getDownloadList(function(ret) {
+                             console.log(JSON.stringify(ret));
+                             });
+}
+
 	function startDownload(val) {
 		var vid = alivid;
 <!--        if (val == 1) {-->
@@ -232,7 +238,7 @@ a.button7{
 		}
 		console.log('begin download：'+JSON.stringify(mediaInfo));
 		alivod.startDownload(mediaInfo);
-	}
+}
 	function stopDownload(val) {
 		var vid = alivid;
 		if (val == 1) {

@@ -9,7 +9,7 @@ var alivod = {
 		var downloadDir = api.fsDir;
 		alivod.downloader.initDownloader({
 			 downloadDir:downloadDir,
-			 maxNums:1,
+			 maxNums:2,
 			 secretImagePath:secretImagePath
 		},function(ret){
 			console.log('Raw:'+JSON.stringify(ret));
