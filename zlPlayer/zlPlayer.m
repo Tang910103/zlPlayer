@@ -338,6 +338,8 @@ typedef NS_ENUM(NSUInteger, EventType) {
     [[AliyunVodDownLoadManager shareManager] setMaxDownloadOperationCount:maxNums];
     [[AliyunVodDownLoadManager shareManager] setEncrptyFile:secretImagePath];
     
+    [[AliyunVodDownLoadManager shareManager] clearAllMedias];
+    
     [self callbackByDic:@{@"initDownloader":paramDict} msg:nil SEL:@selector(setLogger:) doDelete:NO];
 }
 /** 设置sts刷新回调函数 */
@@ -365,13 +367,27 @@ typedef NS_ENUM(NSUInteger, EventType) {
 - (void)startDownload:(NSDictionary *)paramDict {
     [self callbackByDic:@{@"startDownload":paramDict} msg:nil SEL:@selector(setLogger:) doDelete:NO];
     NSDictionary *mediaInfo = [paramDict dictValueForKey:@"mediaInfo" defaultValue:paramDict];
-    if (mediaInfo) {
-        MediaInfo *info = [MediaInfo toModel:mediaInfo];
+    AliyunDownloadMediaInfo *willDownloadMedias = [[MediaInfo toModel:mediaInfo] toAliyunDownloadMediaInfo];
+    
+    NSMutableArray<AliyunDownloadMediaInfo*> *downloadingdMedias = [NSMutableArray arrayWithArray:[[AliyunVodDownLoadManager shareManager] downloadingdMedias]];
+    [downloadingdMedias addObject:willDownloadMedias];
+    
+    for (AliyunDownloadMediaInfo *mediaInfo_1 in [[AliyunVodDownLoadManager shareManager] allMedias]) {
+        if ([willDownloadMedias.vid isEqualToString:mediaInfo_1.vid]) {
+            [[AliyunVodDownLoadManager shareManager] clearMedia:mediaInfo_1];
+            continue;
+        }
+    }
+    NSMutableArray *ar = @[].mutableCopy;
+    for (AliyunDownloadMediaInfo *aliMediaInfo in downloadingdMedias) {
+        MediaInfo *info = [MediaInfo mediaInfoByAliyunDownloadMediaInfo:aliMediaInfo];
         self.aliyunDataSource.vid = info.vid;
         self.aliyunDataSource.quality = info.quality;
         self.aliyunDataSource.format = info.format;
-        [[AliyunVodDownLoadManager shareManager] startDownloadMedia:self.aliyunDataSource];
+        AliyunDataSource *sor = [AliyunDataSource toModel:self.aliyunDataSource.tj_JSONObject];
+        [ar addObject:sor];
     }
+    [[AliyunVodDownLoadManager shareManager] startDownloadMedias:ar];
 }
 /** 停止下载 */
 - (void)stopDownload:(NSDictionary *)paramDict {
@@ -390,8 +406,18 @@ typedef NS_ENUM(NSUInteger, EventType) {
     if (mediaInfoDic) {
         MediaInfo *info = [MediaInfo toModel:mediaInfoDic];
         AliyunDownloadMediaInfo *mediaInfo = [info toAliyunDownloadMediaInfo];
-        [[AliyunVodDownLoadManager shareManager] stopDownloadMedia:mediaInfo];
+        [[AliyunVodDownLoadManager shareManager] clearMedia:mediaInfo];
     }
+}
+/**  功能：获取正在下载视频资源列表。 */
+- (void)getDownloadList:(NSDictionary *)paramDict {
+    NSArray *mediaInfos = [[AliyunVodDownLoadManager shareManager] currentDownloadingdMedias];
+    NSMutableArray *ar = @[].mutableCopy;
+    for (AliyunDownloadMediaInfo *mediaInfo in mediaInfos) {
+        [ar addObject:[MediaInfo mediaInfoByAliyunDownloadMediaInfo:mediaInfo].tj_JSONObject];
+    }
+    [self callbackByDic:@{@"getDownloadList":paramDict,@"mediaInfos":ar} msg:nil SEL:@selector(setLogger:) doDelete:NO];
+    
 }
 #pragma mark ------------ AliyunVodDownLoadDelegate
 /*
@@ -402,12 +428,6 @@ typedef NS_ENUM(NSUInteger, EventType) {
 {
     NSMutableArray *ar = @[].mutableCopy;
     for (AliyunDownloadMediaInfo *mediaInfo in mediaInfos) {
-        for (AliyunDownloadMediaInfo *mediaInfo_1 in [[AliyunVodDownLoadManager shareManager] allMedias]) {
-            if ([mediaInfo.vid isEqualToString:mediaInfo_1.vid]) {
-                [[AliyunVodDownLoadManager shareManager] clearMedia:mediaInfo];
-                continue;
-            }
-        }
         [ar addObject:[MediaInfo mediaInfoByAliyunDownloadMediaInfo:mediaInfo].tj_JSONObject];
     }
     [self callbackByDic:@{@"status":@(YES),@"event":@"prepared",@"mediaInfos":ar} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
@@ -484,6 +504,9 @@ typedef NS_ENUM(NSUInteger, EventType) {
     if (!msg) msg = @"";
 
     NSMutableDictionary *mutDic = dic.mutableCopy;
+    if (![mutDic.allKeys containsObject:@"status"]) {
+        [mutDic setObject:@(YES) forKey:@"status"];
+    }
     if (!self.playerView) {
         [mutDic setObject:@(NO) forKey:@"status"];
         msg = @"还未初始化播放器";

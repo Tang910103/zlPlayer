@@ -1,336 +1,389 @@
 <!doctype html>
 <html>
-    <head>
-        <meta charset="utf-8">
-            <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
-            <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
-                <title>Hello APP</title>
-                <link rel="stylesheet" type="text/css" href="./css/api.css" />
-                <style type="text/css">
-                    html,body{
-                        height: 100%;
-                    }
-                #wrap{
-                    height: 100%;
-                    display: -webkit-box;
-                    display: -webkit-flex;
-                    display: flex;
-                    -webkit-box-orient: vertical;
-                    -webkit-flex-flow: column;
-                    flex-flow: column;
-                }
-                #header{
-                    text-align: center; background-color: #81a9c3; color: #fff;
-                    width: 100%;
-                }
-                #header h1{
-                    font-size: 20px; height: 44px; line-height: 44px; margin: 0em; color: #fff;
-                }
-                #main{
-                    -webkit-box-flex: 1;
-                    -webkit-flex: 1;
-                    flex: 1;
-                }
-                #footer{
-                    height: 30px; line-height: 30px;
-                    background-color: #81a9c3;
-                    width: 100%;
-                    text-align: center;
-                }
-                #footer h5{
-                    color: white;
-                }
-                .con{font-size: 28px; text-align: center;}
-                
-                body{
-                    background-color: #fff;
-                    margin: 0;
-                }
-                #wrap{
-                    height: 100%;
-                    position: relative;
-                }
-                #header{
-                    background-color: #5082c2;
-                    height: 44px;
-                    position: relative;
-                }
-                #header h1{
-                    font-size: 20px;
-                    height: 44px;
-                    line-height: 44px;
-                    margin: 0em;
-                    color: #fff;
-                    margin-left: 100px;
-                    margin-right: 100px;
-                    text-align: center;
-                }
-                #main{
-                    display: block;
-                }
-                a.button{
-                    display: -webkit-box;
-                    -webkit-box-pack: center;
-                    -webkit-box-align: center;
-                    height: 36px;
-                    margin: 8px;
-                    background-color: rgba(240,240,240,1.0);
-                    border-color: rgba(220,220,220,1.0);
-                    border-width: 2px;
-                    border-style: solid;
-                }
-                a.button1{
-                    display: -webkit-box;
-                    -webkit-box-pack: center;
-                    -webkit-box-align: center;
-                    height: 36px;
-                    margin: 8px;
-                    margin-top: 10px;
-                    background-color: rgba(240,240,240,1.0);
-                    border-color: rgba(220,220,220,1.0);
-                    border-width: 2px;
-                    border-style: solid;
-                }
-                a.button2{
-                    display: -webkit-box;
-                    -webkit-box-pack: center;
-                    -webkit-box-align: center;
-                    height: 36px;
-                    margin: 8px;
-                    margin-top: 10px;
-                    background-color: rgba(240,240,240,1.0);
-                    border-color: rgba(220,220,220,1.0);
-                    border-width: 2px;
-                    border-style: solid;
-                }
-                a.button3{
-                    display: -webkit-box;
-                    -webkit-box-pack: center;
-                    -webkit-box-align: center;
-                    height: 36px;
-                    margin: 8px;
-                    margin-top: 10px;
-                    background-color: rgba(240,240,240,1.0);
-                    border-color: rgba(220,220,220,1.0);
-                    border-width: 2px;
-                    border-style: solid;
-                }
-                a.button4{
-                    display: -webkit-box;
-                    -webkit-box-pack: center;
-                    -webkit-box-align: center;
-                    height: 36px;
-                    margin: 8px;
-                    margin-top: 10px;
-                    background-color: rgba(240,240,240,1.0);
-                    border-color: rgba(220,220,220,1.0);
-                    border-width: 2px;
-                    border-style: solid;
-                }
-                a.button5{
-                    display: -webkit-box;
-                    -webkit-box-pack: center;
-                    -webkit-box-align: center;
-                    height: 36px;
-                    margin: 8px;
-                    margin-top: 10px;
-                    background-color: rgba(240,240,240,1.0);
-                    border-color: rgba(220,220,220,1.0);
-                    border-width: 2px;
-                    border-style: solid;
-                }
-                a.button6{
-                    display: -webkit-box;
-                    -webkit-box-pack: center;
-                    -webkit-box-align: center;
-                    height: 36px;
-                    margin: 8px;
-                    margin-top: 10px;
-                    background-color: rgba(240,240,240,1.0);
-                    border-color: rgba(220,220,220,1.0);
-                    border-width: 2px;
-                    border-style: solid;
-                }
-                a.button7{
-                    display: -webkit-box;
-                    -webkit-box-pack: center;
-                    -webkit-box-align: center;
-                    height: 36px;
-                    margin: 8px;
-                    margin-top: 10px;
-                    background-color: rgba(240,240,240,1.0);
-                    border-color: rgba(220,220,220,1.0);
-                    border-width: 2px;
-                    border-style: solid;
-                }
-                a.active{
-                    background-color: rgba(240,240,240,0.6);
-                }
-                </style>
-    </head>
-    <body>
-        <div id="wrap">
-            <div id="header">
-                <h1>APICloud</h1>
-            </div>
-            <div id="main">
-                <div class='vadio-play-content' style="background-color: #000000;"></div>
-                <a class="button" tapmode="active" onclick="initDownload()">准备下载</a>
-                <a class="button1" tapmode="active" onclick="startDownload()">开始下载播放</a>
-                <a class="button2" tapmode="active" onclick="stopDownload()">停止下载</a>
-                <a class="button4" tapmode="active" onclick="removeDownload()">删除下载</a>
-                <a class="button4" tapmode="active" onclick="playDownload()">播放下载</a>
-                
-                <!--<a class="button" tapmode="active" onclick="init()">初始化播放器</a>
-                 <a class="button1" tapmode="active" onclick="play()">开始播放</a>
-                 <a class="button2" tapmode="active" onclick="getCurrentPosition()">获取播放器当前播放进度</a>
-                 <a class="button4" tapmode="active" onclick="isFullScreen()">是否为全屏</a>
-                 <a class="button5" tapmode="active" onclick="seekTo()">跳转到10秒位置</a>
-                 <a class="button6" tapmode="active" onclick="pause()">暂停播放</a>
-                 <a class="button7" tapmode="active" onclick="resume()">继续播放</a>
-                 <a class="button3" tapmode="active" onclick="stop()">停止播放</a>-->
-            </div>
-            
-            <div id="footer">
-                <h5>Copyright &copy;<span id="year"></span> </h5>
-            </div>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>Hello APP</title>
+    <link rel="stylesheet" type="text/css" href="./css/api.css" />
+    <style type="text/css">
+    html,body{
+        height: 100%;
+    }
+    #wrap{
+        height: 100%;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-flex-flow: column;
+               flex-flow: column;
+    }
+    #header{
+        text-align: center; background-color: #81a9c3; color: #fff;
+        width: 100%;
+    }
+    #header h1{
+        font-size: 20px; height: 44px; line-height: 44px; margin: 0em; color: #fff;
+    }
+    #main{
+        -webkit-box-flex: 1; 
+        -webkit-flex: 1;
+        flex: 1;
+    }
+    #footer{
+        height: 30px; line-height: 30px;
+        background-color: #81a9c3; 
+        width: 100%;
+        text-align: center;
+    }
+    #footer h5{
+        color: white;
+    }
+    .con{font-size: 28px; text-align: center;}
+    
+    	body{
+		background-color: #fff;
+	    margin: 0;
+	}
+	#wrap{
+	    height: 100%;
+	    position: relative;
+	}
+	#header{
+		background-color: #5082c2;
+		height: 44px;
+	    position: relative;
+	}
+	#header h1{
+	    font-size: 20px; 
+	    height: 44px; 
+	    line-height: 44px; 
+	    margin: 0em; 
+	    color: #fff;
+		margin-left: 100px;
+		margin-right: 100px;
+		text-align: center;
+	}
+    #main{
+        display: block;
+    }
+    a.button{
+        display: -webkit-box;
+        -webkit-box-pack: center;
+        -webkit-box-align: center;
+        height: 36px;
+        margin: 8px;
+        background-color: rgba(240,240,240,1.0);
+        border-color: rgba(220,220,220,1.0);
+        border-width: 2px;
+        border-style: solid;
+	}
+a.button1{
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+    height: 36px;
+    margin: 8px;
+    margin-top: 10px;
+    background-color: rgba(240,240,240,1.0);
+    border-color: rgba(220,220,220,1.0);
+    border-width: 2px;
+    border-style: solid;
+}
+a.button2{
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+    height: 36px;
+    margin: 8px;
+    margin-top: 10px;
+    background-color: rgba(240,240,240,1.0);
+    border-color: rgba(220,220,220,1.0);
+    border-width: 2px;
+    border-style: solid;
+}
+a.button3{
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+    height: 36px;
+    margin: 8px;
+    margin-top: 10px;
+    background-color: rgba(240,240,240,1.0);
+    border-color: rgba(220,220,220,1.0);
+    border-width: 2px;
+    border-style: solid;
+}
+a.button4{
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+    height: 36px;
+    margin: 8px;
+    margin-top: 10px;
+    background-color: rgba(240,240,240,1.0);
+    border-color: rgba(220,220,220,1.0);
+    border-width: 2px;
+    border-style: solid;
+}
+a.button5{
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+    height: 36px;
+    margin: 8px;
+    margin-top: 10px;
+    background-color: rgba(240,240,240,1.0);
+    border-color: rgba(220,220,220,1.0);
+    border-width: 2px;
+    border-style: solid;
+}
+a.button6{
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+    height: 36px;
+    margin: 8px;
+    margin-top: 10px;
+    background-color: rgba(240,240,240,1.0);
+    border-color: rgba(220,220,220,1.0);
+    border-width: 2px;
+    border-style: solid;
+}
+a.button7{
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+    height: 36px;
+    margin: 8px;
+    margin-top: 10px;
+    background-color: rgba(240,240,240,1.0);
+    border-color: rgba(220,220,220,1.0);
+    border-width: 2px;
+    border-style: solid;
+}
+    a.active{
+        background-color: rgba(240,240,240,0.6);
+	}
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div id="header">
+            <h1>APICloud</h1>
         </div>
-    </body>
-    <script type="text/javascript" src="./script/zepto.min.js"></script>
-    <script type="text/javascript" src="./script/sm.min.js"></script>
-    <script type="text/javascript" src="./script/api.js"></script>
-    <script type="text/javascript" src="./script/alidownload.js"></script>
-    <script type="text/javascript">
-        var alivid = '3723f06af669408db80f2167091d7fa1';
-        function initDownload() {
-            alivod.prepareDownload(alivid);
-        }
-    function startDownload() {
-        var mediaInfo = $api.getStorage(alivid);
-        if (!mediaInfo) {
-            alert('数据没有找到');
-        }
-        alivod.startDownload(mediaInfo);
-    }
-    function stopDownload() {
-        var mediaInfo = $api.getStorage(alivid);
-        if (!mediaInfo) {
-            alert('数据没有找到');
-        }
-        alivod.stopDownload(mediaInfo);
-    }
-    function removeDownload() {
-        var mediaInfo = $api.getStorage(alivid);
-        if (!mediaInfo) {
-            alert('数据没有找到');
-        }
-        alivod.removeDownload(mediaInfo);
-    }
-    function playDownload() {
-        var mediaInfo = $api.getStorage(alivid);
-        if (!mediaInfo) {
-            alert('数据没有找到');
-        }
-        playLocalFile(mediaInfo.savePath);
-    }
-    var zlPlayer = false;
+        <div id="main">
+        	<div class='vadio-play-content' style="background-color: #000000;"></div>
+        	<a class="button" tapmode="active" onclick="initDownload(1)">准备下载1</a>
+            <a class="button1" tapmode="active" onclick="startDownload(1)">开始下载1</a>
+            <a class="button2" tapmode="active" onclick="stopDownload(1)">停止下载</a>
+            <a class="button4" tapmode="active" onclick="removeDownload()">删除下载</a>
+            <a class="button4" tapmode="active" onclick="playDownload()">播放下载</a>
+            <a class="button4" tapmode="active" onclick="deleteDownload()">删除下载文件</a>
+            <a class="button" tapmode="active" onclick="initDownload(2)">准备下载2</a>
+            <a class="button1" tapmode="active" onclick="startDownload(2)">开始下载2</a>
+            <a class="button2" tapmode="active" onclick="stopDownload(2)">停止下载2</a>
+   			<!--<a class="button" tapmode="active" onclick="init()">初始化播放器</a>
+            <a class="button1" tapmode="active" onclick="play()">开始播放</a>
+            <a class="button2" tapmode="active" onclick="getCurrentPosition()">获取播放器当前播放进度</a>
+            <a class="button4" tapmode="active" onclick="isFullScreen()">是否为全屏</a>
+            <a class="button5" tapmode="active" onclick="seekTo()">跳转到10秒位置</a>
+            <a class="button6" tapmode="active" onclick="pause()">暂停播放</a>
+            <a class="button7" tapmode="active" onclick="resume()">继续播放</a>
+            <a class="button3" tapmode="active" onclick="stop()">停止播放</a>-->
+		</div>
+        
+        <div id="footer">
+            <h5>Copyright &copy;<span id="year"></span> </h5>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="./script/zepto.min.js"></script>
+<script type="text/javascript" src="./script/sm.min.js"></script>
+<script type="text/javascript" src="./script/api.js"></script>
+<script type="text/javascript" src="./script/alidownload.js"></script>
+<script type="text/javascript">
+	var alivid = '3723f06af669408db80f2167091d7fa1';
+	var alivid2 = 'dcddb2bbb6e9475f8ec50ca2094e9364';
+	function initDownload(val) {
+<!--        if (val == 1) {-->
+			alivod.prepareDownload(alivid);
+<!--        } else {-->
+			alivod.prepareDownload(alivid2);
+<!--        }-->
+	}
+	function startDownload(val) {
+		var vid = alivid;
+<!--        if (val == 1) {-->
+			vid = alivid;
+            var mediaInfo = $api.getStorage(vid);
+            if (!mediaInfo) {
+                alert('数据没有找到');
+            }
+            console.log('begin download：'+JSON.stringify(mediaInfo));
+            alivod.startDownload(mediaInfo);
+<!--        } else {-->
+			vid = alivid2;
+<!--        }-->
+		var mediaInfo = $api.getStorage(vid);
+		if (!mediaInfo) {
+			alert('数据没有找到');
+		}
+		console.log('begin download：'+JSON.stringify(mediaInfo));
+		alivod.startDownload(mediaInfo);
+	}
+	function stopDownload(val) {
+		var vid = alivid;
+		if (val == 1) {
+			vid = alivid;
+		} else {
+			vid = alivid2;
+		}
+		var mediaInfo = $api.getStorage(vid);
+		if (!mediaInfo) {
+			alert('数据没有找到');
+		}
+		alivod.stopDownload(mediaInfo);
+	}
+	function removeDownload() {
+		var mediaInfo = $api.getStorage(alivid);
+		if (!mediaInfo) {
+			alert('数据没有找到');
+		}
+		alivod.removeDownload(mediaInfo);
+	}
+	function playDownload() {
+		var mediaInfo = $api.getStorage(alivid);
+		if (!mediaInfo) {
+			alert('数据没有找到');
+			return;
+		}
+		if (!mediaInfo.save_path || mediaInfo.save_path == '') {
+			alert('下载文件信息不存在');
+			return;
+		}
+		playLocalFile(mediaInfo.save_path);
+	}
+	function getDownloadFile() {
+		return 'fs://'+alivid+'_m3u8_6.mp4';
+	}
+	function deleteDownload() {
+		var mediaInfo = $api.getStorage(alivid);
+		if (!mediaInfo) {
+			alert('数据没有找到');
+			return;
+		}
+		if (!mediaInfo.save_path || mediaInfo.save_path == '') {
+			alert('下载文件信息不存在');
+			return;
+		}
+		var fs = api.require('fs');
+		fs.remove({
+	        path: mediaInfo.save_path
+        },function(ret,err){
+        	//coding...
+        	console.log(JSON.stringify(ret));
+        });
+	}
+	var zlPlayer = false;
     function init() {
-        var width = api.winWidth;
-        var height = parseInt(width / 1.8);
+    	var width = api.winWidth;
+		var height = parseInt(width / 1.8);
         zlPlayer.init({
-                      fixed:false,
-                      rect:{x: 0,y:44,w:width,h:height},
-                      });
-                      zlPlayer.setLogger(function(ret) {
-                                         console.log(JSON.stringify(ret));
-                                         });
+          fixed:false,
+          rect:{x: 0,y:44,w:width,h:height},
+        });
+        zlPlayer.setLogger(function(ret) {
+        	console.log(JSON.stringify(ret));
+        });
     }
-    function playLocalFile(file) {
+	function playLocalFile(file) {
         zlPlayer.play({
-                      title:"title",
-                      url: file,
-                      //sts:refreshSts(),
-                      direction:"landscape_right",
-                      });
+          title:"title",
+          url: file,
+          //sts:refreshSts(),
+          direction:"landscape_right",
+          });
     }
     
     function play() {
         zlPlayer.play({
-                      title:"title",
-                      url: "fs://1347d8e2fad74413983227f16133b501_m3u8_6.mp4",
-                      //sts:refreshSts(),
-                      direction:"landscape_right",
-                      });
+          title:"title",
+          url: "fs://"+alivid+"_m3u8_6.mp4",
+          //sts:refreshSts(),
+          direction:"landscape_right",
+          });
     }
-    function getCurrentPosition() {
-        zlPlayer.getCurrentPosition({
-                                    },function(ret, err){
-                                    api.toast({
-                                              msg: ret.currentPosition
-                                              });
-                                    });
-    }
-    
-    function isFullScreen() {
-        zlPlayer.isFullScreen({
-                              
-                              },function(ret, err){
-                              api.toast({msg: ret.status ? "是全屏" : "不是全屏"});
-                              });
-    }
-    function seekTo() {
-        var pro = 10;
-        zlPlayer.seekTo({
-                        process:(pro * 1000)
-                        },function(ret, err){
-                        api.toast({msg: "跳转到" + pro + "秒"});
-                        });
-    }
-    function resume() {
-        zlPlayer.resume({
-                        
-                        },function(ret, err){
-                        api.toast({msg: "继续播放"});
-                        });
-    }
-    function pause() {
-        zlPlayer.pause({
-                       
-                       },function(ret, err){
-                       api.toast({msg: "暂停播放"});
-                       });
-    }
-    
-    function stop() {
-        zlPlayer.stop({
-                      
-                      },function(ret, err){
-                      api.toast({msg: "停止播放"});
-                      });
-    }
+	function getCurrentPosition() {
+	    zlPlayer.getCurrentPosition({
+	    },function(ret, err){
+	    	api.toast({
+          		msg: ret.currentPosition
+          	});
+	    });
+	}
+
+	function isFullScreen() {
+	    zlPlayer.isFullScreen({
+	    
+	    },function(ret, err){
+			api.toast({msg: ret.status ? "是全屏" : "不是全屏"});
+	    });
+	}
+	function seekTo() {
+	    var pro = 10;
+	    zlPlayer.seekTo({
+	    	process:(pro * 1000)
+	    },function(ret, err){
+	    	api.toast({msg: "跳转到" + pro + "秒"});
+	    });
+	}
+	function resume() {
+		zlPlayer.resume({
+	   
+	   },function(ret, err){
+	   	api.toast({msg: "继续播放"});
+	   });
+	}
+	function pause() {
+	    zlPlayer.pause({
+	      
+		},function(ret, err){
+			api.toast({msg: "暂停播放"});
+		});
+	}
+
+	function stop() {
+	    zlPlayer.stop({
+	    
+	    },function(ret, err){
+	    	api.toast({msg: "停止播放"});
+	    });
+	}
     apiready = function(){
-        var w = api.winWidth;
-        
-        $('.vadio-play-content').css({
-                                     width: w + 'px',
-                                     height: (w / 1.8) + 'px'
-                                     });
-                                     if ($api.isAndroid) {
-                                         zlPlayer = api.require('xyzPlayer');
-                                         if (!zlPlayer) {
-                                             console.log('user zlPlayer');
-                                             zlPlayer = api.require('zlPlayer');
-                                         } else {
-                                             console.log('user xyzPlayer');
-                                         }
-                                     } else {
-                                         zlPlayer = api.require('abcPlayer');
-                                         console.log('user abcPlayer');
-                                     }
-                                     init();
-                                     var year = $api.byId('year');
-                                     year.innerHTML = new Date().getFullYear();
-                                     alivod.init(zlPlayer);
+    	var w = api.winWidth;
+				
+		$('.vadio-play-content').css({
+			width: w + 'px',
+			height: (w / 1.8) + 'px'
+		});
+		if ($api.isAndroid) {
+			//zlPlayer = api.require('xyzPlayer');
+			if (!zlPlayer) {
+				console.log('user zlPlayer');
+				zlPlayer = api.require('zlPlayer');
+			} else {
+				console.log('user xyzPlayer');
+			}
+		} else {
+			zlPlayer = api.require('abcPlayer');
+			console.log('user abcPlayer');
+		}
+		init();
+        var year = $api.byId('year');
+        year.innerHTML = new Date().getFullYear();
+        alivod.init(zlPlayer);
     };
     
     
@@ -343,5 +396,5 @@
     
     
     
-        </script>
+</script>
 </html>
