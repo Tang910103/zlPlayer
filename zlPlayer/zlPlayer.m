@@ -268,6 +268,9 @@ typedef NS_ENUM(NSUInteger, EventType) {
     }
      [self.playerView getAliyunMediaInfo];
     [self callback:YES msg:@""  SEL:@selector(play:)];
+    
+    NSDictionary *dic = @{@"status":@(YES),@"eventType":@"play"};
+    [self callbackByDic:dic msg:@"" SEL:@selector(addEventListener:) doDelete:NO];
 }
 /** 获取播放器当前播放进度 */
 - (void)getCurrentPosition:(NSDictionary *)paramDict {
@@ -557,24 +560,24 @@ typedef NS_ENUM(NSUInteger, EventType) {
 
 }
 - (void)aliyunVodPlayerView:(AliyunVodPlayerView*)playerView onPause:(NSTimeInterval)currentPlayTime{
-    NSDictionary *dic = @{@"status":@(YES),@"eventType":@(EventType_Pause)};
+    NSDictionary *dic = @{@"status":@(YES),@"eventType":@"pause"};
     [self callbackByDic:dic msg:@"onPause" SEL:@selector(addEventListener:) doDelete:NO];
 }
 - (void)aliyunVodPlayerView:(AliyunVodPlayerView*)playerView onResume:(NSTimeInterval)currentPlayTime{
-    NSDictionary *dic = @{@"status":@(YES),@"eventType":@(EventType_Resume)};
+    NSDictionary *dic = @{@"status":@(YES),@"eventType":@"resume"};
     [self callbackByDic:dic msg:@"onResume" SEL:@selector(addEventListener:) doDelete:NO];
 }
 - (void)aliyunVodPlayerView:(AliyunVodPlayerView*)playerView onStop:(NSTimeInterval)currentPlayTime{
-    NSDictionary *dic = @{@"status":@(YES),@"eventType":@(EventType_Stop)};
+    NSDictionary *dic = @{@"status":@(YES),@"eventType":@"stop"};
     [self callbackByDic:dic msg:@"onStop" SEL:@selector(addEventListener:) doDelete:NO];
 }
 - (void)aliyunVodPlayerView:(AliyunVodPlayerView*)playerView onSeekDone:(NSTimeInterval)seekDoneTime{
-    NSDictionary *dic = @{@"status":@(YES),@"eventType":@(EventType_Seek)};
+    NSDictionary *dic = @{@"status":@(YES),@"eventType":@"seekDone"};
     [self callbackByDic:dic msg:@"onSeekDone" SEL:@selector(addEventListener:) doDelete:NO];
     [self callbackByDic:@{@"seekDoneTime":@(seekDoneTime)} msg:@"" SEL:@selector(setLogger:) doDelete:NO];
 }
 -(void)onFinishWithAliyunVodPlayerView:(AliyunVodPlayerView *)playerView{
-    NSDictionary *dic = @{@"status":@(YES),@"eventType":@(EventType_Finish)};
+    NSDictionary *dic = @{@"status":@(YES),@"eventType":@"end"};
     [self callbackByDic:dic msg:@"onFinish" SEL:@selector(addEventListener:) doDelete:NO];
 }
 
@@ -590,7 +593,6 @@ typedef NS_ENUM(NSUInteger, EventType) {
 }
 
 - (void)aliyunVodPlayerView:(AliyunVodPlayerView *)playerView fullScreen:(BOOL)isFullScreen{
-    
 }
 
 - (void)aliyunVodPlayerView:(AliyunVodPlayerView *)playerView onVideoDefinitionChanged:(NSString *)videoDefinition {
@@ -701,6 +703,8 @@ typedef NS_ENUM(NSUInteger, EventType) {
 
     _isFullScreen = !_isFullScreen;
     _backBtn.hidden = !_isFullScreen;
+    NSDictionary *dic = @{@"status":@(YES),@"eventType":_isFullScreen ? @"fullscreen" : @"unfull"};
+    [self callbackByDic:dic msg:@"" SEL:@selector(addEventListener:) doDelete:NO];
     
     if (_isFullScreen) {
         [self updatePlayerViewFrame:YES];
