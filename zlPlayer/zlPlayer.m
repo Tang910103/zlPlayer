@@ -111,6 +111,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
     UIView *_controlLayer;
     UIButton *_fullScreenBtn;
     CGFloat _statusBarHeight;
+    UIView *_popLayer;
 }
 @property (nonatomic, strong) AliyunVodPlayerView *playerView;
 @property (nonatomic, strong) AliyunVodPlayer *aliyunVodPlayer;
@@ -663,8 +664,11 @@ typedef NS_ENUM(NSUInteger, EventType) {
     //    [self.playerView playViewPrepareWithURL:[NSURL URLWithString:@"http://shenji.zlketang.com/public/test.mp4"]];
     //播放器播放方式
     AliyunVodPlayer *aliPlayer = [self.playerView valueForKey:@"_aliPlayer"];
+    _popLayer = [self.playerView valueForKey:@"_popLayer"];
     _controlLayer = [self.playerView valueForKey:@"_controlLayer"];
     _fullScreenBtn = [_controlLayer valueForKey:@"_fullScreenBtn"];
+    [_popLayer addObserver:self forKeyPath:@"hidden" options:NSKeyValueObservingOptionNew context:nil];
+    [self.playerView setUseWanNetDescribe:@"当前为移动网络"];
 
     _backBtn = [_controlLayer valueForKey:@"_backBtn"];
     _backBtn.hidden = YES;
@@ -693,10 +697,19 @@ typedef NS_ENUM(NSUInteger, EventType) {
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"currentPlayerVideo"]) {
+//        处理切换播放视频，title不变问题
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             AliyunVodPlayerVideo *video = [self.playerView getAliyunMediaInfo];
             [self.playerView setTitle:video.title];
         });
+    } else if ([keyPath isEqualToString:@"hidden"] && object == _popLayer) {
+//        屏蔽移动网络提示视图
+        UILabel *label = [[_popLayer valueForKey:@"_errorView"] valueForKey:@"_errorLabel"];
+        if (![[change objectForKey:NSKeyValueChangeNewKey] boolValue] && [label.text isEqualToString:@"当前为移动网络"]) {
+            UIButton *button = [[_popLayer valueForKey:@"_errorView"] valueForKey:@"_errorButton"];
+            _popLayer.hidden = YES;
+            [button sendActionsForControlEvents:UIControlEventTouchUpInside];
+        }
     }
 }
 - (void)clickFullSreenButton {

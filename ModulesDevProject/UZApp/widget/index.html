@@ -175,16 +175,16 @@ a.button7{
         </div>
         <div id="main">
         	<div class='vadio-play-content' style="background-color: #000000;"></div>
-        	<a class="button" tapmode="active" onclick="initDownload(1)">准备下载1</a>
-            <a class="button1" tapmode="active" onclick="startDownload(1)">开始下载1</a>
-            <a class="button2" tapmode="active" onclick="stopDownload(1)">停止下载</a>
-            <a class="button4" tapmode="active" onclick="removeDownload()">删除下载</a>
-            <a class="button4" tapmode="active" onclick="playDownload()">播放下载</a>
-            <a class="button4" tapmode="active" onclick="deleteDownload()">删除下载文件</a>
-            <a class="button" tapmode="active" onclick="getDownloadList(2)">准备下载2</a>
-            <a class="button1" tapmode="active" onclick="startDownload(2)">开始下载2</a>
-            <a class="button2" tapmode="active" onclick="stopDownload(2)">停止下载2</a>
-   			<!--<a class="button" tapmode="active" onclick="init()">初始化播放器</a>
+<!--            <a class="button" tapmode="active" onclick="initDownload(1)">准备下载1</a>-->
+<!--            <a class="button1" tapmode="active" onclick="startDownload(1)">开始下载1</a>-->
+<!--            <a class="button2" tapmode="active" onclick="stopDownload(1)">停止下载</a>-->
+<!--            <a class="button4" tapmode="active" onclick="removeDownload()">删除下载</a>-->
+<!--            <a class="button4" tapmode="active" onclick="playDownload()">播放下载</a>-->
+<!--            <a class="button4" tapmode="active" onclick="deleteDownload()">删除下载文件</a>-->
+<!--            <a class="button" tapmode="active" onclick="getDownloadList(2)">准备下载2</a>-->
+<!--            <a class="button1" tapmode="active" onclick="startDownload(2)">开始下载2</a>-->
+<!--            <a class="button2" tapmode="active" onclick="stopDownload(2)">停止下载2</a>-->
+               <a class="button" tapmode="active" onclick="init()">初始化播放器</a>
             <a class="button1" tapmode="active" onclick="play()">开始播放</a>
             <a class="button2" tapmode="active" onclick="getCurrentPosition()">获取播放器当前播放进度</a>
             <a class="button4" tapmode="active" onclick="isFullScreen()">是否为全屏</a>
@@ -192,7 +192,7 @@ a.button7{
             <a class="button6" tapmode="active" onclick="pause()">暂停播放</a>
             <a class="button7" tapmode="active" onclick="resume()">继续播放</a>
             <a class="button3" tapmode="active" onclick="stop()">停止播放</a>-->
-		</div>
+	</div>
         
         <div id="footer">
             <h5>Copyright &copy;<span id="year"></span> </h5>
@@ -314,12 +314,23 @@ function getDownloadList(val) {
     }
     
     function play() {
-        zlPlayer.play({
-          title:"title",
-          url: "fs://"+alivid+"_m3u8_6.mp4",
-          //sts:refreshSts(),
-          direction:"landscape_right",
-          });
+        alivod.timer.checkRefreshSts(function(sts) {
+                                     var params = {
+                                     vid : alivid,
+                                     accessKeySecret: sts.accessKeySecret,
+                                     accessKeyId: sts.accessKeyId,
+                                     securityToken: sts.securityToken
+                                     };
+                                     console.log('====================prepareDownload================');
+<!--                                     alivod.downloader.prepareDownload(params);-->
+                                     zlPlayer.play({sts:params,});
+                                     });
+<!--        zlPlayer.play({-->
+<!--          title:"title",-->
+<!--          url: "fs://"+alivid+"_m3u8_6.mp4",-->
+<!--          //sts:refreshSts(),-->
+<!--          direction:"landscape_right",-->
+<!--          });-->
     }
 	function getCurrentPosition() {
 	    zlPlayer.getCurrentPosition({
