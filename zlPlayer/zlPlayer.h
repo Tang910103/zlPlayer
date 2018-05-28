@@ -9,7 +9,7 @@
 
 #import "UZModule.h"
 
-#define version @"0.0.25"
+#define version @"0.0.26"
 
 @interface zlPlayer : UZModule
 
