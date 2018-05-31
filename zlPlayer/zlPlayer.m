@@ -228,17 +228,17 @@ typedef NS_ENUM(NSUInteger, EventType) {
     
     if (!self.playerView) {
         [self initPlayerView];
-//        [self registerNotification];
+        //        [self registerNotification];
     }
     /**************************************/
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(becomeActive)
-//                                                 name:UIApplicationDidBecomeActiveNotification
-//                                               object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(resignActive)
-//                                                 name:UIApplicationWillResignActiveNotification
-//                                               object:nil];
+    //    [[NSNotificationCenter defaultCenter] addObserver:self
+    //                                             selector:@selector(becomeActive)
+    //                                                 name:UIApplicationDidBecomeActiveNotification
+    //                                               object:nil];
+    //    [[NSNotificationCenter defaultCenter] addObserver:self
+    //                                             selector:@selector(resignActive)
+    //                                                 name:UIApplicationWillResignActiveNotification
+    //                                               object:nil];
 }
 
 /** 开始播放url */
@@ -264,10 +264,10 @@ typedef NS_ENUM(NSUInteger, EventType) {
         NSString *accessKeyId = [sts stringValueForKey:@"accessKeyId" defaultValue:nil];
         NSString *securityToken = [sts stringValueForKey:@"securityToken" defaultValue:nil];
         [self.playerView playViewPrepareWithVid:vid accessKeyId:accessKeyId accessKeySecret:accessKeySecret securityToken:securityToken];
-//        [self.aliyunVodPlayer prepareWithVid:vid accessKeyId:accessKeyId accessKeySecret:accessKeySecret securityToken:securityToken];
+        //        [self.aliyunVodPlayer prepareWithVid:vid accessKeyId:accessKeyId accessKeySecret:accessKeySecret securityToken:securityToken];
         [self callbackByDic:@{@"vid":vid,@"accessKeySecret":accessKeySecret,@"accessKeyId":accessKeyId,@"securityToken":securityToken} msg:@"" SEL:@selector(setLogger:) doDelete:NO];
     }
-     [self.playerView getAliyunMediaInfo];
+    [self.playerView getAliyunMediaInfo];
     [self callback:YES msg:@""  SEL:@selector(play:)];
     
     NSDictionary *dic = @{@"status":@(YES),@"eventType":@"play"};
@@ -335,13 +335,13 @@ typedef NS_ENUM(NSUInteger, EventType) {
 /** 初始化下载器 */
 - (void)initDownloader:(NSDictionary *)paramDict {
     [self addCbIDByParamDict:paramDict SEL:@selector(initDownloader:)];
-//    加密文件路径（需要转化为绝对路径）
+    //    加密文件路径（需要转化为绝对路径）
     NSString *secretImagePath = [paramDict stringValueForKey:@"secretImagePath" defaultValue:nil];
     secretImagePath = [self getPathWithUZSchemeURL:secretImagePath];
-//    下载文件路径（需要转化为绝对路径）
+    //    下载文件路径（需要转化为绝对路径）
     NSString *downloadDir = [paramDict stringValueForKey:@"downloadDir" defaultValue:nil];
     downloadDir = [self getPathWithUZSchemeURL:downloadDir];
-//    描述：允许同时开启的个数（最多为4个）
+    //    描述：允许同时开启的个数（最多为4个）
     int maxNums = [paramDict intValueForKey:@"maxNums" defaultValue:4];
     
     [[AliyunVodDownLoadManager shareManager] setDownloadDelegate:self];
@@ -425,7 +425,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
     [self addCbIDByParamDict:paramDict SEL:@selector(getDownloadList:)];
     NSArray *currentDownloadingdMedias = [[AliyunVodDownLoadManager shareManager] currentDownloadingdMedias];
     NSArray *downloadingdMedias = [[AliyunVodDownLoadManager shareManager] downloadingdMedias];
-
+    
     NSArray *mediaInfos = [[AliyunVodDownLoadManager shareManager] allMedias];
     NSMutableArray *ar = @[].mutableCopy;
     for (AliyunDownloadMediaInfo *mediaInfo in mediaInfos) {
@@ -455,7 +455,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
 /*
  功能：下载开始回调。
  回调数据：AliyunDownloadMediaInfo
-*/
+ */
 -(void) onStart:(AliyunDownloadMediaInfo*)mediaInfo
 {
     [self callbackByDic:@{@"status":@(YES),@"event":@"start",@"mediaInfos":@[[MediaInfo mediaInfoByAliyunDownloadMediaInfo:mediaInfo].tj_JSONObject]} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
@@ -463,7 +463,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
 /*
   功能：调用stop结束下载时回调。
   回调数据：AliyunDownloadMediaInfo
- */
+  */
 -(void) onStop:(AliyunDownloadMediaInfo*)mediaInfo
 {
     [self callbackByDic:@{@"status":@(YES),@"event":@"stop",@"mediaInfos":@[[MediaInfo mediaInfoByAliyunDownloadMediaInfo:mediaInfo].tj_JSONObject]} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
@@ -471,7 +471,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
 /*
   功能：下载完成回调。
   回调数据：AliyunDownloadMediaInfo
-*/
+ */
 -(void) onCompletion:(AliyunDownloadMediaInfo*)mediaInfo
 {
     [self callbackByDic:@{@"status":@(YES),@"event":@"completion",@"mediaInfos":@[[MediaInfo mediaInfoByAliyunDownloadMediaInfo:mediaInfo].tj_JSONObject]} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
@@ -487,7 +487,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
 /*
   功能：错误回调。错误码与错误信息详见文档。
   回调数据：AliyunDownloadMediaInfo， code：错误码 msg：错误信息
- */
+  */
 -(void)onError:(AliyunDownloadMediaInfo*)mediaInfo code:(int)code msg:(NSString *)msg
 {
     [self callbackByDic:@{@"status":@(YES),@"event":@"error",@"mediaInfos":@[[MediaInfo mediaInfoByAliyunDownloadMediaInfo:mediaInfo].tj_JSONObject],@"code":@(code)} msg:@"" SEL:@selector(initDownloader:) doDelete:NO];
@@ -517,7 +517,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
 
 - (void)callbackByDic:(NSDictionary *)dic msg:(NSString *)msg SEL:(SEL)sel doDelete:(BOOL)doDelete  {
     if (!msg) msg = @"";
-
+    
     NSMutableDictionary *mutDic = dic.mutableCopy;
     if (![mutDic.allKeys containsObject:@"status"]) {
         [mutDic setObject:@(YES) forKey:@"status"];
@@ -573,7 +573,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
     [self callbackByDic:dic msg:@"error" SEL:@selector(addEventListener:) doDelete:NO];
 }
 - (void)onBackViewClickWithAliyunVodPlayerView:(AliyunVodPlayerView *)playerView{
-
+    
 }
 - (void)aliyunVodPlayerView:(AliyunVodPlayerView*)playerView onPause:(NSTimeInterval)currentPlayTime{
     NSDictionary *dic = @{@"status":@(YES),@"eventType":@"pause"};
@@ -628,17 +628,17 @@ typedef NS_ENUM(NSUInteger, EventType) {
     dispatch_semaphore_t signal = dispatch_semaphore_create(1); //传入值必须 >=0, 若传入为0则阻塞线程并等待timeout,时间到后会执行其后的语句
     dispatch_time_t overTime = dispatch_time(DISPATCH_TIME_NOW, 1.0f * NSEC_PER_SEC);
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-
+        
         dispatch_semaphore_wait(signal, overTime); //signal 值 -1
         dispatch_async(dispatch_get_main_queue(), ^{
             NSString *orientationStr = [self screenOrientation:orientation];
-        NSLog(@"%@",orientationStr);
+            NSLog(@"%@",orientationStr);
             
             [self setScreenOrientation:@{@"orientation":[self screenOrientation:orientation]}];
             
             [self callbackByDic:@{@"playerViewFrame":NSStringFromCGRect(self.playerView.frame),@"controlLayerFrame":NSStringFromCGRect(self->_controlLayer.frame),@"isFullScreen":@(self->_isFullScreen),@"contentOffset":NSStringFromCGPoint(self.scrollView.contentOffset),@"orientation":orientationStr} msg:@"" SEL:@selector(setLogger:) doDelete:NO];
         });
-
+        
         dispatch_semaphore_signal(signal); //signal 值 +1
     });
 }
@@ -661,9 +661,9 @@ typedef NS_ENUM(NSUInteger, EventType) {
 
 //添加视图
 -(void)initPlayerView{
-   
+    
     self.playerView = [[AliyunVodPlayerView alloc] initWithFrame:_rect andSkin:AliyunVodPlayerViewSkinRed];
-//    self.playerView.circlePlay = YES;
+    //    self.playerView.circlePlay = YES;
     [self.playerView setDelegate:self];
     [self.playerView setAutoPlay:YES];
     self.playerView.coverUrl = [NSURL URLWithString:_coverUrl];
@@ -684,10 +684,10 @@ typedef NS_ENUM(NSUInteger, EventType) {
     _fullScreenBtn = [_controlLayer valueForKey:@"_fullScreenBtn"];
     [_popLayer addObserver:self forKeyPath:@"hidden" options:NSKeyValueObservingOptionNew context:nil];
     [self.playerView setUseWanNetDescribe:@"当前为移动网络"];
-
+    
     _backBtn = [_controlLayer valueForKey:@"_backBtn"];
     _backBtn.hidden = YES;
-
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self.playerView name:UIDeviceOrientationDidChangeNotification object:nil];
     
     for (id target in [_fullScreenBtn allTargets]) {
@@ -696,7 +696,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
         }
         
     }
-//    _fullScreenBtn.backgroundColor = [UIColor greenColor];
+    //    _fullScreenBtn.backgroundColor = [UIColor greenColor];
     [_fullScreenBtn addTarget:self action:@selector(clickFullSreenButton) forControlEvents:UIControlEventTouchUpInside];
     [_backBtn addTarget:self action:@selector(clickFullSreenButton) forControlEvents:UIControlEventTouchUpInside];
     
@@ -712,13 +712,13 @@ typedef NS_ENUM(NSUInteger, EventType) {
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"currentPlayerVideo"]) {
-//        处理切换播放视频，title不变问题
+        //        处理切换播放视频，title不变问题
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             AliyunVodPlayerVideo *video = [self.playerView getAliyunMediaInfo];
             [self.playerView setTitle:video.title];
         });
     } else if ([keyPath isEqualToString:@"hidden"] && object == _popLayer) {
-//        屏蔽移动网络提示视图
+        //        屏蔽移动网络提示视图
         UILabel *label = [[_popLayer valueForKey:@"_errorView"] valueForKey:@"_errorLabel"];
         if (![[change objectForKey:NSKeyValueChangeNewKey] boolValue] && [label.text isEqualToString:@"当前为移动网络"]) {
             UIButton *button = [[_popLayer valueForKey:@"_errorView"] valueForKey:@"_errorButton"];
@@ -728,7 +728,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
     }
 }
 - (void)clickFullSreenButton {
-
+    
     _isFullScreen = !_isFullScreen;
     _backBtn.hidden = !_isFullScreen;
     NSDictionary *dic = @{@"status":@(YES),@"eventType":_isFullScreen ? @"fullscreen" : @"unfull"};
