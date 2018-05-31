@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  AliyunPlayerMediaDemo
+
+  Created by 王凯 on 2018/4/11.
+  Copyright © 2018年 com.alibaba.ALPlayerVodSDK. All rights reserved.
+*/
+
+
+CFBundleDisplayName="AliPlayer";

@@ -1,0 +1,82 @@
+//
+//  AliyunVodePlayerViewSDKPrefixHeader.pch
+//  AliyunVodPlayerViewSDK
+//
+//  Created by 王凯 on 2017/8/17.
+//  Copyright © 2017年 SMY. All rights reserved.
+//
+
+#ifndef AliyunVodePlayerViewSDKPrefixHeader_pch
+#define AliyunVodePlayerViewSDKPrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* AliyunVodePlayerViewSDKPrefixHeader_pch */
+
+#import "UIView+AliyunLayout.h"
+#import "AliyunPlayerSDK.h"
+#import "AliyunVodPlayerViewDefine.h"
+#import "AliyunPVUtil.h"
+
+// 播控事件中的类型
+static NSString * const ALPV_TYPE_PLAY_RETRY = @"play_retry";
+static NSString * const ALPV_TYPE_PLAY_REPLAY = @"play_replay";
+static NSString * const ALPV_TYPE_PLAYER_PAUSE = @"player_pause";
+
+static const int ALPV_PX_LOADING_VIEW_WIDTH  = 260;
+static const int ALPV_PX_LOADING_VIEW_HEIGHT = 240;
+
+// click tag
+static const int ALPV_CLICK_BACK = 0;
+static const int ALPV_CLICK_PLAY = ALPV_CLICK_BACK + 1;
+static const int ALPV_CLICK_FULL_SCREEN = ALPV_CLICK_PLAY + 1;
+static const int ALPV_CLICK_CHANGE_QUALITY = ALPV_CLICK_FULL_SCREEN + 1;
+static const int ALPV_CLICK_DOWNLOAD = ALPV_CLICK_CHANGE_QUALITY + 1;
+static const int ALPV_CLICK_LOCK = ALPV_CLICK_DOWNLOAD + 1;
+static const int ALPV_CLICK_PLAYSPEED = ALPV_CLICK_LOCK + 1;
+
+#define ALPV_COLOR_WHITE         [UIColor whiteColor]
+#define ALPV_COLOR_BLUE          [UIColor colorWithRed:(23 / 255.0) green:(157 / 255.0) blue:(242 / 255.0) alpha:1]
+#define ALPV_POP_BG_ERROR        [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7]
+#define ALPV_POP_BG_QUALITY_LIST [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7]
+#define ALPV_POP_BG_SEEK         [UIColor colorWithRed:1 green:1 blue:1 alpha:0.4]
+#define ALPV_POP_SEEK_TEXT       [UIColor colorWithRed:55 / 255.0 green:55 / 255.0 blue:55 / 255.0 alpha:1]
+#define ALPV_COLOR_TEXT_NOMAL    [UIColor colorWithRed:(231 / 255.0) green:(231 / 255.0) blue:(231 / 255.0) alpha:1]
+#define ALPV_COLOR_TEXT_GRAY     [UIColor colorWithRed:(158 / 255.0) green:(158 / 255.0) blue:(158 / 255.0) alpha:1]
+#define ALPV_COLOR_TEXT_GRAY_2   [UIColor colorWithRed:(204 / 255.0) green:(204 / 255.0) blue:(204 / 255.0) alpha:1]
+#define ALPV_COLOR_TEXT_GRAY_3   [UIColor colorWithRed:(99 / 255.0) green:(99 / 255.0) blue:(99 / 255.0) alpha:1]
+#define ALPV_PROGRESS               ALPV_COLOR_BLUE
+#define ALPV_PROGRESS_SECONDARY     [UIColor colorWithRed:(204 / 255.0) green:(204 / 255.0) blue:(204 / 255.0) alpha:1]
+#define ALPV_PROGRESS_BACKGROUND    [UIColor colorWithRed:(153 / 255.0) green:(153 / 255.0) blue:(153 / 255.0) alpha:1]
+
+#define RGB(r,g,b,a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]/// rgb颜色转换（16进制->10进制）
+
+
+typedef NS_ENUM (int, AliyunVodPlayerViewPlayMethod) {
+    AliyunVodPlayerViewPlayMethodUrl = 0,
+    AliyunVodPlayerViewPlayMethodMPS,
+    AliyunVodPlayerViewPlayMethodPlayAuth,
+    AliyunVodPlayerViewPlayMethodSTS, 
+};
+
+//倍速播放界面，入场、退场方式
+typedef NS_ENUM (int, AliyunSpeedViewAnimateType) {
+    AliyunSpeedViewAnimateTypeMoveIn = 0,  //入场
+    AliyunSpeedViewAnimateTypeSelectedPush,//选中选项后入场
+    AliyunSpeedViewAnimateTypePush,        //退场
+};
+
+/*
+ *功能：错误提示内容，显示在界面中间的错误内容；用于用户自定义错误
+ *备注：请勿更改宏名！请勿更改宏名！请勿更改宏名！
+ */
+ static NSString *  ALIYUNVODVIEW_PLAYFINISH ;//= @"Watch again, please click replay";
+ static NSString *  ALIYUNVODVIEW_NETWORKTIMEOUT;// = @"The current network is not good. Please click replay later";
+ static NSString *  ALIYUNVODVIEW_NETWORKUNREACHABLE ;//= @"No network connection, check the network, click replay";
+ static NSString *  ALIYUNVODVIEW_LOADINGDATAERROR ;//= @"Video loading error, please click replay";
+ static NSString *  ALIYUNVODVIEW_USEMOBILENETWORK ;//= @"For mobile networks, click play";
+
+
+

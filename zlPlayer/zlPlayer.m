@@ -326,6 +326,12 @@ typedef NS_ENUM(NSUInteger, EventType) {
 - (void)addEventListener:(NSDictionary *)paramDict {
     [self addCbIDByParamDict:paramDict SEL:@selector(addEventListener:)];
 }
+/** 版本获取 */
+- (void)getSDKVersion:(NSDictionary *)paramDict {
+    [self addCbIDByParamDict:paramDict SEL:@selector(getSDKVersion:)];
+    [self callbackByDic:@{@"version}":[NSString stringWithFormat:@"%@/%@",[self.playerView getSDKVersion],version]} msg:@"" SEL:@selector(getSDKVersion:) doDelete:YES];
+}
+
 /** 初始化下载器 */
 - (void)initDownloader:(NSDictionary *)paramDict {
     [self addCbIDByParamDict:paramDict SEL:@selector(initDownloader:)];
@@ -557,6 +563,15 @@ typedef NS_ENUM(NSUInteger, EventType) {
     return @"landscape_right";
 }
 #pragma mark - AliyunVodPlayerViewDelegate
+/**
+ * 功能：播放器播放时发生错误时，回调信息
+ * 参数：errorModel 播放器报错时提供的错误信息对象
+ */
+- (void)vodPlayer:(AliyunVodPlayer *)vodPlayer playBackErrorModel:(AliyunPlayerVideoErrorModel *)errorModel
+{
+    NSDictionary *dic = @{@"status":@(YES),@"eventType":@"error",@"message":errorModel.errorMsg,@"code":@(errorModel.errorCode)};
+    [self callbackByDic:dic msg:@"error" SEL:@selector(addEventListener:) doDelete:NO];
+}
 - (void)onBackViewClickWithAliyunVodPlayerView:(AliyunVodPlayerView *)playerView{
 
 }
