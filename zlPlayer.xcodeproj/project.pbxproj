@@ -364,7 +364,12 @@
 				A589402720BC4FBF001532C6 /* AliyunPVSpeedButton.h in Headers */,
 				A516D3A7208F7B8E003D1FFC /* KernelMPlayer.h in Headers */,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				A5CD865220C03DFF0095C894 /* AliyunVodPlayerView+category.h in Headers */,
+=======
+				A589401C20BC4FBF001532C6 /* AliyunPVPopLayer.h in Headers */,
+				A589401020BC4FBF001532C6 /* AliyunPVControlLayer.h in Headers */,
+>>>>>>> 50d23919c95bb0cb54a5e62e8ff73eb354e9344d
 =======
 				A589401C20BC4FBF001532C6 /* AliyunPVPopLayer.h in Headers */,
 				A589401020BC4FBF001532C6 /* AliyunPVControlLayer.h in Headers */,
