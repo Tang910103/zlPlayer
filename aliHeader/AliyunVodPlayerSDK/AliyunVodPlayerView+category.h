@@ -8,10 +8,6 @@
 
 #import "AliyunVodPlayerView.h"
 
-@protocol AliyunVodPlayerViewDelegate
-
-@end
-
 @interface AliyunVodPlayerView (category)
 
 @end
