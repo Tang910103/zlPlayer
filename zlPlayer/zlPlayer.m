@@ -526,7 +526,6 @@ typedef NS_ENUM(NSUInteger, EventType) {
         [mutDic setObject:@(NO) forKey:@"status"];
         msg = @"还未初始化播放器";
     }
-    [mutDic setObject:version forKey:@"version"];
     if ([_cbIdDictionary.allKeys containsObject:NSStringFromSelector(sel)]) {
         NSInteger cbID = [_cbIdDictionary intValueForKey:NSStringFromSelector(sel) defaultValue:0];
         [self sendResultEventWithCallbackId:cbID dataDict:mutDic errDict:@{@"msg":msg} doDelete:doDelete];
