@@ -761,7 +761,6 @@ typedef NS_ENUM(NSUInteger, EventType) {
 }
 
 - (void)deviceOrientationDidChangeNotification:(NSNotification *)notifi {
-     return;
     if (self.playerView.isScreenLocked) return;
     [self callbackByDic:@{@"屏幕旋转":@([UIDevice currentDevice].orientation),@"orientation":[self screenOrientation:self.orientation]} msg:@"" SEL:@selector(setLogger:) doDelete:NO];
     if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
