@@ -318,6 +318,13 @@ typedef NS_ENUM(NSUInteger, EventType) {
     [self addCbIDByParamDict:paramDict SEL:@selector(resume:)];
     [self callback:YES msg:@"" SEL:@selector(resume:)];
 }
+/** 取消全屏播放 */
+- (void)unfull:(NSDictionary *)paramDict
+{
+    [self addCbIDByParamDict:paramDict SEL:@selector(unfull:)];
+    [self clickFullSreenButton];
+    [self callback:YES msg:@"" SEL:@selector(unfull:)];
+}
 /** 打印日志 */
 - (void)setLogger:(NSDictionary *)paramDict {
     [self addCbIDByParamDict:paramDict SEL:@selector(setLogger:)];
@@ -719,7 +726,12 @@ typedef NS_ENUM(NSUInteger, EventType) {
     } else if ([keyPath isEqualToString:@"hidden"] && object == _popLayer) {
         //        屏蔽移动网络提示视图
         UILabel *label = [[_popLayer valueForKey:@"_errorView"] valueForKey:@"_errorLabel"];
-        if (![[change objectForKey:NSKeyValueChangeNewKey] boolValue] && [label.text isEqualToString:@"当前为移动网络"]) {
+        BOOL hidden = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
+        if (!hidden) {
+            UIButton *bu = [_popLayer valueForKey:@"_backBtn"];
+            [bu addTarget:self action:@selector(clickFullSreenButton) forControlEvents:UIControlEventTouchUpInside];
+        }
+        if (!hidden && [label.text isEqualToString:@"当前为移动网络"]) {
             UIButton *button = [[_popLayer valueForKey:@"_errorView"] valueForKey:@"_errorButton"];
             _popLayer.hidden = YES;
             [button sendActionsForControlEvents:UIControlEventTouchUpInside];
@@ -749,6 +761,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
 }
 
 - (void)deviceOrientationDidChangeNotification:(NSNotification *)notifi {
+     return;
     if (self.playerView.isScreenLocked) return;
     [self callbackByDic:@{@"屏幕旋转":@([UIDevice currentDevice].orientation),@"orientation":[self screenOrientation:self.orientation]} msg:@"" SEL:@selector(setLogger:) doDelete:NO];
     if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
