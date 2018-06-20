@@ -108,10 +108,10 @@ typedef NS_ENUM(NSUInteger, EventType) {
     NSString *_coverUrl;
     BOOL _isFullScreen;
     UIButton *_backBtn;
-    UIView *_controlLayer;
+    UIView *_controlLayer; //工具栏
     UIButton *_fullScreenBtn;
     CGFloat _statusBarHeight;
-    UIView *_popLayer;
+    UIView *_popLayer; //提示视图
 }
 @property (nonatomic, strong) AliyunVodPlayerView *playerView;
 @property (nonatomic, strong) AliyunVodPlayer *aliyunVodPlayer;
@@ -252,6 +252,9 @@ typedef NS_ENUM(NSUInteger, EventType) {
     url = [self getPathWithUZSchemeURL:url];
     if (self.playerView) {
         [self.playerView stop];
+    }
+    if (!_popLayer.hidden) {
+        _popLayer.hidden = YES;
     }
     if (url) {
         [self.playerView setTitle:_title];
