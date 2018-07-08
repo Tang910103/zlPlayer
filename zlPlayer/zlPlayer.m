@@ -108,10 +108,10 @@ typedef NS_ENUM(NSUInteger, EventType) {
     NSString *_coverUrl;
     BOOL _isFullScreen;
     UIButton *_backBtn;
-    UIView *_controlLayer;
+    UIView *_controlLayer; //工具栏
     UIButton *_fullScreenBtn;
     CGFloat _statusBarHeight;
-    UIView *_popLayer;
+    UIView *_popLayer; //提示视图
 }
 @property (nonatomic, strong) AliyunVodPlayerView *playerView;
 @property (nonatomic, strong) AliyunVodPlayer *aliyunVodPlayer;
@@ -253,6 +253,9 @@ typedef NS_ENUM(NSUInteger, EventType) {
     if (self.playerView) {
         [self.playerView stop];
     }
+    if (!_popLayer.hidden) {
+        _popLayer.hidden = YES;
+    }
     if (url) {
         [self.playerView setTitle:_title];
         [self.playerView setCoverUrl:[NSURL URLWithString:_coverUrl]];
@@ -317,6 +320,13 @@ typedef NS_ENUM(NSUInteger, EventType) {
     [self.playerView resume];
     [self addCbIDByParamDict:paramDict SEL:@selector(resume:)];
     [self callback:YES msg:@"" SEL:@selector(resume:)];
+}
+/** 取消全屏播放 */
+- (void)unfull:(NSDictionary *)paramDict
+{
+    [self addCbIDByParamDict:paramDict SEL:@selector(unfull:)];
+    [self clickFullSreenButton];
+    [self callback:YES msg:@"" SEL:@selector(unfull:)];
 }
 /** 打印日志 */
 - (void)setLogger:(NSDictionary *)paramDict {
@@ -526,7 +536,6 @@ typedef NS_ENUM(NSUInteger, EventType) {
         [mutDic setObject:@(NO) forKey:@"status"];
         msg = @"还未初始化播放器";
     }
-    [mutDic setObject:version forKey:@"version"];
     if ([_cbIdDictionary.allKeys containsObject:NSStringFromSelector(sel)]) {
         NSInteger cbID = [_cbIdDictionary intValueForKey:NSStringFromSelector(sel) defaultValue:0];
         [self sendResultEventWithCallbackId:cbID dataDict:mutDic errDict:@{@"msg":msg} doDelete:doDelete];
@@ -720,7 +729,12 @@ typedef NS_ENUM(NSUInteger, EventType) {
     } else if ([keyPath isEqualToString:@"hidden"] && object == _popLayer) {
         //        屏蔽移动网络提示视图
         UILabel *label = [[_popLayer valueForKey:@"_errorView"] valueForKey:@"_errorLabel"];
-        if (![[change objectForKey:NSKeyValueChangeNewKey] boolValue] && [label.text isEqualToString:@"当前为移动网络"]) {
+        BOOL hidden = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
+        if (!hidden) {
+            UIButton *bu = [_popLayer valueForKey:@"_backBtn"];
+            [bu addTarget:self action:@selector(clickFullSreenButton) forControlEvents:UIControlEventTouchUpInside];
+        }
+        if (!hidden && [label.text isEqualToString:@"当前为移动网络"]) {
             UIButton *button = [[_popLayer valueForKey:@"_errorView"] valueForKey:@"_errorButton"];
             _popLayer.hidden = YES;
             [button sendActionsForControlEvents:UIControlEventTouchUpInside];
