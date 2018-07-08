@@ -93,6 +93,8 @@
 		A589405120BC5390001532C6 /* LaunchScreen.strings in Resources */ = {isa = PBXBuildFile; fileRef = A589404620BC5390001532C6 /* LaunchScreen.strings */; };
 		A589405220BC5390001532C6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A589404820BC5390001532C6 /* Localizable.strings */; };
 		A589405320BC5390001532C6 /* Main.strings in Resources */ = {isa = PBXBuildFile; fileRef = A589404A20BC5390001532C6 /* Main.strings */; };
+		A5B1F4B820F243B400F91833 /* AliyunImageSource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A5B1F4B620F243B400F91833 /* AliyunImageSource.bundle */; };
+		A5B1F5A920F2501100F91833 /* AliyunVodPlayerViewSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5B1F5A820F2501000F91833 /* AliyunVodPlayerViewSDK.framework */; };
 		A5CD866C20C049890095C894 /* AliyunVodPlayerSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5CD866820C049870095C894 /* AliyunVodPlayerSDK.framework */; };
 		A5CD866D20C049890095C894 /* AliThirdparty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5CD866920C049880095C894 /* AliThirdparty.framework */; };
 		A5CD866E20C049890095C894 /* AliyunLanguageSource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A5CD866A20C049880095C894 /* AliyunLanguageSource.bundle */; };
@@ -252,6 +254,8 @@
 		A589404720BC5390001532C6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = LaunchScreen.strings; sourceTree = "<group>"; };
 		A589404920BC5390001532C6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		A589404B20BC5390001532C6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Main.strings; sourceTree = "<group>"; };
+		A5B1F4B620F243B400F91833 /* AliyunImageSource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AliyunImageSource.bundle; sourceTree = "<group>"; };
+		A5B1F5A820F2501000F91833 /* AliyunVodPlayerViewSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AliyunVodPlayerViewSDK.framework; path = "../../../../../Users/tangjie/Library/Developer/Xcode/DerivedData/AliyunPlayerMediaDemo-gxgzhjcfctvtxpcjcbwhuypshzir/Build/Products/Debug-iphoneos/AliyunVodPlayerViewSDK.framework"; sourceTree = "<group>"; };
 		A5CD866820C049870095C894 /* AliyunVodPlayerSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AliyunVodPlayerSDK.framework; sourceTree = "<group>"; };
 		A5CD866920C049880095C894 /* AliThirdparty.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AliThirdparty.framework; sourceTree = "<group>"; };
 		A5CD866A20C049880095C894 /* AliyunLanguageSource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AliyunLanguageSource.bundle; sourceTree = "<group>"; };
@@ -323,6 +327,7 @@
 				52BA30A019F6367A00D81640 /* CoreTelephony.framework in Frameworks */,
 				52BA30A119F6367A00D81640 /* CoreVideo.framework in Frameworks */,
 				A5CD866D20C049890095C894 /* AliThirdparty.framework in Frameworks */,
+				A5B1F5A920F2501100F91833 /* AliyunVodPlayerViewSDK.framework in Frameworks */,
 				52BA30A219F6367A00D81640 /* Foundation.framework in Frameworks */,
 				52BA30A319F6367A00D81640 /* ImageIO.framework in Frameworks */,
 				52CA35771AB195EB002579CF /* libresolv.9.dylib in Frameworks */,
@@ -517,6 +522,8 @@
 		A516D3ED208F8FFA003D1FFC /* aliSDK */ = {
 			isa = PBXGroup;
 			children = (
+				A5B1F5A820F2501000F91833 /* AliyunVodPlayerViewSDK.framework */,
+				A5B1F4B620F243B400F91833 /* AliyunImageSource.bundle */,
 				A5CD866920C049880095C894 /* AliThirdparty.framework */,
 				A5CD866A20C049880095C894 /* AliyunLanguageSource.bundle */,
 				A5CD866B20C049890095C894 /* AliyunPlayerSDK.framework */,
@@ -648,6 +655,7 @@
 				A589404F20BC5390001532C6 /* Main.strings in Resources */,
 				A589405220BC5390001532C6 /* Localizable.strings in Resources */,
 				A5CD866E20C049890095C894 /* AliyunLanguageSource.bundle in Resources */,
+				A5B1F4B820F243B400F91833 /* AliyunImageSource.bundle in Resources */,
 				A589405120BC5390001532C6 /* LaunchScreen.strings in Resources */,
 				527BCFF519C4346B0077631F /* uz in Resources */,
 				A589404C20BC5390001532C6 /* InfoPlist.strings in Resources */,

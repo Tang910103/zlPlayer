@@ -573,6 +573,17 @@ typedef NS_ENUM(NSUInteger, EventType) {
 }
 #pragma mark - AliyunVodPlayerViewDelegate
 /**
+ * 功能：播放事件协议方法,主要内容 AliyunVodPlayerEventPrepareDone状态下，此时获取到播放视频数据（时长、当前播放数据、视频宽高等）
+ * 参数：event 视频事件
+ */
+- (void)vodPlayer:(AliyunVodPlayer *)vodPlayer onEventCallback:(AliyunVodPlayerEvent)event
+{
+    if (event == AliyunVodPlayerEventFirstFrame) {
+        NSDictionary *dic = @{@"status":@(YES),@"eventType":@"firstframe"};
+        [self callbackByDic:dic msg:@"firstframe" SEL:@selector(addEventListener:) doDelete:NO];
+    }
+}
+/**
  * 功能：播放器播放时发生错误时，回调信息
  * 参数：errorModel 播放器报错时提供的错误信息对象
  */

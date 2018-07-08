@@ -6,15 +6,15 @@
 	<dict>
 		<key>Headers/AliVcMediaPlayer.h</key>
 		<data>
-		in8o3eSmo0Io1e/RGLqKAoFVQmE=
+		mBepu4AZgHjvrsGVbHASDuEsAdI=
 		</data>
 		<key>Headers/AliVcPlayerDefine.h</key>
 		<data>
-		JBE3XxvNQpdUnbKdjHBRXLhRowA=
+		k9qZdzXKicHUavEozRRzfYp1iAI=
 		</data>
 		<key>Headers/AliVcPlayerErrorCode.h</key>
 		<data>
-		GAdGo/VAK5Reo3StJtBCx2e0n3E=
+		s2uyE9sIZpMxwBgVKfwGJ8N10kM=
 		</data>
 		<key>Headers/AliyunPlayerSDK.h</key>
 		<data>
@@ -30,7 +30,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		9ERrwuTfxNOJ6S+8oHO8F5fe2Qw=
+		+M8UrjVDZ6C83j7KDe6evnqu3gU=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -43,33 +43,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			in8o3eSmo0Io1e/RGLqKAoFVQmE=
+			mBepu4AZgHjvrsGVbHASDuEsAdI=
 			</data>
 			<key>hash2</key>
 			<data>
-			bAMMsA2cL/NtDY9hwzo6uE//0+dehbP35di0GUmVsX0=
+			2KVn4RgpK+RpAkEBrnKlIhRsTYuhYRX+TSCaoIBIWZo=
 			</data>
 		</dict>
 		<key>Headers/AliVcPlayerDefine.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			JBE3XxvNQpdUnbKdjHBRXLhRowA=
+			k9qZdzXKicHUavEozRRzfYp1iAI=
 			</data>
 			<key>hash2</key>
 			<data>
-			5GQvjuYwV/MXc/4XUPBqUqyWXkF5RGkBJG5pCBhd/tE=
+			3KJJtygC7eiypP8oMBJCtPWAebZYIunIIB2Cz3KEftY=
 			</data>
 		</dict>
 		<key>Headers/AliVcPlayerErrorCode.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			GAdGo/VAK5Reo3StJtBCx2e0n3E=
+			s2uyE9sIZpMxwBgVKfwGJ8N10kM=
 			</data>
 			<key>hash2</key>
 			<data>
-			CfbSXSj/guIDfa6aF1BsAgzIonGyJnrmvyftKj8Uawg=
+			2/+ojb5BhiSxTgAl8zVq+wLAzf5rnwlsE0HKT06e/vQ=
 			</data>
 		</dict>
 		<key>Headers/AliyunPlayerSDK.h</key>

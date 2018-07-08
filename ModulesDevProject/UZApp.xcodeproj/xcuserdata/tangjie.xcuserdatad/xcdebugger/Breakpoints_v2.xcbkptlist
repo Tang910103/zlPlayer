@@ -4,55 +4,20 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            scope = "0"
-            stopOnStyle = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../zlPlayer/zlPlayer.m"
-            timestampString = "549212779.599804"
+            timestampString = "552751156.56352"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "411"
-            endingLineNumber = "411"
-            landmarkName = "-removeDownload:"
+            startingLineNumber = "583"
+            endingLineNumber = "583"
+            landmarkName = "-vodPlayer:onEventCallback:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../zlPlayer/zlPlayer.m"
-            timestampString = "549212779.599871"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "279"
-            endingLineNumber = "279"
-            landmarkName = "-getCurrentPosition:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
->>>>>>> 50d23919c95bb0cb54a5e62e8ff73eb354e9344d
-=======
->>>>>>> 新增 播放器播放时发生错误时，回调信息getSDKVersion
-=======
->>>>>>> 3.4.4
    </Breakpoints>
 </Bucket>
