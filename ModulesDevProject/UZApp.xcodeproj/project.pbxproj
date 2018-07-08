@@ -95,6 +95,9 @@
 		A589405320BC5390001532C6 /* Main.strings in Resources */ = {isa = PBXBuildFile; fileRef = A589404A20BC5390001532C6 /* Main.strings */; };
 		A5B1F4B820F243B400F91833 /* AliyunImageSource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A5B1F4B620F243B400F91833 /* AliyunImageSource.bundle */; };
 		A5B1F5A920F2501100F91833 /* AliyunVodPlayerViewSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5B1F5A820F2501000F91833 /* AliyunVodPlayerViewSDK.framework */; };
+		A5B1F5AA20F2505B00F91833 /* AliyunVodPlayerViewSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5B1F5A820F2501000F91833 /* AliyunVodPlayerViewSDK.framework */; };
+		A5B1F5AB20F2505B00F91833 /* AliyunVodPlayerViewSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5B1F5A820F2501000F91833 /* AliyunVodPlayerViewSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A5B1F5AC20F2506100F91833 /* AliyunImageSource.bundle in Embed PlugIns */ = {isa = PBXBuildFile; fileRef = A5B1F4B620F243B400F91833 /* AliyunImageSource.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A5CD866C20C049890095C894 /* AliyunVodPlayerSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5CD866820C049870095C894 /* AliyunVodPlayerSDK.framework */; };
 		A5CD866D20C049890095C894 /* AliThirdparty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5CD866920C049880095C894 /* AliThirdparty.framework */; };
 		A5CD866E20C049890095C894 /* AliyunLanguageSource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A5CD866A20C049880095C894 /* AliyunLanguageSource.bundle */; };
@@ -127,6 +130,7 @@
 			files = (
 				A5CD867420C04A6E0095C894 /* AliyunPlayerSDK.framework in Embed Frameworks */,
 				A5CD867120C04A6E0095C894 /* AliThirdparty.framework in Embed Frameworks */,
+				A5B1F5AB20F2505B00F91833 /* AliyunVodPlayerViewSDK.framework in Embed Frameworks */,
 				A5CD867620C04A6E0095C894 /* AliyunVodPlayerSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -138,6 +142,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				A5B1F5AC20F2506100F91833 /* AliyunImageSource.bundle in Embed PlugIns */,
 				A5CD867220C04A6E0095C894 /* AliyunLanguageSource.bundle in Embed PlugIns */,
 			);
 			name = "Embed PlugIns";
@@ -283,6 +288,7 @@
 				52BA310019F6368400D81640 /* PhotosUI.framework in Frameworks */,
 				52BA310219F6368400D81640 /* QuartzCore.framework in Frameworks */,
 				52BA310319F6368400D81640 /* SafariServices.framework in Frameworks */,
+				A5B1F5AA20F2505B00F91833 /* AliyunVodPlayerViewSDK.framework in Frameworks */,
 				52BA310419F6368400D81640 /* SceneKit.framework in Frameworks */,
 				52BA310519F6368400D81640 /* Social.framework in Frameworks */,
 				A5CD867020C04A6E0095C894 /* AliThirdparty.framework in Frameworks */,
