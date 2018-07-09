@@ -10,6 +10,8 @@
 #import "AliyunVodPlayerViewDefine.h"
 #import "AliyunVodPlayerDefine.h"
 #import "AliyunVodPlayerVideo.h"
+#import "AliyunPVPlaySpeedView.h"
+
 /*
  当视频返回的时候的消息响应代理，此处可以进行一些销毁操作
  */
@@ -35,6 +37,14 @@
 - (void)aliyunVodPlayerView:(AliyunVodPlayerView *)playerView fullScreen:(BOOL)isFullScreen;
 
 @optional
+/*
+ * 功能 ：播放方式，是否自动连播
+ */
+- (void)aliyunVodPlayerView:(AliyunVodPlayerView*)playerView isAutomaticFlow:(BOOL)isAutomaticFlow;
+/*
+ * 功能 ：显示模式，选择的显示模式
+ */
+- (void)aliyunVodPlayerView:(AliyunVodPlayerView*)playerView displayMode:(AliyunVodPlayerDisplayMode)displayMode;
 /**
  * 功能：暂停事件
  * 参数：currentPlayTime ： 暂停时播放时间
@@ -181,6 +191,8 @@ self.isLock时来判定UIViewController 是否支持物理旋转。如果viewcon
  * 备注：当调用了prepareToPlay后，并且开始播放后，才能获取该值。
  */
 @property(nonatomic, readonly) NSTimeInterval bufferPercentage;
+
+@property (nonatomic, strong) AliyunPVPlaySpeedView *playSpeedView;         //倍速播放切换界面
 
 /*
  功能：初始化界面皮肤

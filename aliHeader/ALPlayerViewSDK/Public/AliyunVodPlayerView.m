@@ -18,7 +18,6 @@
 #import "AliyunPVReachability.h"
 #import "AliyunPVDisplayLayer.h"
 #import <MediaPlayer/MediaPlayer.h>
-#import "AliyunPVPlaySpeedView.h"
 #import "AliyunFirstStartGuideView.h"
 
 #import "AliyunVodPlayer.h"
@@ -64,7 +63,6 @@
 
 @property (nonatomic, strong) NSTimer *timer;                               //计时器
 @property (nonatomic, assign) NSTimeInterval currentDuration;               //记录播放时长
-@property (nonatomic, strong) AliyunPVPlaySpeedView *playSpeedView;         //倍速播放切换界面
 @property (nonatomic, strong) AliyunFirstStartGuideView *guideView;     //导航图，第一次使用时，手势介绍。
 @property (nonatomic, strong) UIImageView *coverImageView;                   //封面
 @property (nonatomic, assign) AliyunVodPlayerVideoQuality currentQuality;   //临时存储清晰度
@@ -687,7 +685,7 @@
     switch (event) {
         case AliyunPVTapClickedEventSingle:
         {
-            [self showSpeedViewPushInAnimateWithPlaySpeedView:self.playSpeedView];
+            [self hiddenPlaySpeedView:self.playSpeedView completion:nil];
 
             if ([[self.controlLayer subviews] containsObject:self.controlLayer.qualityListView]) {
                 [self.controlLayer hideQualityListView:YES];
@@ -909,6 +907,25 @@
     }
 }
 #pragma mark AliyunPVPlaySpeedViewDelegate
+- (void)AliyunPVPlaySpeedView:(AliyunPVPlaySpeedView *)playSpeedView displayMode:(AliyunVodPlayerDisplayMode)displayMode
+{
+    [self setDisplayMode:displayMode];
+    [self hiddenPlaySpeedView:playSpeedView completion:^(BOOL finished) {
+        [self showToast:[NSString stringWithFormat:@"当前屏幕模式切换为：%@",displayMode == AliyunVodPlayerDisplayModeFit ? @"适应大小" : @"裁剪铺满"]];
+        if ([self.delegate respondsToSelector:@selector(AliyunPVPlaySpeedView:displayMode:)]) {
+            [self.delegate aliyunVodPlayerView:self displayMode:displayMode];
+        }
+    }];
+}
+- (void)AliyunPVPlaySpeedView:(AliyunPVPlaySpeedView *)playSpeedView isAutomaticFlow:(BOOL)isAutomaticFlow
+{
+    [self hiddenPlaySpeedView:playSpeedView completion:^(BOOL finished) {
+        [self showToast:[NSString stringWithFormat:@"当前播放方式切换为：%@",isAutomaticFlow ? @"自动连播" : @"播完暂停"]];
+        if ([self.delegate respondsToSelector:@selector(AliyunPVPlaySpeedView:isAutomaticFlow:)]) {
+            [self.delegate aliyunVodPlayerView:self isAutomaticFlow:isAutomaticFlow];
+        }
+    }];
+}
 - (void)AliyunPVPlaySpeedView:(AliyunPVPlaySpeedView *)playSpeedView playSpeed:(AliyunVodPlayerViewPlaySpeed)playSpeed{
     
     float speed = [self floatValueSpeedViewWithPlaySpeed:playSpeed];
@@ -1571,27 +1588,8 @@
 }
 
 //倍速播放界面  退场动画
-- (void)showSpeedViewPushInAnimateWithPlaySpeedView:(AliyunPVPlaySpeedView *)playSpeedView{
-    if (!playSpeedView.hidden) {
-        [UIView animateWithDuration:0.3 animations:^{
-            if ([AliyunPVUtil isInterfaceOrientationPortrait]) {
-                CGRect frame = playSpeedView.frame;
-                frame.origin.x = playSpeedView.aliyun_width;
-                playSpeedView.frame = frame;
-            }else{
-                CGRect frame = playSpeedView.frame;
-                frame.origin.x = SCREEN_WIDTH;
-                playSpeedView.frame = frame;
-            }
-        } completion:^(BOOL finished) {
-            playSpeedView.hidden = YES;
-        }];
-    }
-}
-
-//倍速播放界面 选中选择倍速值后退出
-- (void)showSpeedViewSelectedPushInAnimateWithPlaySpeedView:(AliyunPVPlaySpeedView *)playSpeedView playSpeed:(AliyunVodPlayerViewPlaySpeed)playSpeed{
-    NSBundle *resourceBundle = [AliyunPVUtil languageBundle];
+//隐藏右侧菜单栏
+- (void)hiddenPlaySpeedView:(AliyunPVPlaySpeedView *)playSpeedView completion:(void(^)(BOOL finished))completiton {
     [UIView animateWithDuration:0.3 animations:^{
         if ([AliyunPVUtil isInterfaceOrientationPortrait]) {
             CGRect frame = playSpeedView.frame;
@@ -1603,26 +1601,39 @@
             playSpeedView.frame = frame;
         }
     } completion:^(BOOL finished) {
+        if (completiton) {
+            completiton(finished);
+        }
         playSpeedView.hidden = YES;
-        UILabel *label = [[UILabel alloc] init];
-        label.font = [UIFont systemFontOfSize:14.0f];
+    }];
+}
+
+//倍速播放界面 选中选择倍速值后退出
+- (void)showSpeedViewSelectedPushInAnimateWithPlaySpeedView:(AliyunPVPlaySpeedView *)playSpeedView playSpeed:(AliyunVodPlayerViewPlaySpeed)playSpeed{
+    NSBundle *resourceBundle = [AliyunPVUtil languageBundle];
+    [self hiddenPlaySpeedView:playSpeedView completion:^(BOOL finished) {
         NSString *title = [NSString stringWithFormat:@"%@ %@ %@",
                            NSLocalizedStringFromTableInBundle(@"the current video has swiched to", nil, resourceBundle, nil),
                            NSLocalizedStringFromTableInBundle([self playSpeedGetString:playSpeed], nil, resourceBundle, nil),
                            NSLocalizedStringFromTableInBundle(@"speed rate", nil, resourceBundle, nil)];
-        label.text = title;
-        label.backgroundColor = [UIColor blackColor];
-        label.textColor = [UIColor whiteColor];
-        NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:14],};
-        CGSize textSize = [title boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, 40) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil].size;;
-        label.frame = CGRectMake((self.aliyun_width-textSize.width-10)/2, self.aliyun_height-75, textSize.width+10, 40);
-        [self addSubview:label];
-        [self bringSubviewToFront:label];
-        [UIView animateWithDuration:2 animations:^{
-            label.alpha = 0;
-        } completion:^(BOOL finished) {
-            [label removeFromSuperview];
-        }];
+        [self showToast:title];
+    }];
+}
+- (void)showToast:(NSString *)msg {
+    UILabel *label = [[UILabel alloc] init];
+    label.font = [UIFont systemFontOfSize:14.0f];
+    label.text = msg;
+    label.backgroundColor = [UIColor blackColor];
+    label.textColor = [UIColor whiteColor];
+    NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:14],};
+    CGSize textSize = [msg boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, 40) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil].size;;
+    label.frame = CGRectMake((self.aliyun_width-textSize.width-10)/2, self.aliyun_height-75, textSize.width+10, 40);
+    [self addSubview:label];
+    [self bringSubviewToFront:label];
+    [UIView animateWithDuration:2 animations:^{
+        label.alpha = 0;
+    } completion:^(BOOL finished) {
+        [label removeFromSuperview];
     }];
 }
 

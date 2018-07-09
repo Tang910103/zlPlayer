@@ -65,10 +65,6 @@
 		A5B1F59A20F24CD600F91833 /* AliyunVodPlayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = A5B1F56720F24CD600F91833 /* AliyunVodPlayerView.h */; };
 		A5B1F59B20F24CD600F91833 /* AliyunVodPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5B1F56820F24CD600F91833 /* AliyunVodPlayerView.m */; };
 		A5B1F59C20F24CD600F91833 /* AliyunVodPlayerViewDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = A5B1F56920F24CD600F91833 /* AliyunVodPlayerViewDefine.h */; };
-		A5B1F5A420F24F6A00F91833 /* AliyunVodPlayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = A5B1F5A020F24F6A00F91833 /* AliyunVodPlayerView.h */; };
-		A5B1F5A520F24F6A00F91833 /* AliyunVodPlayerViewDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = A5B1F5A120F24F6A00F91833 /* AliyunVodPlayerViewDefine.h */; };
-		A5B1F5A620F24F6A00F91833 /* AliyunVodPlayerViewSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A5B1F5A220F24F6A00F91833 /* AliyunVodPlayerViewSDK.a */; };
-		A5B1F5A720F24F6A00F91833 /* AliyunVodPlayerViewSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = A5B1F5A320F24F6A00F91833 /* AliyunVodPlayerViewSDK.h */; };
 		A5CD865220C03DFF0095C894 /* AliyunVodPlayerView+category.h in Headers */ = {isa = PBXBuildFile; fileRef = A5CD865020C03DFF0095C894 /* AliyunVodPlayerView+category.h */; };
 		A5CD865320C03DFF0095C894 /* AliyunVodPlayerView+category.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CD865120C03DFF0095C894 /* AliyunVodPlayerView+category.m */; };
 		A5EB47AA20A2937B0002C1F0 /* zlPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = A5A805052081D5CE0038686C /* zlPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -160,10 +156,6 @@
 		A5B1F56720F24CD600F91833 /* AliyunVodPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliyunVodPlayerView.h; sourceTree = "<group>"; };
 		A5B1F56820F24CD600F91833 /* AliyunVodPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AliyunVodPlayerView.m; sourceTree = "<group>"; };
 		A5B1F56920F24CD600F91833 /* AliyunVodPlayerViewDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliyunVodPlayerViewDefine.h; sourceTree = "<group>"; };
-		A5B1F5A020F24F6A00F91833 /* AliyunVodPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliyunVodPlayerView.h; sourceTree = "<group>"; };
-		A5B1F5A120F24F6A00F91833 /* AliyunVodPlayerViewDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliyunVodPlayerViewDefine.h; sourceTree = "<group>"; };
-		A5B1F5A220F24F6A00F91833 /* AliyunVodPlayerViewSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = AliyunVodPlayerViewSDK.a; sourceTree = "<group>"; };
-		A5B1F5A320F24F6A00F91833 /* AliyunVodPlayerViewSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliyunVodPlayerViewSDK.h; sourceTree = "<group>"; };
 		A5CD865020C03DFF0095C894 /* AliyunVodPlayerView+category.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AliyunVodPlayerView+category.h"; sourceTree = "<group>"; };
 		A5CD865120C03DFF0095C894 /* AliyunVodPlayerView+category.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AliyunVodPlayerView+category.m"; sourceTree = "<group>"; };
 		A5CD865920C045DF0095C894 /* AliyunVodPlayerView+category.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AliyunVodPlayerView+category.h"; sourceTree = "<group>"; };
@@ -181,7 +173,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5B1F5A620F24F6A00F91833 /* AliyunVodPlayerViewSDK.a in Frameworks */,
 				A516D3A0208F7B8E003D1FFC /* AliThirdparty.a in Frameworks */,
 				A516D3AC208F7B8E003D1FFC /* AliyunVodPlayerSDK.a in Frameworks */,
 				A516D3A5208F7B8E003D1FFC /* AliyunPlayerSDK.a in Frameworks */,
@@ -194,7 +185,6 @@
 		A516D388208F7B8E003D1FFC /* aliHeader */ = {
 			isa = PBXGroup;
 			children = (
-				A5B1F59F20F24F6A00F91833 /* AliyunVodPlayerViewSDK */,
 				A5B1F52E20F24CD600F91833 /* ALPlayerViewSDK */,
 				A516D389208F7B8E003D1FFC /* AliThirdparty */,
 				A516D38C208F7B8E003D1FFC /* AliyunPlayerSDK */,
@@ -418,17 +408,6 @@
 			path = Public;
 			sourceTree = "<group>";
 		};
-		A5B1F59F20F24F6A00F91833 /* AliyunVodPlayerViewSDK */ = {
-			isa = PBXGroup;
-			children = (
-				A5B1F5A020F24F6A00F91833 /* AliyunVodPlayerView.h */,
-				A5B1F5A120F24F6A00F91833 /* AliyunVodPlayerViewDefine.h */,
-				A5B1F5A220F24F6A00F91833 /* AliyunVodPlayerViewSDK.a */,
-				A5B1F5A320F24F6A00F91833 /* AliyunVodPlayerViewSDK.h */,
-			);
-			path = AliyunVodPlayerViewSDK;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -442,9 +421,7 @@
 				A5EE3A72209B80AA00835E5C /* NSObject+exchangeMethod.h in Headers */,
 				A5B1F59820F24CD600F91833 /* UIView+AliyunLayout.h in Headers */,
 				A518551720AC6B6500699690 /* NSObject+BARunTime.h in Headers */,
-				A5B1F5A420F24F6A00F91833 /* AliyunVodPlayerView.h in Headers */,
 				A5EE3A6C209B808C00835E5C /* NSArrary+safe.h in Headers */,
-				A5B1F5A520F24F6A00F91833 /* AliyunVodPlayerViewDefine.h in Headers */,
 				A5B1F58E20F24CD600F91833 /* AliyunPVSpeedButton.h in Headers */,
 				A518551920AC6B6500699690 /* NSObject+Header.h in Headers */,
 				A516D3A8208F7B8E003D1FFC /* MPlayingHandler.h in Headers */,
@@ -459,7 +436,6 @@
 				A5B1F57E20F24CD600F91833 /* AliyunPVQualityListView.h in Headers */,
 				A5B1F58A20F24CD600F91833 /* AliyunPVPlaySpeedView.h in Headers */,
 				A5B1F59A20F24CD600F91833 /* AliyunVodPlayerView.h in Headers */,
-				A5B1F5A720F24F6A00F91833 /* AliyunVodPlayerViewSDK.h in Headers */,
 				A516D3AD208F7B8E003D1FFC /* AliyunVodPlayerSDK.h in Headers */,
 				A516D3A4208F7B8E003D1FFC /* AliVcPlayerErrorCode.h in Headers */,
 				A5B1F57A20F24CD600F91833 /* AliyunPVControlLayer.h in Headers */,
@@ -522,9 +498,6 @@
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
-			knownRegions = (
-				en,
-			);
 			mainGroup = A5A804F92081D5CE0038686C;
 			productRefGroup = A5A805032081D5CE0038686C /* Products */;
 			projectDirPath = "";

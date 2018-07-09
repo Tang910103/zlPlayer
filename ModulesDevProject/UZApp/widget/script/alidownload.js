@@ -9,7 +9,7 @@ var alivod = {
 		var downloadDir = api.fsDir;
 		alivod.downloader.initDownloader({
 			 downloadDir:downloadDir,
-			 maxNums:2,
+			 maxNums:1,
 			 secretImagePath:secretImagePath
 		},function(ret){
 			console.log('Raw:'+JSON.stringify(ret));
@@ -21,11 +21,13 @@ var alivod = {
 			for (var i = 0; i < mediaInfos.length;i++) {
 				var mediaInfo = mediaInfos[i];
 				if (!mediaInfo) {
+					console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxx');
 					continue;
 				}
 				console.log('mediaInfo Raw:'+JSON.stringify(mediaInfo));
 				var vid = mediaInfo.vid;
 				if (!vid || vid == '') {
+				console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxx');
 					continue;
 				}
 				console.log('event:'+ret.event+';media:'+JSON.stringify(mediaInfo));
@@ -55,9 +57,10 @@ var alivod = {
 				}
 			}
 		});
-		//alivod.removeDownload({vid:'1347d8e2fad74413983227f16133b501','quality':6,
-		//"duration":2524,"size":45532284,"format":"m3u8",
-		//savePath:api.fsDir+'/'+'1347d8e2fad74413983227f16133b501_m3u8_6.mp4'});
+		alivod.downloader.setRefreshStsCallback(function() {
+			console.log('setRefreshStsCallback STS：'+JSON.stringify(alivod.timer.sts));
+			alivod.downloader.setSts(alivod.timer.sts);
+		});
 		alivod.timer.start();
 	},
 	prepareDownload:function(vid) {

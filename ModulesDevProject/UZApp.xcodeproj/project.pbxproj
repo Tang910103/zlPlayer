@@ -89,10 +89,6 @@
 		A589404D20BC5390001532C6 /* LaunchScreen.strings in Resources */ = {isa = PBXBuildFile; fileRef = A589403D20BC538E001532C6 /* LaunchScreen.strings */; };
 		A589404E20BC5390001532C6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A589403F20BC538E001532C6 /* Localizable.strings */; };
 		A589404F20BC5390001532C6 /* Main.strings in Resources */ = {isa = PBXBuildFile; fileRef = A589404120BC538E001532C6 /* Main.strings */; };
-		A589405020BC5390001532C6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A589404420BC5390001532C6 /* InfoPlist.strings */; };
-		A589405120BC5390001532C6 /* LaunchScreen.strings in Resources */ = {isa = PBXBuildFile; fileRef = A589404620BC5390001532C6 /* LaunchScreen.strings */; };
-		A589405220BC5390001532C6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A589404820BC5390001532C6 /* Localizable.strings */; };
-		A589405320BC5390001532C6 /* Main.strings in Resources */ = {isa = PBXBuildFile; fileRef = A589404A20BC5390001532C6 /* Main.strings */; };
 		A5B1F4B820F243B400F91833 /* AliyunImageSource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A5B1F4B620F243B400F91833 /* AliyunImageSource.bundle */; };
 		A5B1F5A920F2501100F91833 /* AliyunVodPlayerViewSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5B1F5A820F2501000F91833 /* AliyunVodPlayerViewSDK.framework */; };
 		A5B1F5AA20F2505B00F91833 /* AliyunVodPlayerViewSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5B1F5A820F2501000F91833 /* AliyunVodPlayerViewSDK.framework */; };
@@ -255,10 +251,6 @@
 		A589403E20BC538E001532C6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = LaunchScreen.strings; sourceTree = "<group>"; };
 		A589404020BC538E001532C6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = Localizable.strings; sourceTree = "<group>"; };
 		A589404220BC538E001532C6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = Main.strings; sourceTree = "<group>"; };
-		A589404520BC5390001532C6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
-		A589404720BC5390001532C6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = LaunchScreen.strings; sourceTree = "<group>"; };
-		A589404920BC5390001532C6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
-		A589404B20BC5390001532C6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Main.strings; sourceTree = "<group>"; };
 		A5B1F4B620F243B400F91833 /* AliyunImageSource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AliyunImageSource.bundle; sourceTree = "<group>"; };
 		A5B1F5A820F2501000F91833 /* AliyunVodPlayerViewSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AliyunVodPlayerViewSDK.framework; path = "../../../../../Users/tangjie/Library/Developer/Xcode/DerivedData/AliyunPlayerMediaDemo-gxgzhjcfctvtxpcjcbwhuypshzir/Build/Products/Debug-iphoneos/AliyunVodPlayerViewSDK.framework"; sourceTree = "<group>"; };
 		A5CD866820C049870095C894 /* AliyunVodPlayerSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AliyunVodPlayerSDK.framework; sourceTree = "<group>"; };
@@ -363,7 +355,6 @@
 		5238DE381BE0BE8700D2CB5C /* localization */ = {
 			isa = PBXGroup;
 			children = (
-				A589404320BC5390001532C6 /* en.lproj */,
 				A589403A20BC538E001532C6 /* zh-Hans.lproj */,
 			);
 			name = localization;
@@ -557,17 +548,6 @@
 			path = "zh-Hans.lproj";
 			sourceTree = "<group>";
 		};
-		A589404320BC5390001532C6 /* en.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				A589404420BC5390001532C6 /* InfoPlist.strings */,
-				A589404620BC5390001532C6 /* LaunchScreen.strings */,
-				A589404820BC5390001532C6 /* Localizable.strings */,
-				A589404A20BC5390001532C6 /* Main.strings */,
-			);
-			path = en.lproj;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -625,7 +605,6 @@
 			knownRegions = (
 				Base,
 				"zh-Hans",
-				en,
 			);
 			mainGroup = 527BCF6219C431480077631F;
 			productRefGroup = 527BCF6C19C431480077631F /* Products */;
@@ -659,18 +638,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A589404F20BC5390001532C6 /* Main.strings in Resources */,
-				A589405220BC5390001532C6 /* Localizable.strings in Resources */,
 				A5CD866E20C049890095C894 /* AliyunLanguageSource.bundle in Resources */,
 				A5B1F4B820F243B400F91833 /* AliyunImageSource.bundle in Resources */,
-				A589405120BC5390001532C6 /* LaunchScreen.strings in Resources */,
 				527BCFF519C4346B0077631F /* uz in Resources */,
 				A589404C20BC5390001532C6 /* InfoPlist.strings in Resources */,
 				527BCFF619C4346B0077631F /* widget in Resources */,
 				A589404D20BC5390001532C6 /* LaunchScreen.strings in Resources */,
 				A589404E20BC5390001532C6 /* Localizable.strings in Resources */,
-				A589405320BC5390001532C6 /* Main.strings in Resources */,
 				527BCF7C19C431480077631F /* Images.xcassets in Resources */,
-				A589405020BC5390001532C6 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -716,38 +691,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				A589404220BC538E001532C6 /* zh-Hans */,
-			);
-			name = Main.strings;
-			sourceTree = "<group>";
-		};
-		A589404420BC5390001532C6 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A589404520BC5390001532C6 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		A589404620BC5390001532C6 /* LaunchScreen.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A589404720BC5390001532C6 /* en */,
-			);
-			name = LaunchScreen.strings;
-			sourceTree = "<group>";
-		};
-		A589404820BC5390001532C6 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A589404920BC5390001532C6 /* en */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		A589404A20BC5390001532C6 /* Main.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A589404B20BC5390001532C6 /* en */,
 			);
 			name = Main.strings;
 			sourceTree = "<group>";

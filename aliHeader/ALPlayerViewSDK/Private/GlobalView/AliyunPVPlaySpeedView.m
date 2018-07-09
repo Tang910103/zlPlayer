@@ -12,8 +12,12 @@
 
 @interface AliyunPVPlaySpeedView()
 @property(nonatomic, strong) UILabel *titleLabel;
+@property(nonatomic, strong) UILabel *titleLabel_1;
+@property(nonatomic, strong) UILabel *titleLabel_2;
 @property (nonatomic, strong) UIControl *control;
 @property (nonatomic, assign) NSInteger btnTag;
+@property (nonatomic, assign) NSInteger btnTag_1;
+@property (nonatomic, assign) NSInteger btnTag_2;
 @end
 
 @implementation AliyunPVPlaySpeedView
@@ -54,7 +58,30 @@
     }
     return _titleLabel;
 }
-
+- (UILabel *)titleLabel_1{
+    if(!_titleLabel_1){
+        _titleLabel_1 = [[UILabel alloc] init];
+        _titleLabel_1.text = @"屏幕模式";//@"屏幕模式";
+        [_titleLabel_1 setFont:[UIFont systemFontOfSize:[AliyunPVUtil titleTextSize]]];
+        //        _titleLabel.backgroundColor = [UIColor redColor];
+        _titleLabel_1.textAlignment = NSTextAlignmentCenter;
+        [_titleLabel_1 setTextColor:ALPV_COLOR_TEXT_NOMAL];
+        [_titleLabel_1 setFont:[UIFont systemFontOfSize:[AliyunPVUtil titleTextSize]]];
+    }
+    return _titleLabel_1;
+}
+- (UILabel *)titleLabel_2{
+    if(!_titleLabel_2){
+        _titleLabel_2 = [[UILabel alloc] init];
+        _titleLabel_2.text = @"播放方式";//@"播放方式";
+        [_titleLabel_2 setFont:[UIFont systemFontOfSize:[AliyunPVUtil titleTextSize]]];
+        //        _titleLabel.backgroundColor = [UIColor redColor];
+        _titleLabel_2.textAlignment = NSTextAlignmentCenter;
+        [_titleLabel_2 setTextColor:ALPV_COLOR_TEXT_NOMAL];
+        [_titleLabel_2 setFont:[UIFont systemFontOfSize:[AliyunPVUtil titleTextSize]]];
+    }
+    return _titleLabel_2;
+}
 #pragma mark - 便利初始化函数
 - (instancetype)init{
     return [self initWithFrame:CGRectZero];
@@ -64,27 +91,60 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame: frame]) {
         self.btnTag = 10000;
+        self.btnTag_1 = 10004;
+        self.btnTag_2 = 10006;
         [self addSubview:self.titleLabel];
+        [self addSubview:self.titleLabel_1];
+        [self addSubview:self.titleLabel_2];
         [self addSubview:self.control];
     }
     return self;
 }
-
+- (void)setDisplayMode:(AliyunVodPlayerDisplayMode)displayMode
+{
+    _displayMode = displayMode;
+    NSInteger tag = displayMode == AliyunVodPlayerDisplayModeFit ? 10004 : 10005;
+    UIButton *button = [self viewWithTag:tag];
+    if (button) {
+        [self buttonClicked:button];
+    } else {
+        self.btnTag_1 = tag;
+    }
+}
 #pragma mark - buttonClicked
 - (void)buttonClicked:(UIButton *)sender{
-    if (sender.tag == self.btnTag) {
-        return;
+    if (sender.tag == self.btnTag || sender.tag == self.btnTag_1 || sender.tag == self.btnTag_2) return;
+    NSInteger btnTag = self.btnTag;
+    if (sender.tag < 10000+4) {
+        btnTag = self.btnTag;
+    } else if (sender.tag < 10000+6) {
+        btnTag = self.btnTag_1;
+    } else if (sender.tag < 10000+8) {
+       btnTag = self.btnTag_2;
     }
-    if (self.playSpeedViewDelegate) {
-    AliyunPVSpeedButton *nomalBtn = [self viewWithTag:self.btnTag];
+    AliyunPVSpeedButton *nomalBtn = [self viewWithTag:btnTag];
     nomalBtn.speedImageView.image = nil;
     nomalBtn.speedLabel.textColor = [UIColor whiteColor];
     AliyunPVSpeedButton *btn = (AliyunPVSpeedButton*)sender;
     btn.speedLabel.textColor = [self textColor:self.skin];
     btn.speedImageView.image = [AliyunPVUtil imageWithNameInBundle:@"al_point_btn" skin:self.skin];
-    self.btnTag = btn.tag;
-    [self.playSpeedViewDelegate AliyunPVPlaySpeedView:self playSpeed:(int)sender.tag-10000];
+    if (sender.tag < 10000+4) {
+        self.btnTag = btn.tag;
+        if ([self.playSpeedViewDelegate respondsToSelector:@selector(AliyunPVPlaySpeedView:playSpeed:)]) {
+            [self.playSpeedViewDelegate AliyunPVPlaySpeedView:self playSpeed:(int)sender.tag-10000];
+        }
+    } else if (sender.tag < 10000+6) {
+        self.btnTag_1 = btn.tag;
+        if ([self.playSpeedViewDelegate respondsToSelector:@selector(AliyunPVPlaySpeedView:displayMode:)]) {
+            [self.playSpeedViewDelegate AliyunPVPlaySpeedView:self displayMode:btn.tag == 10004 ? AliyunVodPlayerDisplayModeFit : AliyunVodPlayerDisplayModeFitWithCropping];
+        }
+    } else if (sender.tag < 10000+8) {
+        self.btnTag_2 = btn.tag;
+        if ([self.playSpeedViewDelegate respondsToSelector:@selector(AliyunPVPlaySpeedView:isAutomaticFlow:)]) {
+            [self.playSpeedViewDelegate AliyunPVPlaySpeedView:self isAutomaticFlow:btn.tag == 10007];
+        }
     }
+    
 }
 
 
@@ -112,16 +172,30 @@
 
 #pragma mark - layoutSubviews
 -(void)layoutSubviews{
-    self.titleLabel.frame = CGRectMake(0, 0, self.aliyun_width, 48);
-    self.control.frame = CGRectMake(0, 0, self.aliyun_width, self.aliyun_height);
     CGFloat leftWidth = 20;
     CGFloat buttonWidth = 60;
+    CGFloat buttonWidth_1 = self.aliyun_width/2;
+    CGFloat buttonHeight = 45;
     CGFloat disWidth = (self.aliyun_width - 4*buttonWidth-2*leftWidth)/3;
-    CGFloat tempY  = self.aliyun_height/2-45;
-    for (int i = 0; i<4; i++) {
+    self.titleLabel.frame = CGRectMake(0, 0, self.aliyun_width, 48);
+    self.titleLabel_1.frame = CGRectMake(0, 93, self.aliyun_width, 48);
+    self.titleLabel_2.frame = CGRectMake(0, 186, self.aliyun_width, 48);
+    self.control.frame = CGRectMake(0, 0, self.aliyun_width, self.aliyun_height);
+    CGFloat tempY  = CGRectGetMaxY(self.titleLabel.frame);
+    for (int i = 0; i<8; i++) {
         AliyunPVSpeedButton *tempButton = [self viewWithTag:10000+i];
         if (tempButton) {
-            tempButton.frame = CGRectMake(leftWidth+i*(disWidth+buttonWidth), tempY, buttonWidth, 30+15);
+            if (i < 4) {
+                tempButton.frame = CGRectMake(leftWidth+i*(disWidth+buttonWidth), tempY, buttonWidth, buttonHeight);
+            } else if (i < 5) {
+                tempButton.frame = CGRectMake(0, CGRectGetMaxY(self.titleLabel_1.frame), buttonWidth_1, buttonHeight);
+            } else if (i < 6) {
+                tempButton.frame = CGRectMake(buttonWidth_1, CGRectGetMaxY(self.titleLabel_1.frame), buttonWidth_1, buttonHeight);
+            } else if (i < 7) {
+                tempButton.frame = CGRectMake(0, CGRectGetMaxY(self.titleLabel_2.frame), buttonWidth_1, buttonHeight);
+            } else if (i < 8) {
+                tempButton.frame = CGRectMake(buttonWidth_1, CGRectGetMaxY(self.titleLabel_2.frame), buttonWidth_1, buttonHeight);
+            }
             continue;
         }
         AliyunPVSpeedButton *btn = [AliyunPVSpeedButton buttonWithType:UIButtonTypeCustom];
@@ -130,7 +204,7 @@
         [btn addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
         btn.speedLabel.font = [UIFont systemFontOfSize:15.0];
         btn.speedLabel.textAlignment = NSTextAlignmentCenter;
-        if (self.btnTag==btn.tag) {
+        if (self.btnTag==btn.tag || (i == 4 && self.displayMode == AliyunVodPlayerDisplayModeFit) || (i == 5 && self.displayMode == AliyunVodPlayerDisplayModeFitWithCropping) || (i == 6 && !self.isAutomaticFlow) || (i == 7 && self.isAutomaticFlow)) {
             btn.speedLabel.textColor = [self textColor:self.skin];
             btn.speedImageView.image = [AliyunPVUtil imageWithNameInBundle:@"al_point_btn" skin:self.skin];
         }else{
@@ -138,7 +212,17 @@
             btn.speedImageView.image = [[UIImage alloc] init];
         }
         NSBundle *resourceBundle = [AliyunPVUtil languageBundle];
-        btn.frame = CGRectMake(leftWidth+i*(disWidth+buttonWidth), tempY, buttonWidth, 30+15);
+        if (i < 4) {
+            tempButton.frame = CGRectMake(leftWidth+i*(disWidth+buttonWidth), tempY, buttonWidth, buttonHeight);
+        } else if (i < 5) {
+            tempButton.frame = CGRectMake((self.aliyun_width - 2 * buttonWidth)/3, CGRectGetMaxY(self.titleLabel_1.frame), buttonWidth, buttonHeight);
+        } else if (i < 6) {
+            tempButton.frame = CGRectMake((self.aliyun_width - 2 * buttonWidth)/3 + buttonWidth, CGRectGetMaxY(self.titleLabel_1.frame), buttonWidth, buttonHeight);
+        } else if (i < 7) {
+            tempButton.frame = CGRectMake((self.aliyun_width - 2 * buttonWidth)/3, CGRectGetMaxY(self.titleLabel_2.frame), buttonWidth, buttonHeight);
+        } else if (i < 8) {
+            tempButton.frame = CGRectMake((self.aliyun_width - 2 * buttonWidth)/3 + buttonWidth, CGRectGetMaxY(self.titleLabel_2.frame), buttonWidth, buttonHeight);
+        }
         switch (i) {
             case 0:
                 btn.speedLabel.text =  NSLocalizedStringFromTableInBundle(@"Nomal", nil, resourceBundle, nil);//@"正常";
@@ -151,6 +235,18 @@
                 break;
             case 3:
                 btn.speedLabel.text =  NSLocalizedStringFromTableInBundle(@"2X", nil, resourceBundle, nil);
+                break;
+            case 4:
+                btn.speedLabel.text =  @"适应大小";
+                break;
+            case 5:
+                btn.speedLabel.text =  @"裁剪铺满";
+                break;
+            case 6:
+                btn.speedLabel.text =  @"播完暂停";
+                break;
+            case 7:
+                btn.speedLabel.text =  @"自动连播";
                 break;
             default:
                 break;

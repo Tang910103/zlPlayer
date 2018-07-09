@@ -8,7 +8,7 @@
 
 #import "zlPlayer.h"
 #import "NSDictionaryUtils.h"
-#import "AliyunVodPlayerViewSDK.h"
+#import "AliyunVodPlayerView.h"
 #import "UZAppDelegate.h"
 #import "AliyunVodDownLoadManager.h"
 #import "NSObject+Header.h"
@@ -112,6 +112,9 @@ typedef NS_ENUM(NSUInteger, EventType) {
     UIButton *_fullScreenBtn;
     CGFloat _statusBarHeight;
     UIView *_popLayer; //提示视图
+    
+    NSInteger _endType;//（可选项，默认1）播放模式，选项1-播完暂停，2-自动连播
+    NSInteger _screenMode;//（可选项，默认1）（1:适应大小, 2:裁剪铺满）
 }
 @property (nonatomic, strong) AliyunVodPlayerView *playerView;
 @property (nonatomic, strong) AliyunVodPlayer *aliyunVodPlayer;
@@ -225,11 +228,15 @@ typedef NS_ENUM(NSUInteger, EventType) {
     _fixed = [paramDict boolValueForKey:@"fixed" defaultValue:NO];
     _coverUrl = [paramDict stringValueForKey:@"coverUrl" defaultValue:@""];
     _statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
-    
+    _endType = [paramDict integerValueForKey:@"endType" defaultValue:1];
+    _screenMode = [paramDict integerValueForKey:@"screenMode" defaultValue:1];
     if (!self.playerView) {
         [self initPlayerView];
         //        [self registerNotification];
     }
+    [self.playerView.playSpeedView setDisplayMode:_screenMode == 1 ? AliyunVodPlayerDisplayModeFit : AliyunVodPlayerDisplayModeFitWithCropping];
+    [self.playerView.playSpeedView setIsAutomaticFlow:_endType == 2];
+    [self.aliyunVodPlayer setDisplayMode:self.playerView.playSpeedView.displayMode];
     /**************************************/
     //    [[NSNotificationCenter defaultCenter] addObserver:self
     //                                             selector:@selector(becomeActive)
@@ -341,6 +348,18 @@ typedef NS_ENUM(NSUInteger, EventType) {
     [self addCbIDByParamDict:paramDict SEL:@selector(getSDKVersion:)];
     [self callbackByDic:@{@"version}":[NSString stringWithFormat:@"%@/%@",[self.playerView getSDKVersion],version]} msg:@"" SEL:@selector(getSDKVersion:) doDelete:YES];
 }
+/** 设置屏幕模式 屏幕模式，选项1:适应大小, 2:裁剪铺满 */
+- (void)setScreenMode:(NSDictionary *)paramDict {
+    [self addCbIDByParamDict:paramDict SEL:@selector(setScreenMode:)];
+    [self callbackByDic:@{@"screenMode": _screenMode == 1 ? @"适应大小" : @"裁剪铺满"} msg:nil SEL:@selector(setScreenMode:) doDelete:YES];
+}
+/** 设置播放方式 播放模式，选项1-播完暂停，2-自动连播 */
+- (void)setPlayEndType:(NSDictionary *)paramDict {
+    [self addCbIDByParamDict:paramDict SEL:@selector(setPlayEndType:)];
+    [self callbackByDic:@{@"endType": _endType == 1 ? @"播完暂停" : @"自动连播"} msg:nil SEL:@selector(setPlayEndType:) doDelete:YES];
+}
+
+
 
 /** 初始化下载器 */
 - (void)initDownloader:(NSDictionary *)paramDict {
@@ -572,6 +591,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
     return @"landscape_right";
 }
 #pragma mark - AliyunVodPlayerViewDelegate
+
 /**
  * 功能：播放事件协议方法,主要内容 AliyunVodPlayerEventPrepareDone状态下，此时获取到播放视频数据（时长、当前播放数据、视频宽高等）
  * 参数：event 视频事件
@@ -621,7 +641,20 @@ typedef NS_ENUM(NSUInteger, EventType) {
     NSDictionary *dic = @{@"status":@(YES),@"eventType":@(EventType_LockScreen)};
     [self callbackByDic:dic msg:@"LockScreen" SEL:@selector(addEventListener:) doDelete:NO];
 }
-
+/*
+ * 功能 ：播放方式，是否自动连播
+ */
+- (void)aliyunVodPlayerView:(AliyunVodPlayerView*)playerView isAutomaticFlow:(BOOL)isAutomaticFlow
+{
+    _endType = isAutomaticFlow ? 2 : 1;
+}
+/*
+ * 功能 ：显示模式，选择的显示模式
+ */
+- (void)aliyunVodPlayerView:(AliyunVodPlayerView*)playerView displayMode:(AliyunVodPlayerDisplayMode)displayMode
+{
+    _screenMode = displayMode == AliyunVodPlayerDisplayModeFit ? 1 : 2;
+}
 
 - (void)aliyunVodPlayerView:(AliyunVodPlayerView*)playerView onVideoQualityChanged:(AliyunVodPlayerVideoQuality)quality
 {
