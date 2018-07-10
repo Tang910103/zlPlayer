@@ -175,24 +175,28 @@ a.button7{
         </div>
         <div id="main">
         	<div class='vadio-play-content' style="background-color: #000000;"></div>
-<!--            <a class="button" tapmode="active" onclick="initDownload(1)">准备下载1</a>-->
-<!--            <a class="button1" tapmode="active" onclick="startDownload(1)">开始下载1</a>-->
-<!--            <a class="button2" tapmode="active" onclick="stopDownload(1)">停止下载</a>-->
-<!--            <a class="button4" tapmode="active" onclick="removeDownload()">删除下载</a>-->
-<!--            <a class="button4" tapmode="active" onclick="playDownload()">播放下载</a>-->
-<!--            <a class="button4" tapmode="active" onclick="deleteDownload()">删除下载文件</a>-->
-<!--            <a class="button" tapmode="active" onclick="getDownloadList(2)">准备下载2</a>-->
-<!--            <a class="button1" tapmode="active" onclick="startDownload(2)">开始下载2</a>-->
-<!--            <a class="button2" tapmode="active" onclick="stopDownload(2)">停止下载2</a>-->
-               <a class="button" tapmode="active" onclick="init()">初始化播放器</a>
+        	
+        	
+        	<!--<a class="button" tapmode="active" onclick="initDownload(1)">准备下载1</a>
+            <a class="button1" tapmode="active" onclick="startDownload(1)">开始下载1</a>
+            <a class="button2" tapmode="active" onclick="stopDownload(1)">停止下载</a>
+            <a class="button4" tapmode="active" onclick="removeDownload()">删除下载</a>
+            <a class="button4" tapmode="active" onclick="playDownload()">播放下载</a>
+            <a class="button4" tapmode="active" onclick="deleteDownload()">删除下载文件</a>
+            <a class="button" tapmode="active" onclick="initDownload(2)">准备下载2</a>
+            <a class="button1" tapmode="active" onclick="startDownload(2)">开始下载2</a>
+            <a class="button2" tapmode="active" onclick="stopDownload(2)">停止下载2</a>-->
+            
+            
+   			<a class="button" tapmode="active" onclick="init()">初始化播放器</a>
             <a class="button1" tapmode="active" onclick="play()">开始播放</a>
             <a class="button2" tapmode="active" onclick="getCurrentPosition()">获取播放器当前播放进度</a>
             <a class="button4" tapmode="active" onclick="isFullScreen()">是否为全屏</a>
             <a class="button5" tapmode="active" onclick="seekTo()">跳转到10秒位置</a>
             <a class="button6" tapmode="active" onclick="pause()">暂停播放</a>
             <a class="button7" tapmode="active" onclick="resume()">继续播放</a>
-            <a class="button3" tapmode="active" onclick="stop()">停止播放</a>-->
-	</div>
+            <a class="button3" tapmode="active" onclick="stop()">停止播放</a>
+		</div>
         
         <div id="footer">
             <h5>Copyright &copy;<span id="year"></span> </h5>
@@ -207,38 +211,26 @@ a.button7{
 	var alivid = '3723f06af669408db80f2167091d7fa1';
 	var alivid2 = 'dcddb2bbb6e9475f8ec50ca2094e9364';
 	function initDownload(val) {
-<!--        if (val == 1) {-->
+		if (val == 1) {
 			alivod.prepareDownload(alivid);
-<!--        } else {-->
+		} else {
 			alivod.prepareDownload(alivid2);
-<!--        }-->
+		}
 	}
-function getDownloadList(val) {
-    zlPlayer.getDownloadList(function(ret) {
-                             console.log(JSON.stringify(ret));
-                             });
-}
-
 	function startDownload(val) {
 		var vid = alivid;
-<!--        if (val == 1) {-->
+		if (val == 1) {
 			vid = alivid;
-            var mediaInfo = $api.getStorage(vid);
-            if (!mediaInfo) {
-                alert('数据没有找到');
-            }
-            console.log('begin download：'+JSON.stringify(mediaInfo));
-            alivod.startDownload(mediaInfo);
-<!--        } else {-->
+		} else {
 			vid = alivid2;
-<!--        }-->
+		}
 		var mediaInfo = $api.getStorage(vid);
 		if (!mediaInfo) {
 			alert('数据没有找到');
 		}
 		console.log('begin download：'+JSON.stringify(mediaInfo));
 		alivod.startDownload(mediaInfo);
-}
+	}
 	function stopDownload(val) {
 		var vid = alivid;
 		if (val == 1) {
@@ -296,10 +288,15 @@ function getDownloadList(val) {
     function init() {
     	var width = api.winWidth;
 		var height = parseInt(width / 1.8);
+		var screenMode = $api.getStorage('screenMode');
+		var endType = $api.getStorage('endType');
         zlPlayer.init({
           fixed:false,
           rect:{x: 0,y:44,w:width,h:height},
+          endType:endType?parseInt(endType):1,
+          screenMode:screenMode ?parseInt(screenMode):1
         });
+        console.log('================begin set logger================');
         zlPlayer.setLogger(function(ret) {
         	console.log(JSON.stringify(ret));
         });
@@ -314,23 +311,12 @@ function getDownloadList(val) {
     }
     
     function play() {
-        alivod.timer.checkRefreshSts(function(sts) {
-                                     var params = {
-                                     vid : alivid,
-                                     accessKeySecret: sts.accessKeySecret,
-                                     accessKeyId: sts.accessKeyId,
-                                     securityToken: sts.securityToken
-                                     };
-                                     console.log('====================prepareDownload================');
-<!--                                     alivod.downloader.prepareDownload(params);-->
-                                     zlPlayer.play({sts:params,});
-                                     });
-<!--        zlPlayer.play({-->
-<!--          title:"title",-->
-<!--          url: "fs://"+alivid+"_m3u8_6.mp4",-->
-<!--          //sts:refreshSts(),-->
-<!--          direction:"landscape_right",-->
-<!--          });-->
+        zlPlayer.play({
+          title:"title",
+          url: "http://shenji.zlketang.com/public/test.mp4",
+          //sts:refreshSts(),
+          direction:"landscape_right",
+          });
     }
 	function getCurrentPosition() {
 	    zlPlayer.getCurrentPosition({
@@ -386,20 +372,29 @@ function getDownloadList(val) {
 			height: (w / 1.8) + 'px'
 		});
 		if ($api.isAndroid) {
-			//zlPlayer = api.require('xyzPlayer');
-			if (!zlPlayer) {
-				console.log('user zlPlayer');
-				zlPlayer = api.require('zlPlayer');
-			} else {
-				console.log('user xyzPlayer');
-			}
+			zlPlayer = api.require('xyzPlayer');
 		} else {
 			zlPlayer = api.require('abcPlayer');
 			console.log('user abcPlayer');
 		}
-		init();
+		console.log('================before set logger================');
+        zlPlayer.setLogger(function(ret) {
+        	console.log(JSON.stringify(ret));
+        });
+        console.log('================after set logger================');
         var year = $api.byId('year');
         year.innerHTML = new Date().getFullYear();
+        
+        zlPlayer.setScreenMode(function(ret) {
+			var screenMode = ret.screenMode;
+			$api.setStorage('screenMode',screenMode);
+			api.toast({msg: "screenMode:"+screenMode});
+        });
+        zlPlayer.setPlayEndType(function(ret) {
+			var endType = ret.endType;
+			$api.setStorage('endType',endType);
+			api.toast({msg: "endType:"+endType});
+        });
         alivod.init(zlPlayer);
     };
     

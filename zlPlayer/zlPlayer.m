@@ -229,7 +229,9 @@ typedef NS_ENUM(NSUInteger, EventType) {
     _coverUrl = [paramDict stringValueForKey:@"coverUrl" defaultValue:@""];
     _statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
     _endType = [paramDict integerValueForKey:@"endType" defaultValue:1];
+    _endType = _endType < 1 ? 1 : _endType;
     _screenMode = [paramDict integerValueForKey:@"screenMode" defaultValue:1];
+    _screenMode = _screenMode < 1 ? 1 : _screenMode;
     if (!self.playerView) {
         [self initPlayerView];
         //        [self registerNotification];

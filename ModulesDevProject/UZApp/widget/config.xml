@@ -26,6 +26,5 @@
   <feature name="db"/>  
   <feature name="UIMultiSelector"/>  
   <feature name="abcPlayer"/>  
-  <feature name="xyzPlayer"/>  
-  <feature name="zlPlayer"/> 
+  <feature name="xyzPlayer"/> 
 </widget>
