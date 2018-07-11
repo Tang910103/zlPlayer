@@ -427,4 +427,8 @@ self.isLock时来判定UIViewController 是否支持物理旋转。如果viewcon
  */
 - (void)setUseWanNetDescribe:(NSString *)des;
 
+//倍速播放界面  退场动画
+//隐藏右侧菜单栏
+- (void)hiddenPlaySpeedView:(AliyunPVPlaySpeedView *)playSpeedView completion:(void(^)(BOOL finished))completiton;
+
 @end

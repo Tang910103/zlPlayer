@@ -52,7 +52,7 @@
         _titleLabel.text = NSLocalizedStringFromTableInBundle(@"Fast speed play", nil, resourceBundle, nil);//@"倍速播放";
         [_titleLabel setFont:[UIFont systemFontOfSize:[AliyunPVUtil titleTextSize]]];
 //        _titleLabel.backgroundColor = [UIColor redColor];
-        _titleLabel.textAlignment = NSTextAlignmentCenter;
+//        _titleLabel.textAlignment = NSTextAlignmentCenter;
         [_titleLabel setTextColor:ALPV_COLOR_TEXT_NOMAL];
         [_titleLabel setFont:[UIFont systemFontOfSize:[AliyunPVUtil titleTextSize]]];
     }
@@ -64,7 +64,7 @@
         _titleLabel_1.text = @"屏幕模式";//@"屏幕模式";
         [_titleLabel_1 setFont:[UIFont systemFontOfSize:[AliyunPVUtil titleTextSize]]];
         //        _titleLabel.backgroundColor = [UIColor redColor];
-        _titleLabel_1.textAlignment = NSTextAlignmentCenter;
+//        _titleLabel_1.textAlignment = NSTextAlignmentCenter;
         [_titleLabel_1 setTextColor:ALPV_COLOR_TEXT_NOMAL];
         [_titleLabel_1 setFont:[UIFont systemFontOfSize:[AliyunPVUtil titleTextSize]]];
     }
@@ -76,7 +76,7 @@
         _titleLabel_2.text = @"播放方式";//@"播放方式";
         [_titleLabel_2 setFont:[UIFont systemFontOfSize:[AliyunPVUtil titleTextSize]]];
         //        _titleLabel.backgroundColor = [UIColor redColor];
-        _titleLabel_2.textAlignment = NSTextAlignmentCenter;
+//        _titleLabel_2.textAlignment = NSTextAlignmentCenter;
         [_titleLabel_2 setTextColor:ALPV_COLOR_TEXT_NOMAL];
         [_titleLabel_2 setFont:[UIFont systemFontOfSize:[AliyunPVUtil titleTextSize]]];
     }
@@ -174,27 +174,27 @@
 -(void)layoutSubviews{
     CGFloat leftWidth = 20;
     CGFloat buttonWidth = 60;
-    CGFloat buttonWidth_1 = self.aliyun_width/2;
-    CGFloat buttonHeight = 45;
+    CGFloat buttonWidth_1 = 80;
+    CGFloat buttonHeight = 30;
     CGFloat disWidth = (self.aliyun_width - 4*buttonWidth-2*leftWidth)/3;
-    self.titleLabel.frame = CGRectMake(0, 0, self.aliyun_width, 48);
-    self.titleLabel_1.frame = CGRectMake(0, 93, self.aliyun_width, 48);
-    self.titleLabel_2.frame = CGRectMake(0, 186, self.aliyun_width, 48);
+    self.titleLabel.frame = CGRectMake(0, 0, self.aliyun_width, 35);
+    self.titleLabel_1.frame = CGRectMake(0, 65, self.aliyun_width, 35);
+    self.titleLabel_2.frame = CGRectMake(0, 130, self.aliyun_width, 35);
     self.control.frame = CGRectMake(0, 0, self.aliyun_width, self.aliyun_height);
     CGFloat tempY  = CGRectGetMaxY(self.titleLabel.frame);
     for (int i = 0; i<8; i++) {
         AliyunPVSpeedButton *tempButton = [self viewWithTag:10000+i];
         if (tempButton) {
             if (i < 4) {
-                tempButton.frame = CGRectMake(leftWidth+i*(disWidth+buttonWidth), tempY, buttonWidth, buttonHeight);
+                tempButton.frame = CGRectMake(0+i*(disWidth+buttonWidth), tempY, buttonWidth, buttonHeight);
             } else if (i < 5) {
                 tempButton.frame = CGRectMake(0, CGRectGetMaxY(self.titleLabel_1.frame), buttonWidth_1, buttonHeight);
             } else if (i < 6) {
-                tempButton.frame = CGRectMake(buttonWidth_1, CGRectGetMaxY(self.titleLabel_1.frame), buttonWidth_1, buttonHeight);
+                tempButton.frame = CGRectMake(buttonWidth_1 + leftWidth, CGRectGetMaxY(self.titleLabel_1.frame), buttonWidth_1, buttonHeight);
             } else if (i < 7) {
                 tempButton.frame = CGRectMake(0, CGRectGetMaxY(self.titleLabel_2.frame), buttonWidth_1, buttonHeight);
             } else if (i < 8) {
-                tempButton.frame = CGRectMake(buttonWidth_1, CGRectGetMaxY(self.titleLabel_2.frame), buttonWidth_1, buttonHeight);
+                tempButton.frame = CGRectMake(buttonWidth_1 + leftWidth, CGRectGetMaxY(self.titleLabel_2.frame), buttonWidth_1, buttonHeight);
             }
             continue;
         }

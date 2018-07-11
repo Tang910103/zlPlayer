@@ -38,9 +38,9 @@
 }
 
 - (void)layoutSubviews{
-    self.speedImageView.frame = CGRectMake((self.aliyun_width-5)/2, 0, 5, 5);
+    self.speedImageView.frame = CGRectMake((self.aliyun_width-5)/2, 0, 0, 0);
     [self addSubview:self.speedImageView];
-    self.speedLabel.frame = CGRectMake(0, self.speedImageView.aliyun_bottom+5, self.aliyun_width, 30);
+    self.speedLabel.frame = CGRectMake(0, self.speedImageView.aliyun_bottom+0, self.aliyun_width, 30);
     [self addSubview:self.speedLabel];
 }
 

@@ -12,6 +12,7 @@
 #import "UZAppDelegate.h"
 #import "AliyunVodDownLoadManager.h"
 #import "NSObject+Header.h"
+#import "AliyunPVControlLayer.h"
 
 @interface MediaInfo : NSObject
 /** 字符串类型；视频id */
@@ -108,7 +109,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
     NSString *_coverUrl;
     BOOL _isFullScreen;
     UIButton *_backBtn;
-    UIView *_controlLayer; //工具栏
+    AliyunPVControlLayer *_controlLayer; //工具栏
     UIButton *_fullScreenBtn;
     CGFloat _statusBarHeight;
     UIView *_popLayer; //提示视图
@@ -740,6 +741,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
     [_popLayer addObserver:self forKeyPath:@"hidden" options:NSKeyValueObservingOptionNew context:nil];
     [self.playerView setUseWanNetDescribe:@"当前为移动网络"];
     
+    _controlLayer.playSpeedBtn.hidden = YES;
     _backBtn = [_controlLayer valueForKey:@"_backBtn"];
     _backBtn.hidden = YES;
     
@@ -791,9 +793,12 @@ typedef NS_ENUM(NSUInteger, EventType) {
     
     _isFullScreen = !_isFullScreen;
     _backBtn.hidden = !_isFullScreen;
+    _controlLayer.playSpeedBtn.hidden = !_isFullScreen;
     NSDictionary *dic = @{@"status":@(YES),@"eventType":_isFullScreen ? @"fullscreen" : @"unfull"};
     [self callbackByDic:dic msg:@"" SEL:@selector(addEventListener:) doDelete:NO];
-    
+    if (!self.playerView.playSpeedView.hidden) {
+        [self.playerView hiddenPlaySpeedView:self.playerView.playSpeedView completion:nil];
+    }
     if (_isFullScreen) {
         [self updatePlayerViewFrame:YES];
         if ([[self screenOrientation:ScreenOrientation_landscape_right] isEqualToString:_orientationStr]) {
