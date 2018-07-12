@@ -952,7 +952,7 @@
             break;
             
         default:
-            speedFloatValue = 0;
+            speedFloatValue = 0.8;
             break;
     }
     
@@ -979,6 +979,7 @@
             playSpeedString = @"2X";
             break;
         default:
+            playSpeedString = @"0.8X";
             break;
     }
     return playSpeedString;

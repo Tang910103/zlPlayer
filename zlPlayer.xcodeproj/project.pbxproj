@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A51250AB20F7A34B001D409A /* NSBundle+category.h in Headers */ = {isa = PBXBuildFile; fileRef = A51250A920F7A349001D409A /* NSBundle+category.h */; };
+		A51250AC20F7A34B001D409A /* NSBundle+category.m in Sources */ = {isa = PBXBuildFile; fileRef = A51250AA20F7A34A001D409A /* NSBundle+category.m */; };
 		A516D3A0208F7B8E003D1FFC /* AliThirdparty.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A516D38A208F7B8E003D1FFC /* AliThirdparty.a */; };
 		A516D3A1208F7B8E003D1FFC /* AliThirdparty.h in Headers */ = {isa = PBXBuildFile; fileRef = A516D38B208F7B8E003D1FFC /* AliThirdparty.h */; };
 		A516D3A2208F7B8E003D1FFC /* AliVcMediaPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = A516D38D208F7B8E003D1FFC /* AliVcMediaPlayer.h */; };
@@ -90,6 +92,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A51250A920F7A349001D409A /* NSBundle+category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+category.h"; sourceTree = "<group>"; };
+		A51250AA20F7A34A001D409A /* NSBundle+category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+category.m"; sourceTree = "<group>"; };
 		A516D38A208F7B8E003D1FFC /* AliThirdparty.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = AliThirdparty.a; sourceTree = "<group>"; };
 		A516D38B208F7B8E003D1FFC /* AliThirdparty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliThirdparty.h; sourceTree = "<group>"; };
 		A516D38D208F7B8E003D1FFC /* AliVcMediaPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliVcMediaPlayer.h; sourceTree = "<group>"; };
@@ -254,6 +258,8 @@
 				A518551320AC6B6400699690 /* NSObject */,
 				A5EE3A70209B80AA00835E5C /* NSObject+exchangeMethod.h */,
 				A5EE3A6F209B80AA00835E5C /* NSObject+exchangeMethod.m */,
+				A51250A920F7A349001D409A /* NSBundle+category.h */,
+				A51250AA20F7A34A001D409A /* NSBundle+category.m */,
 				A5EE3A68209B808B00835E5C /* NSArrary+safe.h */,
 				A5EE3A67209B808A00835E5C /* NSArrary+safe.m */,
 				A5EE3A69209B808B00835E5C /* NSDictionary+safe.h */,
@@ -428,6 +434,7 @@
 				A516D3A7208F7B8E003D1FFC /* KernelMPlayer.h in Headers */,
 				A5B1F58620F24CD600F91833 /* AliyunPVGifView.h in Headers */,
 				A5CD865220C03DFF0095C894 /* AliyunVodPlayerView+category.h in Headers */,
+				A51250AB20F7A34B001D409A /* NSBundle+category.h in Headers */,
 				A516D3A2208F7B8E003D1FFC /* AliVcMediaPlayer.h in Headers */,
 				A5B1F57C20F24CD600F91833 /* AliyunPVProgressView.h in Headers */,
 				A5B1F59420F24CD600F91833 /* AliyunPVReachability.h in Headers */,
@@ -498,6 +505,9 @@
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
 			mainGroup = A5A804F92081D5CE0038686C;
 			productRefGroup = A5A805032081D5CE0038686C /* Products */;
 			projectDirPath = "";
@@ -526,6 +536,7 @@
 				A5B1F57820F24CD600F91833 /* AliyunPVBaseLayer.m in Sources */,
 				A5B1F59B20F24CD600F91833 /* AliyunVodPlayerView.m in Sources */,
 				A5B1F58320F24CD600F91833 /* AliyunFirstStartGuideView.m in Sources */,
+				A51250AC20F7A34B001D409A /* NSBundle+category.m in Sources */,
 				A5B1F59920F24CD600F91833 /* UIView+AliyunLayout.m in Sources */,
 				A5B1F58F20F24CD600F91833 /* AliyunPVSpeedButton.m in Sources */,
 				A5B1F58920F24CD600F91833 /* AliyunPVLoadingView.m in Sources */,

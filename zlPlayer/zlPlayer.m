@@ -13,6 +13,7 @@
 #import "AliyunVodDownLoadManager.h"
 #import "NSObject+Header.h"
 #import "AliyunPVControlLayer.h"
+#import "NSBundle+category.h"
 
 @interface MediaInfo : NSObject
 /** 字符串类型；视频id */
@@ -134,6 +135,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
         _cbIdDictionary = @{}.mutableCopy;
         _orientationStr = [self screenOrientation:ScreenOrientation_landscape_right];
         [[UZAppDelegate appDelegate] addAppHandle:self];
+        [NSBundle setLanguage:@"zh-Hans"];
     }
     return self;
 }
@@ -354,12 +356,12 @@ typedef NS_ENUM(NSUInteger, EventType) {
 /** 设置屏幕模式 屏幕模式，选项1:适应大小, 2:裁剪铺满 */
 - (void)setScreenMode:(NSDictionary *)paramDict {
     [self addCbIDByParamDict:paramDict SEL:@selector(setScreenMode:)];
-    [self callbackByDic:@{@"screenMode": _screenMode == 1 ? @"适应大小" : @"裁剪铺满"} msg:nil SEL:@selector(setScreenMode:) doDelete:YES];
+    [self callbackByDic:@{@"screenMode": _screenMode == 1 ? @1 : @2} msg:nil SEL:@selector(setScreenMode:) doDelete:NO];
 }
 /** 设置播放方式 播放模式，选项1-播完暂停，2-自动连播 */
 - (void)setPlayEndType:(NSDictionary *)paramDict {
     [self addCbIDByParamDict:paramDict SEL:@selector(setPlayEndType:)];
-    [self callbackByDic:@{@"endType": _endType == 1 ? @"播完暂停" : @"自动连播"} msg:nil SEL:@selector(setPlayEndType:) doDelete:YES];
+    [self callbackByDic:@{@"endType": _endType == 1 ? @1 : @2} msg:nil SEL:@selector(setPlayEndType:) doDelete:NO];
 }
 
 
@@ -650,6 +652,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
 - (void)aliyunVodPlayerView:(AliyunVodPlayerView*)playerView isAutomaticFlow:(BOOL)isAutomaticFlow
 {
     _endType = isAutomaticFlow ? 2 : 1;
+    [self callbackByDic:@{@"endType": @(_endType)} msg:nil SEL:@selector(setPlayEndType:) doDelete:NO];
 }
 /*
  * 功能 ：显示模式，选择的显示模式
@@ -657,6 +660,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
 - (void)aliyunVodPlayerView:(AliyunVodPlayerView*)playerView displayMode:(AliyunVodPlayerDisplayMode)displayMode
 {
     _screenMode = displayMode == AliyunVodPlayerDisplayModeFit ? 1 : 2;
+    [self callbackByDic:@{@"screenMode": @(_screenMode)} msg:nil SEL:@selector(setScreenMode:) doDelete:NO];
 }
 
 - (void)aliyunVodPlayerView:(AliyunVodPlayerView*)playerView onVideoQualityChanged:(AliyunVodPlayerVideoQuality)quality
@@ -815,6 +819,7 @@ typedef NS_ENUM(NSUInteger, EventType) {
 }
 
 - (void)deviceOrientationDidChangeNotification:(NSNotification *)notifi {
+    return;
     if (self.playerView.isScreenLocked) return;
     [self callbackByDic:@{@"屏幕旋转":@([UIDevice currentDevice].orientation),@"orientation":[self screenOrientation:self.orientation]} msg:@"" SEL:@selector(setLogger:) doDelete:NO];
     if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {

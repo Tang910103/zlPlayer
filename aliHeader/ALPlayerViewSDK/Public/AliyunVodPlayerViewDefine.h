@@ -19,7 +19,7 @@ typedef NS_ENUM (int, AliyunVodPlayerViewSkin) {
 };
 
 typedef NS_ENUM (int, AliyunVodPlayerViewPlaySpeed) {
-    AliyunVodPlayerViewPlaySpeedNomal = 0 ,
+    AliyunVodPlayerViewPlaySpeedNomal = 1 ,
     AliyunVodPlayerViewPlaySpeedOnePointTwoFive,
     AliyunVodPlayerViewPlaySpeedOnePointFive,
     AliyunVodPlayerViewPlaySpeedTwo

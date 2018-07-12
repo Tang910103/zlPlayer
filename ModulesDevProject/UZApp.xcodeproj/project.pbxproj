@@ -85,8 +85,6 @@
 		52CA35771AB195EB002579CF /* libresolv.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 52CA35761AB195EB002579CF /* libresolv.9.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
 		52E586AA1AFC74F100864ACF /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52BA30A919F6367A00D81640 /* CoreAudio.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A516D3CC208F7BBD003D1FFC /* libzlPlayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A516D3B6208F7BA0003D1FFC /* libzlPlayer.a */; };
-		A589404C20BC5390001532C6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A589403B20BC538E001532C6 /* InfoPlist.strings */; };
-		A589404D20BC5390001532C6 /* LaunchScreen.strings in Resources */ = {isa = PBXBuildFile; fileRef = A589403D20BC538E001532C6 /* LaunchScreen.strings */; };
 		A589404E20BC5390001532C6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A589403F20BC538E001532C6 /* Localizable.strings */; };
 		A589404F20BC5390001532C6 /* Main.strings in Resources */ = {isa = PBXBuildFile; fileRef = A589404120BC538E001532C6 /* Main.strings */; };
 		A5B1F4B820F243B400F91833 /* AliyunImageSource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A5B1F4B620F243B400F91833 /* AliyunImageSource.bundle */; };
@@ -247,8 +245,6 @@
 		52CA35741AB195C9002579CF /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
 		52CA35761AB195EB002579CF /* libresolv.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.9.dylib; path = usr/lib/libresolv.9.dylib; sourceTree = SDKROOT; };
 		A5473D4E208C9607002563D0 /* zlPlayer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = zlPlayer.xcodeproj; path = ../../../zlPlayer.xcodeproj; sourceTree = "<group>"; };
-		A589403C20BC538E001532C6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = InfoPlist.strings; sourceTree = "<group>"; };
-		A589403E20BC538E001532C6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = LaunchScreen.strings; sourceTree = "<group>"; };
 		A589404020BC538E001532C6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = Localizable.strings; sourceTree = "<group>"; };
 		A589404220BC538E001532C6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = Main.strings; sourceTree = "<group>"; };
 		A5B1F4B620F243B400F91833 /* AliyunImageSource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AliyunImageSource.bundle; sourceTree = "<group>"; };
@@ -540,8 +536,6 @@
 		A589403A20BC538E001532C6 /* zh-Hans.lproj */ = {
 			isa = PBXGroup;
 			children = (
-				A589403B20BC538E001532C6 /* InfoPlist.strings */,
-				A589403D20BC538E001532C6 /* LaunchScreen.strings */,
 				A589403F20BC538E001532C6 /* Localizable.strings */,
 				A589404120BC538E001532C6 /* Main.strings */,
 			);
@@ -641,9 +635,7 @@
 				A5CD866E20C049890095C894 /* AliyunLanguageSource.bundle in Resources */,
 				A5B1F4B820F243B400F91833 /* AliyunImageSource.bundle in Resources */,
 				527BCFF519C4346B0077631F /* uz in Resources */,
-				A589404C20BC5390001532C6 /* InfoPlist.strings in Resources */,
 				527BCFF619C4346B0077631F /* widget in Resources */,
-				A589404D20BC5390001532C6 /* LaunchScreen.strings in Resources */,
 				A589404E20BC5390001532C6 /* Localizable.strings in Resources */,
 				527BCF7C19C431480077631F /* Images.xcassets in Resources */,
 			);
@@ -663,22 +655,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		A589403B20BC538E001532C6 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A589403C20BC538E001532C6 /* zh-Hans */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		A589403D20BC538E001532C6 /* LaunchScreen.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A589403E20BC538E001532C6 /* zh-Hans */,
-			);
-			name = LaunchScreen.strings;
-			sourceTree = "<group>";
-		};
 		A589403F20BC538E001532C6 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
