@@ -162,8 +162,6 @@
 		A5B1F56920F24CD600F91833 /* AliyunVodPlayerViewDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliyunVodPlayerViewDefine.h; sourceTree = "<group>"; };
 		A5CD865020C03DFF0095C894 /* AliyunVodPlayerView+category.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AliyunVodPlayerView+category.h"; sourceTree = "<group>"; };
 		A5CD865120C03DFF0095C894 /* AliyunVodPlayerView+category.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AliyunVodPlayerView+category.m"; sourceTree = "<group>"; };
-		A5CD865920C045DF0095C894 /* AliyunVodPlayerView+category.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AliyunVodPlayerView+category.h"; sourceTree = "<group>"; };
-		A5CD865A20C045DF0095C894 /* AliyunVodPlayerView+category.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AliyunVodPlayerView+category.m"; sourceTree = "<group>"; };
 		A5EE3A67209B808A00835E5C /* NSArrary+safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArrary+safe.m"; sourceTree = "<group>"; };
 		A5EE3A68209B808B00835E5C /* NSArrary+safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArrary+safe.h"; sourceTree = "<group>"; };
 		A5EE3A69209B808B00835E5C /* NSDictionary+safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+safe.h"; sourceTree = "<group>"; };
@@ -299,8 +297,6 @@
 		A5B1F4B320F240DA00F91833 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
-				A5CD865A20C045DF0095C894 /* AliyunVodPlayerView+category.m */,
-				A5CD865920C045DF0095C894 /* AliyunVodPlayerView+category.h */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";

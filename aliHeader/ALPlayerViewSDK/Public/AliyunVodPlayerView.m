@@ -912,7 +912,7 @@
     [self setDisplayMode:displayMode];
     [self hiddenPlaySpeedView:playSpeedView completion:^(BOOL finished) {
         [self showToast:[NSString stringWithFormat:@"当前屏幕模式切换为：%@",displayMode == AliyunVodPlayerDisplayModeFit ? @"适应大小" : @"裁剪铺满"]];
-        if ([self.delegate respondsToSelector:@selector(AliyunPVPlaySpeedView:displayMode:)]) {
+        if ([self.delegate respondsToSelector:@selector(aliyunVodPlayerView:displayMode:)]) {
             [self.delegate aliyunVodPlayerView:self displayMode:displayMode];
         }
     }];
@@ -921,7 +921,7 @@
 {
     [self hiddenPlaySpeedView:playSpeedView completion:^(BOOL finished) {
         [self showToast:[NSString stringWithFormat:@"当前播放方式切换为：%@",isAutomaticFlow ? @"自动连播" : @"播完暂停"]];
-        if ([self.delegate respondsToSelector:@selector(AliyunPVPlaySpeedView:isAutomaticFlow:)]) {
+        if ([self.delegate respondsToSelector:@selector(aliyunVodPlayerView:isAutomaticFlow:)]) {
             [self.delegate aliyunVodPlayerView:self isAutomaticFlow:isAutomaticFlow];
         }
     }];

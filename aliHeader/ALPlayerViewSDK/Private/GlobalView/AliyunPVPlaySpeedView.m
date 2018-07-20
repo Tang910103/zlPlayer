@@ -90,7 +90,7 @@
 #pragma mark - 指定初始化函数
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame: frame]) {
-        self.btnTag = 10000;
+        self.btnTag = 10001;
         self.btnTag_1 = 10005;
         self.btnTag_2 = 10007;
         [self addSubview:self.titleLabel];

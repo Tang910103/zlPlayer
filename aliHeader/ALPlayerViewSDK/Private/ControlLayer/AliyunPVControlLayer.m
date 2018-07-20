@@ -18,7 +18,7 @@ static const int ALYPV_PX_PLAY_WIDTH = 104;
 static const int ALPV_PX_FULLSCREEN_WIDTH = 96;
 // full screen
 static const int ALYPV_PX_FULL_TIME_WIDTH = 160 + 80;
-static const int ALYPV_PX_QUALITY_WIDTH = 146 + ALYPV_PX_MARGIN * 2;
+static const int ALYPV_PX_QUALITY_WIDTH = 0 ;//146 + ALYPV_PX_MARGIN * 2;
 static const int ALPV_PX_DOWNLOAD_WIDTH = (96 + ALYPV_PX_MARGIN * 2) * 0; // 先不显示
 
 @interface AliyunPVControlLayer () <AliyunPVProgressViewDelegate, AliyunPVQualityListViewDelegate>
