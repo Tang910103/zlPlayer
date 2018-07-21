@@ -690,15 +690,15 @@ typedef NS_ENUM(NSUInteger, EventType) {
 //    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 //
 //        dispatch_semaphore_wait(signal, overTime); //signal 值 -1
-//        dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
             NSString *orientationStr = [self screenOrientation:orientation];
             NSLog(@"%@",orientationStr);
             
             [self setScreenOrientation:@{@"orientation":[self screenOrientation:orientation]}];
             
             [self callbackByDic:@{@"playerViewFrame":NSStringFromCGRect(self.playerView.frame),@"controlLayerFrame":NSStringFromCGRect(self->_controlLayer.frame),@"isFullScreen":@(self->_isFullScreen),@"contentOffset":NSStringFromCGPoint(self.scrollView.contentOffset),@"orientation":orientationStr} msg:@"" SEL:@selector(setLogger:) doDelete:NO];
-//        });
-//        
+        });
+
 //        dispatch_semaphore_signal(signal); //signal 值 +1
 //    });
 }
@@ -822,11 +822,11 @@ typedef NS_ENUM(NSUInteger, EventType) {
     if (self.playerView.isScreenLocked) return;
     [self callbackByDic:@{@"屏幕旋转":@([UIDevice currentDevice].orientation),@"orientation":[self screenOrientation:self.orientation]} msg:@"" SEL:@selector(setLogger:) doDelete:NO];
     if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft) {
-        [self setOrientation:ScreenOrientation_landscape_right];
+        [self setOrientation:ScreenOrientation_landscape_left];
         [self updatePlayerViewFrame:YES];
     }
     if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
-        [self setOrientation:ScreenOrientation_landscape_left];
+        [self setOrientation:ScreenOrientation_landscape_right];
         [self updatePlayerViewFrame:YES];
     }
 }
